@@ -28,7 +28,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         </td>
     </tr>
     <tr>
-        <th nowrap >E-mail:</th>
+        <th nowrap >Email:</th>
         <td>
             <?if ($thisclient && ($email=$thisclient->getEmail())) {
                 ?>
@@ -42,7 +42,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td>Telefone:</td>
         <td><input type="text" name="phone" size="25" value="<?=$info['phone']?>">
-             &nbsp;Ext&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
+             &nbsp;Ramal&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
             &nbsp;<font class="error">&nbsp;<?=$errors['phone']?></font></td>
     </tr>
     <tr height=2px><td align="left" colspan=2 >&nbsp;</td</tr>
@@ -50,7 +50,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         <th>Departamento:</th>
         <td>
             <select name="topicId">
-                <option value="" selected >Select One</option>
+                <option value="" selected >Selecione um</option>
                 <?
                  $services= db_query('SELECT topic_id,topic FROM '.TOPIC_TABLE.' WHERE isactive=1 ORDER BY topic');
                  if($services && db_num_rows($services)) {
@@ -114,7 +114,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
             $errors['captcha']='Please re-enter the text again';
         ?>
     <tr>
-        <th valign="top">Captcha Text:</th>
+        <th valign="top">Texto da imagem:</th>
         <td><img src="captcha.php" border="0" align="left">
         <span>&nbsp;&nbsp;<input type="text" name="captcha" size="7" value="">&nbsp;<i>Insira o texto mostrado na imagem.</i></span><br/>
                 <font class="error">&nbsp;<?=$errors['captcha']?></font>
