@@ -8,7 +8,7 @@ $sql='SELECT dept.dept_id,dept_name,email.email_id,email.email,email.name as ema
      ' LEFT JOIN '.STAFF_TABLE.' staff ON dept.dept_id=staff.dept_id ';
 $depts=db_query($sql.' GROUP BY dept.dept_id ORDER BY dept_name');    
 ?>
-<div class="msg">Departments</div>
+<div class="msg">Departamentos</div>
 <table width="100%" border="0" cellspacing=1 cellpadding=2>
     <form action="admin.php?t=dept" method="POST" name="depts" onSubmit="return checkbox_checker(document.forms['depts'],1,0);">
     <input type=hidden name='do' value='mass_process'>
@@ -16,11 +16,11 @@ $depts=db_query($sql.' GROUP BY dept.dept_id ORDER BY dept_name');
     <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th>Dept. Name</th>
-            <th>Type</th>
-            <th width=10>Users</th>
-            <th>Primary Outgoing Email</th>
-            <th>Manager</th>
+	        <th>Nome do departamento</th>
+            <th>Tipo</th>
+            <th width=10>Usuários</th>
+            <th>E-mail principal de saída</th>
+            <th>Gerenciamento</th>
         </tr>
         <?
         $class = 'row1';
@@ -58,7 +58,7 @@ $depts=db_query($sql.' GROUP BY dept.dept_id ORDER BY dept_name');
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //not tickets found!! ?> 
-            <tr class="<?=$class?>"><td colspan=6><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=6><b>Retorno de consulta com 0 resultado</b></td></tr>
         <?
         endif; ?>
     </table>
