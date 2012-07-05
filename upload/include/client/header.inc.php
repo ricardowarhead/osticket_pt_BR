@@ -22,7 +22,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
          <li><a class="log_out" href="logout.php">Sair</a></li>
          <li><a class="my_tickets" href="tickets.php">Meus Tickets</a></li>
          <?}else {?>
-         <li><a class="ticket_status" href="tickets.php">Visualizar Ticket</a></li>
+         <li><a class="ticket_status" href="tickets.php">Ver Ticket</a></li>
          <?}?>
          <li><a class="new_ticket" href="open.php">Novo Ticket</a></li>
          <li><a class="home" href="index.php">Início</a></li>
