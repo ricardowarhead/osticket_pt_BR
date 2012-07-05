@@ -13,7 +13,7 @@ $t=Format::input($_POST['lticket']?$_POST['lticket']:$_GET['t']);
 </div>
 <div style="margin:5px 0px 100px 0;text-align:center; width:100%;">
     <p align="center">
-        Para visualizar o status de um ticket, use o seu login abaixo.<br/>
+        Para visualizar o status de um ticket, entre com o seu login abaixo.<br/>
         Se este é seu primeiro acesso ou se você perdeu o ID do ticket, por favor <a href="open.php">clique aqui</a> para abrir um novo ticket.
     </p>
     <span class="error"><?=Format::htmlchars($loginmsg)?></span>
