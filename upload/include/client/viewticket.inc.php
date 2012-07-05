@@ -17,7 +17,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
        <td width=50%>	
         <table align="center" class="infotable" cellspacing="1" cellpadding="3" width="100%" border=0>
 	        <tr>
-				<th width="100" >Ticket Status:</th>
+				<th width="100" >Status do Ticket:</th>
 				<td><?=$ticket->getStatus()?></td>
 			</tr>
             <tr>
@@ -37,7 +37,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
                 <td><?=Format::htmlchars($ticket->getName())?></td>
             </tr>
             <tr>
-                <th width="100">E-mail:</th>
+                <th width="100">Email:</th>
                 <td><?=$ticket->getEmail()?></td>
             </tr>
             <tr>
@@ -117,7 +117,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
     </div> 
     <div id="reply" style="padding:10px 0 20px 40px;">
         <?if($ticket->isClosed()) {?>
-        <div class="msg">O ticket será reaberto na postagem da mensagem</div>
+        <div class="msg">O ticket será reaberto ao postar a mensagem</div>
         <?}?>
         <form action="view.php?id=<?=$id?>#reply" name="reply" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?=$ticket->getExtId()?>">
@@ -129,7 +129,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
             </div>
             <? if($cfg->allowOnlineAttachments()) {?>
             <div align="left">
-                Arquivo anexo <br><input type="file" name="attachment" id="attachment" size=30px value="<?=$info['attachment']?>" /> 
+                Anexo <br><input type="file" name="attachment" id="attachment" size=30px value="<?=$info['attachment']?>" /> 
                     <font class="error">&nbsp;<?=$errors['attachment']?></font>
             </div>
             <?}?>

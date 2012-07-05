@@ -16,7 +16,7 @@ if(!defined('OSTCLIENTINC') || !is_object($ticket)) die('Kwaheri rafiki!'); //Sa
     <?=Format::htmlchars($ticket->getName())?>,<br>
     <p>
      Obrigado por nos contactar.<br>
-     Uma solicitação ao suporte foi criada e a Veezor retornará em breve.</p>
+     Uma solicitação ao suporte foi enviada e a Veezor retornará em breve.</p>
           
     <?if($cfg->autoRespONNewTicket()){ ?>
     <p>Um e-mail com o número do ticket foi enviado para <b><?=$ticket->getEmail()?></b>.
