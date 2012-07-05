@@ -25,19 +25,19 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
  <input type="hidden" name="dept_id" value="<?=$info['dept_id']?>">
  <tr><td>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>Department</td></tr>
-        <tr class="subheader"><td colspan=2 >Dept depends on email &amp; help topics settings for incoming tickets.</td></tr>
-        <tr><th>Dept Name:</th>
+        <tr class="header"><td colspan=2>Departamento</td></tr>
+        <tr class="subheader"><td colspan=2 >Departamento depende do e-mail &amp; configurações de tópicos de ajuda para tickets de entrada.</td></tr>
+        <tr><th>Nome do departamento:</th>
             <td><input type="text" name="dept_name" size=25 value="<?=$info['dept_name']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['dept_name']?></font>
                     
             </td>
         </tr>
         <tr>
-            <th>Dept Email:</th>
+            <th>E-mail do Departamento:</th>
             <td>
                 <select name="email_id">
-                    <option value="">Select One</option>
+                    <option value="">Selecionar um</option>
                     <?
                     $emails=db_query('SELECT email_id,email,name,smtp_active FROM '.EMAIL_TABLE);
                     while (list($id,$email,$name,$smtp) = db_fetch_row($emails)){
@@ -56,12 +56,12 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
             $users= db_query('SELECT staff_id,CONCAT_WS(" ",firstname,lastname) as name FROM '.STAFF_TABLE.' WHERE dept_id='.db_input($info['dept_id']));
             ?>
         <tr>
-            <th>Dep Manager:</th>
+            <th>Gerenciamento de departamento:</th>
             <td>
                 <?if($users && db_num_rows($users)) {?>
                 <select name="manager_id">
-                    <option value=0 >-------None-------</option>
-                    <option value=0 disabled >Select Manager (optional)</option>
+                    <option value=0 >-------Nenhum-------</option>
+                    <option value=0 disabled >Seleção de gerenciador (opcional)</option>
                      <?
                      while (list($id,$name) = db_fetch_row($users)){ ?>
                         <option value="<?=$id?>"<?=($info['manager_id']==$id)?'selected':''?>><?=$name?></option>
@@ -69,14 +69,14 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                      
                 </select>
                  <?}else {?>
-                       No Users (Add Users)
+                       Sem usuários (adicionar usuários)
                        <input type="hidden" name="manager_id"  value="0" />
                  <?}?>
                     &nbsp;<font class="error">&nbsp;<?=$errors['manager_id']?></font>
             </td>
         </tr>
         <?}?>
-        <tr><th>Dept Type</th>
+        <tr><th>Tipo do departamento</th>
             <td>
                 <input type="radio" name="ispublic"  value="1"   <?=$info['ispublic']?'checked':''?> />Public
                 <input type="radio" name="ispublic"  value="0"   <?=!$info['ispublic']?'checked':''?> />Private (Hidden)
@@ -84,7 +84,7 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
             </td>
         </tr>
         <tr>
-            <th valign="top"><br/>Dept Signature:</th>
+            <th valign="top"><br/>Assinatura do departamento:</th>
             <td>
                 <i>Required when Dept is public</i>&nbsp;&nbsp;&nbsp;<font class="error"><?=$errors['dept_signature']?></font><br/>
                 <textarea name="dept_signature" cols="21" rows="5" style="width: 60%;"><?=$info['dept_signature']?></textarea>
@@ -93,10 +93,10 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                 can be appended to responses.&nbsp;(available as a choice for public departments)  
             </td>
         </tr>
-        <tr><th>Email Templates:</th>
+        <tr><th>Modelos de e-mail:</th>
             <td>
                 <select name="tpl_id">
-                    <option value=0 disabled>Select Template</option>
+                    <option value=0 disabled>Selecionar modelo</option>
                     <option value="0" selected="selected">System Default</option>
                     <?
                     $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE tpl_id!='.db_input($cfg->getDefaultTemplateId()));
@@ -109,29 +109,29 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                 <i>Used for outgoing emails,alerts and notices to user and staff.</i>
             </td>
         </tr>
-        <tr class="header"><td colspan=2>Autoresponders</td></tr>
+        <tr class="header"><td colspan=2>Resposta automática</td></tr>
         <tr class="subheader"><td colspan=2>
             Global auto-response settings in preference section must be enabled for Dept 'Enable' setting to take effect.
             </td>
         </tr>
-        <tr><th>New Ticket:</th>
+        <tr><th>Novo Ticket:</th>
             <td>
                 <input type="radio" name="ticket_auto_response"  value="1"   <?=$info['ticket_auto_response']?'checked':''?> />Enable
                 <input type="radio" name="ticket_auto_response"  value="0"   <?=!$info['ticket_auto_response']?'checked':''?> />Disable
             </td>
         </tr>
-        <tr><th>New Message:</th>
+        <tr><th>Nova Mensagem:</th>
             <td>
                 <input type="radio" name="message_auto_response"  value="1"   <?=$info['message_auto_response']?'checked':''?> />Enable
                 <input type="radio" name="message_auto_response"  value="0"   <?=!$info['message_auto_response']?'checked':''?> />Disable
             </td>
         </tr>
         <tr>
-            <th>Auto Response Email:</th>
+            <th>Resposta automática do e-mail:</th>
             <td>
                 <select name="autoresp_email_id">
-                    <option value="0" disabled>Select One</option>
-                    <option value="0" selected="selected">Dept Email (above)</option>
+                    <option value="0" disabled>Selecionar um</option>
+                    <option value="0" selected="selected">E-mail do departamento (acima)</option>
                     <?
                     $emails=db_query('SELECT email_id,email,name,smtp_active FROM '.EMAIL_TABLE.' WHERE email_id!='.db_input($info['email_id']));
                     if($emails && db_num_rows($emails)) {
@@ -146,7 +146,7 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                     }?>
                  </select>
                  &nbsp;<font class="error">&nbsp;<?=$errors['autoresp_email_id']?></font>&nbsp;<br/>
-                 <i>Email address used to send auto-responses, if enabled.</i>
+                 <i>Endereço de e-mail usado para enviar respostas automáticas, se habilitado.</i>
             </td>
         </tr>
     </table>
