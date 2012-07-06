@@ -116,7 +116,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <th valign="top">Texto da imagem:</th>
         <td><img src="captcha.php" border="0" align="left">
-        <span>&nbsp;&nbsp;<input type="text" name="captcha" size="7" value="">&nbsp;<i>Insira o texto mostrado na imagem.</i></span><br/>
+        <span>&nbsp;&nbsp;<input type="text" name="captcha" size="7" value="">&nbsp;<i>Digite o texto mostrado na imagem.</i></span><br/>
                 <font class="error">&nbsp;<?=$errors['captcha']?></font>
         </td>
     </tr>
