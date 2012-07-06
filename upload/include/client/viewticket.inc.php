@@ -41,7 +41,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
                 <td><?=$ticket->getEmail()?></td>
             </tr>
             <tr>
-                <th>Telefone:</th>
+                <th>Telefone: </th>
                 <td><?=Format::phone($ticket->getPhoneNumber())?></td>
             </tr>
         </table>
@@ -117,7 +117,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
     </div> 
     <div id="reply" style="padding:10px 0 20px 40px;">
         <?if($ticket->isClosed()) {?>
-        <div class="msg">O ticket será reaberto ao postar a mensagem</div>
+        <div class="msg">O ticket será reaberto ao postar esta mensagem</div>
         <?}?>
         <form action="view.php?id=<?=$id?>#reply" name="reply" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?=$ticket->getExtId()?>">
