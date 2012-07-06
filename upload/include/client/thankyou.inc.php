@@ -20,10 +20,10 @@ if(!defined('OSTCLIENTINC') || !is_object($ticket)) die('Kwaheri rafiki!'); //Sa
           
     <?if($cfg->autoRespONNewTicket()){ ?>
     <p>Um e-mail com o número do ticket foi enviado para <b><?=$ticket->getEmail()?></b>.
-        Você vai precisar do número do ticket e seu e-mail para acessar o progresso da solicitação. 
+        Você irá precisar do número do ticket e seu e-mail para acessar o progresso da solicitação. 
     </p>
     <p>
-     Se você quiser enviar comentários ou informações adicionais sobre o mesmo assunto, por favor siga as instruções no e-mail.
+     Se você quiser enviar comentários ou informações adicionais sobre o mesmo assunto, por favor siga as instruções contidas no e-mail.
     </p>
     <?}?>
     <p>Equipe de suporte :: Veezor Network Intelligence </p>
