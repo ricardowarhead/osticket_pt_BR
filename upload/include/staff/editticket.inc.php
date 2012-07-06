@@ -35,9 +35,9 @@ if($_POST && $errors){
     <input type='hidden' name='id' value='<?=$ticket->getId()?>'>
     <input type='hidden' name='a' value='update'>
     <tr><td align="left" colspan=2 class="msg">
-        Update Ticket #<?=$ticket->getExtId()?>&nbsp;&nbsp;(<a href="tickets.php?id=<?=$ticket->getId()?>" style="color:black;">View Ticket</a>)<br></td></tr>
+        Atualização de Ticket #<?=$ticket->getExtId()?>&nbsp;&nbsp;(<a href="tickets.php?id=<?=$ticket->getId()?>" style="color:black;">View Ticket</a>)<br></td></tr>
     <tr>
-        <td align="left" nowrap width="120"><b>Email Address:</b></td>
+        <td align="left" nowrap width="120"><b>Endereço de e-mail:</b></td>
         <td>
             <input type="text" id="email" name="email" size="25" value="<?=$info['email']?>">
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['email']?></font>
