@@ -90,7 +90,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 	        <th width="70" nowrap>
                 <a href="view.php?sort=ID&order=<?=$negorder?><?=$qstr?>" title="Sort By Ticket ID <?=$negorder?>">Ticket #</a></th>
 	        <th width="100">
-                <a href="view.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Date <?=$negorder?>">Data de criação</a></th>
+                <a href="view.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Date <?=$negorder?>">Data da criação</a></th>
             <th width="60">Status</th>
             <th width="240">Assunto</th>
             <th width="150">
