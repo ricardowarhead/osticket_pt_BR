@@ -7,7 +7,7 @@ $sql='SELECT topic_id,isactive,topic.noautoresp,topic.dept_id,topic,dept_name,pr
      ' LEFT JOIN '.TICKET_PRIORITY_TABLE.' pri ON pri.priority_id=topic.priority_id ';
 $services=db_query($sql.' ORDER BY topic'); 
 ?>
-<div class="msg">Help Topics</div>
+<div class="msg">Tópicos de Ajuda</div>
 <table width="100%" border="0" cellspacing=1 cellpadding=2>
    <form action="admin.php?t=settings" method="POST" name="topic" onSubmit="return checkbox_checker(document.forms['topic'],1,0);">
    <input type='hidden' name='t' value='topics'>
@@ -16,12 +16,12 @@ $services=db_query($sql.' ORDER BY topic');
     <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th>Help Topic</th>
+	        <th>Tópico de Ajuda</th>
             <th>Status</th>
             <th>AutoResp.</th>
-            <th>Department</th>
-            <th>Priority</th>
-	        <th>Last Updated</th>
+            <th>Departamento</th>
+            <th>Prioridade</th>
+	        <th>Último Updated</th>
         </tr>
         <?
         $class = 'row1';
@@ -49,7 +49,7 @@ $services=db_query($sql.' ORDER BY topic');
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //notthing! ?> 
-            <tr class="<?=$class?>"><td colspan=8><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=8><b>Consulta retornou 0 resultados</b></td></tr>
         <?
         endif; ?>
     </table>
@@ -59,10 +59,10 @@ $services=db_query($sql.' ORDER BY topic');
      ?>
     <tr>
         <td style="padding-left:20px">
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['topic'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['topic'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['topic'],true)">Toggle</a>&nbsp;&nbsp;
+            Selecione:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['topic'],true)">Todos</a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['topic'])">Nenhum</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['topic'],true)">Aleatório</a>&nbsp;&nbsp;
         </td>
     </tr>
     <tr>
