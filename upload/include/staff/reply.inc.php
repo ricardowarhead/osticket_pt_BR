@@ -25,7 +25,7 @@ if($answer && $_REQUEST['a']!='add'){
     <form action="kb.php" method="POST" name="group">
     <input type="hidden" name="a" value="<?=$action?>">
     <input type="hidden" name="id" value="<?=$info['premade_id']?>">
-    <tr><td width=80px>Title:</td>
+    <tr><td width=80px>Título:</td>
         <td><input type="text" size=45 name="title" value="<?=$info['title']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['title']?></font>
         </td>
@@ -33,15 +33,15 @@ if($answer && $_REQUEST['a']!='add'){
     <tr>
         <td>Status:</td>
         <td>
-            <input type="radio" name="isenabled"  value="1"   <?=$info['isenabled']?'checked':''?> /> Active
-            <input type="radio" name="isenabled"  value="0"   <?=!$info['isenabled']?'checked':''?> />Offline
+            <input type="radio" name="isenabled"  value="1"   <?=$info['isenabled']?'checked':''?> /> Ativado
+            <input type="radio" name="isenabled"  value="0"   <?=!$info['isenabled']?'checked':''?> />Desativado
             &nbsp;<font class="error">&nbsp;<?=$errors['isenabled']?></font>
         </td>
     </tr>
-    <tr><td valign="top">Category:</td>
-        <td>Department under which the 'answer' will be made available.&nbsp;<font class="error">&nbsp;<?=$errors['depts']?></font><br/>
+    <tr><td valign="top">Categoria:</td>
+        <td>Departamento onde as respostas serão disponibilizadas.&nbsp;<font class="error">&nbsp;<?=$errors['depts']?></font><br/>
             <select name=dept_id>
-                <option value=0 selected>All Departments</option>
+                <option value=0 selected>Todos os Departamentos</option>
                 <?
                 $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' ORDER BY dept_name');
                 while (list($id,$name) = db_fetch_row($depts)){
@@ -52,8 +52,8 @@ if($answer && $_REQUEST['a']!='add'){
             </select>
         </td>
     </tr>
-    <tr><td valign="top">Answer:</td>
-        <td>Premade Reply - Ticket's base variables are supported.&nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font><br/>
+    <tr><td valign="top">Responder:</td>
+        <td>Resposta Preparada - variáveis do Ticket's de base são suportadas.&nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font><br/>
             <textarea name="answer" id="answer" cols="90" rows="9" wrap="soft" style="width:80%"><?=$info['answer']?></textarea>
         </td>
     </tr>
