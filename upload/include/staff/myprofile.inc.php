@@ -2,7 +2,7 @@
 if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
 
 ?>
-<div class="msg">My Profile Info</div>
+<div class="msg">Minhas informações</div>
 <table width="100%" border="0" cellspacing=0 cellpadding=2>
  <form action="profile.php" method="post">
  <input type="hidden" name="t" value="info">
@@ -12,22 +12,22 @@ if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
         <td>&nbsp;<?=$thisuser->getUserName()?></td>
     </tr>
     <tr>
-        <td>First Name:</td>
+        <td>Primeiro Nome:</td>
         <td><input type="text" name="firstname" value="<?=$rep['firstname']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['firstname']?></font></td>
     </tr>
     <tr>
-        <td>Last Name:</td>
+        <td>Último Nome:</td>
         <td><input type="text" name="lastname" value="<?=$rep['lastname']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['lastname']?></font></td>
     </tr>
     <tr>
-        <td>Email Address:</td>
+        <td>Email:</td>
         <td><input type="text" name="email" size=25 value="<?=$rep['email']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['email']?></font></td>
     </tr>
     <tr>
-        <td>Office Phone:</td>
+        <td>Telefone do Escritório:</td>
         <td>
             <input type="text" name="phone" value="<?=$rep['phone']?>" ><font class="error">&nbsp;<?=$errors['phone']?></font>&nbsp;Ext&nbsp;
             <input type="text" name="phone_ext" size=6 value="<?=$rep['phone_ext']?>" >
@@ -35,12 +35,12 @@ if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
         </td>
     </tr>
     <tr>
-        <td>Cell Phone:</td>
+        <td>Celular:</td>
         <td><input type="text" name="mobile" value="<?=$rep['mobile']?>" >
             &nbsp;<font class="error">&nbsp;<?=$errors['mobile']?></font></td>
     </tr>
     <tr>
-        <td valign="top">Signature:</td>
+        <td valign="top">Assinatura:</td>
         <td><textarea name="signature" cols="21" rows="5" style="width: 60%;"><?=$rep['signature']?></textarea></td>
     </tr>
     <tr><td>&nbsp;</td>
