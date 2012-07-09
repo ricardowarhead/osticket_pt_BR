@@ -34,18 +34,18 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
  <input type="hidden" name="staff_id" value="<?=$rep['staff_id']?>">
  <tr><td>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>User Account</td></tr>
-        <tr class="subheader"><td colspan=2>Account information</td></tr>
+        <tr class="header"><td colspan=2>Conta de Usuário</td></tr>
+        <tr class="subheader"><td colspan=2>Informações da Conta</td></tr>
         <tr>
             <th>Username:</th>
             <td><input type="text" name="username" value="<?=$rep['username']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['username']?></font></td>
         </tr>
         <tr>
-            <th>Department:</th>
+            <th>Departamento:</th>
             <td>
                 <select name="dept_id">
-                    <option value=0>Select Department</option>
+                    <option value=0>Selecionar Departamento</option>
                     <?
                     while (list($id,$name) = db_fetch_row($depts)){
                         $selected = ($rep['dept_id']==$id)?'selected':''; ?>
@@ -56,10 +56,10 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
             </td>
         </tr>
         <tr>
-            <th>User Group:</th>
+            <th>Grupo do Usuário:</th>
             <td>
                 <select name="group_id">
-                    <option value=0>Select Group</option>
+                    <option value=0>Selecione Grupo</option>
                     <?
                     while (list($id,$name) = db_fetch_row($groups)){
                         $selected = ($rep['group_id']==$id)?'selected':''; ?>
@@ -70,78 +70,78 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
             </td>
         </tr>
         <tr>
-            <th>Name (First,Last):</th>
+            <th>Nome (Primeiro,Último):</th>
             <td>
                 <input type="text" name="firstname" value="<?=$rep['firstname']?>">&nbsp;<font class="error">*</font>
                 &nbsp;&nbsp;&nbsp;<input type="text" name="lastname" value="<?=$rep['lastname']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['name']?></font></td>
         </tr>
         <tr>
-            <th>Email Address:</th>
+            <th>Email:</th>
             <td><input type="text" name="email" size=25 value="<?=$rep['email']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['email']?></font></td>
         </tr>
         <tr>
-            <th>Office Phone:</th>
+            <th>Telefone do Escritório:</th>
             <td>
                 <input type="text" name="phone" value="<?=$rep['phone']?>" >&nbsp;Ext&nbsp;
                 <input type="text" name="phone_ext" size=6 value="<?=$rep['phone_ext']?>" >
                     &nbsp;<font class="error">&nbsp;<?=$errors['phone']?></font></td>
         </tr>
         <tr>
-            <th>Mobile Phone:</th>
+            <th>Celular:</th>
             <td>
                 <input type="text" name="mobile" value="<?=$rep['mobile']?>" >
                     &nbsp;<font class="error">&nbsp;<?=$errors['mobile']?></font></td>
         </tr>
         <tr>
-            <th valign="top">Signature:</th>
+            <th valign="top">Assinatura:</th>
             <td><textarea name="signature" cols="21" rows="5" style="width: 60%;"><?=$rep['signature']?></textarea></td>
         </tr>
         <tr>
-            <th>Password:</th>
+            <th>Senha:</th>
             <td>
                 <i><?=$pwdinfo?></i>&nbsp;&nbsp;&nbsp;<font class="error">&nbsp;<?=$errors['npassword']?></font> <br/>
                 <input type="password" name="npassword" AUTOCOMPLETE=OFF >&nbsp;
             </td>
         </tr>
         <tr>
-            <th>Password (confirm):</th>
+            <th>Confirmação de Senha:</th>
             <td class="mainTableAlt"><input type="password" name="vpassword" AUTOCOMPLETE=OFF >
                 &nbsp;<font class="error">&nbsp;<?=$errors['vpassword']?></font></td>
         </tr>
         <tr>
-            <th>Forced Password Change:</th>
+            <th>Nova Senha:</th>
             <td>
-                <input type="checkbox" name="resetpasswd" <?=$rep['resetpasswd'] ? 'checked': ''?>>Require a change of password in the next login</td>
+                <input type="checkbox" name="resetpasswd" <?=$rep['resetpasswd'] ? 'checked': ''?>>Exigir uma mudança de senha no próximo login</td>
         </tr>
-        <tr class="header"><td colspan=2>Account Permission, status &amp; Settings</td></tr>
+        <tr class="header"><td colspan=2>Permissão de conta, status &amp; Configurações</td></tr>
         <tr class="subheader"><td colspan=2>
-            Staff's permission is also based on the assigned group. <b>Admin is not restricted by group settings.</b></td>
+            As permissões da staff baseia-se também no grupo atribuído. <b>Administrador não é limitado por configurações do grupo.</b></td>
         </tr> 
         <tr><th><b>Account Status</b></th>
             <td>
-                        <input type="radio" name="isactive"  value="1" <?=$rep['isactive']?'checked':''?> /><b>Active</b>
-                        <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Locked</b>
+                        <input type="radio" name="isactive"  value="1" <?=$rep['isactive']?'checked':''?> /><b>Ativo</b>
+                        <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Bloqueado</b>
                         &nbsp;&nbsp;
             </td>
         </tr>
-        <tr><th><b>Account Type</b></th>
+        <tr><th><b>Tipo de Conta</b></th>
             <td class="mainTableAlt">
                         <input type="radio" name="isadmin"  value="1" <?=$rep['isadmin']?'checked':''?> /><font color="red"><b>Admin</b></font>
                         <input type="radio" name="isadmin"  value="0" <?=!$rep['isadmin']?'checked':''?> /><b>Staff</b>
                         &nbsp;&nbsp;
             </td>
         </tr>
-        <tr><th>Directory Listing</th>
+        <tr><th>Directory Listagem</th>
             <td>
-               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Show the user on staff's directory
+               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no directory staff
             </td>
         </tr>
-        <tr><th>Vacation Mode</th>
+        <tr><th>Modo de Tendência</th>
             <td class="mainTableAlt">
              <input type="checkbox" name="onvacation" <?=$rep['onvacation'] ? 'checked': ''?>>
-                Staff on vacation mode. (<i>No ticket assignment or Alerts</i>)
+                Staff no modo de tendência. (<i>Nenhuma atribuição de ticket ou alerta</i>)
                 &nbsp;<font class="error">&nbsp;<?=$errors['vacation']?></font>
             </td>
         </tr>
