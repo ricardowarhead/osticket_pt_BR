@@ -61,7 +61,7 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
         Query:&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
         &nbsp;&nbsp;
         <input type="submit" name="search" class="button" value="Search">
-        &nbsp;<a href="#" class="msg" onClick="showHide('add','search'); return false;">(Add)</a>
+        &nbsp;<a href="#" class="msg" onClick="showHide('add','search'); return false;">(Adicionar)</a>
     </form>
 </div>
 <div id='add' style="display:<?=$showadd?'block':'none'?>;" align="left">
@@ -71,7 +71,7 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
     Email:&nbsp;<input type="text" name="email" value="<?=$_POST['email']?>">
     &nbsp;
     <input type="submit" name="add" class="button" value="Add">
-     &nbsp;<a href="#" class="msg" onClick="showHide('add','search'); return false;">(Search)</a>
+     &nbsp;<a href="#" class="msg" onClick="showHide('add','search'); return false;">(Procurar)</a>
     </form>
 </div>
 <div class="msg"><?=$result_type?>:&nbsp;<?=$showing?></div>
@@ -84,10 +84,10 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th width=250>
-                <a href="admin.php?t=banlist&sort=email&order=<?=$negorder?><?=$qstr?>" title="Sort by email <?=$negorder?>">Email</a></th>
+                <a href="admin.php?t=banlist&sort=email&order=<?=$negorder?><?=$qstr?>" title="Sort by email <?=$negorder?>">E-mail</a></th>
 	        <th width=200 >Submitter</th> 
 	        <th width=150 nowrap>
-                <a href="admin.php?t=banlist&sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Create Date <?=$negorder?>">Date Added</a></th>
+                <a href="admin.php?t=banlist&sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Create Date <?=$negorder?>">Data adicionada</a></th>
         </tr>
         <?
         $class = 'row1';
@@ -113,7 +113,7 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //nothin' found!! ?> 
-            <tr class="<?=$class?>"><td colspan=4><b>Query returned 0 results</b>&nbsp;&nbsp;<a href="admin.php?t=banlist">Index list</a></td></tr>
+            <tr class="<?=$class?>"><td colspan=4><b>Query returned 0 results</b>&nbsp;&nbsp;<a href="admin.php?t=banlist">Lista padrão</a></td></tr>
         <?
         endif; ?>
      </table>
@@ -134,7 +134,7 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
     <tr>
         <td align="center">
             <input class="button" type="submit" name="delete" value="Remove From List" 
-                     onClick='return confirm("Are you sure you wan to REMOVE selected email from ban list?");'>
+                     onClick='return confirm("Tem certeza que deseja remover o e-mail selecionado da lista de banidos?");'>
         </td>
     </tr>
     <?
