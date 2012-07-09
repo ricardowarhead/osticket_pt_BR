@@ -26,35 +26,35 @@ $gmtime=Misc::gmtime();
 $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE ispublic=1');
 $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_id='.db_input($cfg->getId()));
 ?>
-<div class="msg">System Preferences and Settings&nbsp;&nbsp;(v<?=$config['ostversion']?>)</div>
+<div class="msg">Preferências do Sistema e Configurações&nbsp;&nbsp;(v<?=$config['ostversion']?>)</div>
 <table width="100%" border="0" cellspacing=0 cellpadding=0>
  <form action="admin.php?t=pref" method="post">
  <input type="hidden" name="t" value="pref">
  <tr><td>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header" ><td colspan=2>General Settings</td></tr>
+        <tr class="header" ><td colspan=2>Definições Gerais</td></tr>
         <tr class="subheader">
-            <td colspan=2">Offline mode will disable client interface and <b>only</b> allow <b>super admins</b> to login to Staff Control Panel</td>
+            <td colspan=2">O modo offline irá desabilitar interface do cliente e <b>só</b> permitirá o acesso ao Painel de Controle aos <b>super administradores</b></td>
         </tr>
-        <tr><th><b>Helpdesk Status</b></th>
+        <tr><th><b>Ajuda de Status</b></th>
             <td>
-                <input type="radio" name="isonline"  value="1"   <?=$config['isonline']?'checked':''?> /><b>Online</b> (Active)
-                <input type="radio" name="isonline"  value="0"   <?=!$config['isonline']?'checked':''?> /><b>Offline</b> (Disabled)
+                <input type="radio" name="isonline"  value="1"   <?=$config['isonline']?'checked':''?> /><b>Online</b> (Ativado)
+                <input type="radio" name="isonline"  value="0"   <?=!$config['isonline']?'checked':''?> /><b>Offline</b> (Disativado)
                 &nbsp;<font class="warn">&nbsp;<?=$config['isoffline']?'osTicket offline':''?></font>
             </td>
         </tr>
-        <tr><th>Helpdesk URL:</th>
+        <tr><th>Ajuda de URL:</th>
             <td>
                 <input type="text" size="40" name="helpdesk_url" value="<?=$config['helpdesk_url']?>"> 
                 &nbsp;<font class="error">*&nbsp;<?=$errors['helpdesk_url']?></font></td>
         </tr>
-        <tr><th>Helpdesk Name/Title:</th>
+        <tr><th>Ajuda de Nome/Título:</th>
             <td><input type="text" size="40" name="helpdesk_title" value="<?=$config['helpdesk_title']?>"> </td>
         </tr>
-        <tr><th>Default Email Templates:</th>
+        <tr><th>Modelos de Email Padrão:</th>
             <td>
                 <select name="default_template_id">
-                    <option value=0>Select Default Template</option>
+                    <option value=0>Selecione Modelo Padrão</option>
                     <?
                     while (list($id,$name) = db_fetch_row($templates)){
                         $selected = ($config['default_template_id']==$id)?'SELECTED':''; ?>
@@ -64,10 +64,10 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>&nbsp;<font class="error">*&nbsp;<?=$errors['default_template_id']?></font>
             </td>
         </tr>
-        <tr><th>Default Department:</th>
+        <tr><th>Departamento Padrão:</th>
             <td>
                 <select name="default_dept_id">
-                    <option value=0>Select Default Dept</option>
+                    <option value=0>Selecione Dept Padrão</option>
                     <?
                     while (list($id,$name) = db_fetch_row($depts)){
                     $selected = ($config['default_dept_id']==$id)?'SELECTED':''; ?>
@@ -77,7 +77,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>&nbsp;<font class="error">*&nbsp;<?=$errors['default_dept_id']?></font>
             </td>
         </tr>
-        <tr><th>Default Page Size:</th>
+        <tr><th>Tamanho Padrão da Página:</th>
             <td>
                 <select name="max_page_size">
                     <?
@@ -90,17 +90,17 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>
             </td>
         </tr>
-        <tr><th>System Log Level:</th>
+        <tr><th>Nível de log do sistema:</th>
             <td>
                 <select name="log_level">
-                    <option value=0 <?=$config['log_level'] == 0 ? 'selected="selected"':''?>>None (Disable Logger)</option>
-                    <option value=3 <?=$config['log_level'] == 3 ? 'selected="selected"':''?>> DEBUG</option>
-                    <option value=2 <?=$config['log_level'] == 2 ? 'selected="selected"':''?>> WARN</option>
-                    <option value=1 <?=$config['log_level'] == 1 ? 'selected="selected"':''?>> ERROR</option>
+                    <option value=0 <?=$config['log_level'] == 0 ? 'selected="selected"':''?>>Nenhum (Desativar Logger)</option>
+                    <option value=3 <?=$config['log_level'] == 3 ? 'selected="selected"':''?>> LIMPAR</option>
+                    <option value=2 <?=$config['log_level'] == 2 ? 'selected="selected"':''?>> AVISAR</option>
+                    <option value=1 <?=$config['log_level'] == 1 ? 'selected="selected"':''?>> ERRO</option>
                 </select>
-                &nbsp;Purge logs after
+                &nbsp;Limpar os logs após
                 <select name="log_graceperiod">
-                    <option value=0 selected> None (Disable)</option>
+                    <option value=0 selected> Nenhum (Disabilitado)</option>
                     <?
                     for ($i = 1; $i <=12; $i++) {
                         ?>
@@ -110,7 +110,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>
             </td>
         </tr>
-        <tr><th>Staff Excessive Logins:</th>
+        <tr><th>Logins Excessivos:</th>
             <td>
                 <select name="staff_max_logins">
                   <?php
@@ -118,31 +118,31 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                         echo sprintf('<option value="%d" %s>%d</option>',$i,(($config['staff_max_logins']==$i)?'selected="selected"':''),$i);
                     }
                     ?>
-                </select> attempt(s) allowed
-                &nbsp;before a
+                </select> tentativa(s) permitiu
+                &nbsp;antes de uma
                 <select name="staff_login_timeout">
                   <?php
                     for ($i = 1; $i <= 10; $i++) {
                         echo sprintf('<option value="%d" %s>%d</option>',$i,(($config['staff_login_timeout']==$i)?'selected="selected"':''),$i);
                     }
                     ?>
-                </select> min. timeout (penalty in minutes)
+                </select> min. tempo livre (pena em minutos)
             </td>
         </tr>
-        <tr><th>Staff Session Timeout:</th>
+        <tr><th>Tempo limite de sessão Staff:</th>
             <td>
               <input type="text" name="staff_session_timeout" size=6 value="<?=$config['staff_session_timeout']?>">
-                (<i>Staff's max Idle time in minutes. Enter 0 to disable timeout</i>)
+                (<i>Tempo máximo de Staff inativo em minutos. Digite 0 para desativar o tempo limite.</i>)
             </td>
         </tr>
-       <tr><th>Bind Staff Session to IP:</th>
+       <tr><th>Sessão Bind Staff de IP:</th>
             <td>
               <input type="checkbox" name="staff_ip_binding" <?=$config['staff_ip_binding']?'checked':''?>>
-               Bind staff's session to login IP.
+               Sessão Bind Staff para entrar IP.
             </td>
         </tr>
 
-        <tr><th>Client Excessive Logins:</th>
+        <tr><th>Excesso de Logins do Client:</th>
             <td>
                 <select name="client_max_logins">
                   <?php
