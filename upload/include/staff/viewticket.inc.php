@@ -32,7 +32,7 @@ if($ticket->isOverdue())
 
         <td class="msg" width=50%>
             <? if($thisuser->canEditTickets() || ($thisuser->isManager() && $dept->getId()==$thisuser->getDeptId())) { ?>
-             <a href="tickets.php?id=<?=$id?>&a=edit" title="Edit Ticket" class="Icon editTicket">Edit Ticket</a>
+             <a href="tickets.php?id=<?=$id?>&a=edit" title="Edit Ticket" class="Icon editTicket">Editar Ticket</a>
             <?}?>
         </td>
     </tr>
@@ -44,15 +44,15 @@ if($ticket->isOverdue())
 				<td><?=$ticket->getStatus()?></td>
 			</tr>
 			<tr>
-        		<th>Priority:</th>
+        		<th>Prioridade:</th>
         		<td><?=$ticket->getPriority()?></td>
    	 		</tr>
             <tr>
-                <th>Department:</th>
+                <th>Departamento:</th>
                 <td><?=Format::htmlchars($ticket->getDeptName())?></td>
             </tr>
 			<tr>
-                <th>Create Date:</th>
+                <th>Data de criação:</th>
                 <td><?=Format::db_datetime($ticket->getCreateDate())?></td>
             </tr>
 		</table>
@@ -60,7 +60,7 @@ if($ticket->isOverdue())
      <td width=50% valign="top">
         <table align="center" class="ticketinfo" cellspacing="1" cellpadding="3" width="100%" border=0>
             <tr>
-                <th>Name:</th>
+                <th>Nome:</th>
                 <td><?=Format::htmlchars($ticket->getName())?></td>
             </tr>
             <tr>
@@ -75,38 +75,38 @@ if($ticket->isOverdue())
                 </td>
             </tr>
             <tr>
-                <th>Phone:</th>
+                <th>Telefone:</th>
                 <td><?=Format::phone($ticket->getPhoneNumber())?></td>
             </tr>
             <tr>
-                <th>Source:</th>
+                <th>Fonte:</th>
                 <td><?=$ticket->getSource()?></td>
             </tr>
         </table>
      </td>
     </tr>
-    <tr><td colspan=2 class="msg">Subject: <?=Format::htmlchars($ticket->getSubject())?></td></tr>
+    <tr><td colspan=2 class="msg">Assunto: <?=Format::htmlchars($ticket->getSubject())?></td></tr>
     <tr>
      <td valign="top" width=50%>
         <table align="center" class="ticketinfo" cellspacing="1" cellpadding="3" width="100%" border=0>
             <tr>
-                <th>Assigned Staff:</th>
+                <th>Função Pessoal:</th>
                 <td><?=$staff?Format::htmlchars($staff->getName()):'- unassigned -'?></td>
             </tr>
             <tr>
-                <th nowrap>Last Response:</th>
+                <th nowrap>Última Resposta:</th>
                 <td><?=Format::db_datetime($ticket->getLastResponseDate())?></td>
             </tr>
             <?php
             if($ticket->isOpen()){ ?>
             <tr>
-                <th>Due Date:</th>
+                <th>Vencimento:</th>
                 <td><?=Format::db_datetime($ticket->getDueDate())?></td>
             </tr>
             <?php
             }else { ?>
             <tr>
-                <th>Close Date:</th>
+                <th>Feche Data:</th>
                 <td><?=Format::db_datetime($ticket->getCloseDate())?></td>
             </tr>
             <?php
@@ -116,7 +116,7 @@ if($ticket->isOverdue())
      </td>
      <td width=50% valign="top">
         <table align="center" class="ticketinfo" cellspacing="1" cellpadding="3" width="100%" border=0>
-            <tr><th>Help Topic:</th>
+            <tr><th>Tópico da ajuda:</th>
                 <td><?
                     $ht=$ticket->getHelpTopic();
                     echo Format::htmlchars($ht?$ht:'N/A');
@@ -124,10 +124,10 @@ if($ticket->isOverdue())
                 </td>
             </tr>
             <tr>
-                <th>IP Address:</th>
+                <th>Endereço IP:</th>
                 <td><?=$ticket->getIP()?></td>
             </tr>
-            <tr><th nowrap>Last Message:</th>
+            <tr><th nowrap>Última Mensagem:</th>
                 <td><?=Format::db_datetime($ticket->getLastMessageDate())?></td>
             </tr>
         </table>
@@ -151,42 +151,42 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
         <form name=action action='tickets.php?id=<?=$id?>' method=post class="inline" >
             <input type='hidden' name='ticket_id' value="<?=$id?>"/>
              <input type='hidden' name='a' value="process"/>
-            <span for="do"> &nbsp;<b>Action:</b></span>
+            <span for="do"> &nbsp;<b>Ação:</b></span>
             <select id="do" name="do" 
               onChange="this.form.ticket_priority.disabled=strcmp(this.options[this.selectedIndex].value,'change_priority','reopen','overdue')?false:true;">
-                <option value="">Select Action</option>
-                <option value="change_priority" <?=$info['do']=='change_priority'?'selected':''?> >Change Priority</option>
+                <option value="">Selecione a Ação</option>
+                <option value="change_priority" <?=$info['do']=='change_priority'?'selected':''?> >Escolha a Prioridade</option>
                 <?if(!$ticket->isoverdue()){ ?>
-                <option value="overdue" <?=$info['do']=='overdue'?'selected':''?> >Mark Overdue</option>
+                <option value="overdue" <?=$info['do']=='overdue'?'selected':''?> >Marcar Atraso</option>
                 <?}?>
                 <?if($ticket->isAssigned()){ ?>
-                <option value="release" <?=$info['do']=='release'?'selected':''?> >Release (unassign)</option>
+                <option value="release" <?=$info['do']=='release'?'selected':''?> >Relocar (não atribuir)</option>
                 <?}?>
                 
                 <?if($thisuser->canCloseTickets()){
                     //if you can close a ticket...reopening it is given.
                     if($ticket->isOpen()){?>
-                     <option value="close" <?=$info['do']=='close'?'selected':''?> >Close Ticket</option>
+                     <option value="close" <?=$info['do']=='close'?'selected':''?> >Fechar Ticket</option>
                     <?}else{?>
-                        <option value="reopen" <?=$info['do']=='reopen'?'selected':''?> >Reopen Ticket</option>
+                        <option value="reopen" <?=$info['do']=='reopen'?'selected':''?> >Reabrir Ticket</option>
                     <?}
                 }?>
                 <?php
                  if($thisuser->canManageBanList()) {
                     if(!$emailBanned) {?>    
-                        <option value="banemail" >Ban Email <?=$ticket->isOpen()?'&amp; Close':''?></option>
+                        <option value="banemail" >Proibir Email <?=$ticket->isOpen()?'&amp; Close':''?></option>
                     <?}else{?>
-                        <option value="unbanemail">Un-Ban Email</option>
+                        <option value="unbanemail">Liberar Email</option>
                     <?}
                  }?>
                 
                 <?if($thisuser->canDeleteTickets()){ //oooh...fear the deleters! ?>
-                <option value="delete" >Delete Ticket</option>
+                <option value="delete" >Deletar Ticket</option>
                 <?}?>
             </select>
-            <span for="ticket_priority">Priority:</span>
+            <span for="ticket_priority">Prioridade:</span>
             <select id="ticket_priority" name="ticket_priority" <?=!$info['do']?'disabled':''?> >
-                <option value="0" selected="selected">-Unchanged-</option>
+                <option value="0" selected="selected">-Inalterado-</option>
                 <?
                 $priorityId=$ticket->getPriorityId();
                 $resp=db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_TABLE);
@@ -209,12 +209,12 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
     $display=($notes>5)?'none':'block'; //Collapse internal notes if more than 5.
 ?>
 <div align="left">
-    <a class="Icon note" href="#" onClick="toggleLayer('ticketnotes'); return false;">Internal Notes (<?=$notes?>)</a><br><br>
+    <a class="Icon note" href="#" onClick="toggleLayer('ticketnotes'); return false;">Notas Internas (<?=$notes?>)</a><br><br>
     <div id='ticketnotes' style="display:<?=$display?>;text-align:center;"> 
         <?
         while($row=db_fetch_array($resp)) {?>
         <table align="center" class="note" cellspacing="0" cellpadding="1" width="100%" border=0>
-            <tr><th><?=Format::db_daydatetime($row['created'])?>&nbsp;-&nbsp; posted by <?=$row['source']?></th></tr>
+            <tr><th><?=Format::db_daydatetime($row['created'])?>&nbsp;-&nbsp; postado por <?=$row['source']?></th></tr>
             <? if($row['title']) {?>
             <tr class="header"><td><?=Format::display($row['title'])?></td></tr>
             <?} ?>
@@ -225,7 +225,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
 </div>
 <?} ?>
 <div align="left">
-    <a class="Icon thread" href="#" onClick="toggleLayer('ticketthread'); return false;">Ticket Thread</a>
+    <a class="Icon thread" href="#" onClick="toggleLayer('ticketthread'); return false;">Tópico do Ticket</a>
     <div id="ticketthread">
 	<?
 	    //get messages
@@ -293,20 +293,20 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                             $canned=db_query($sql);
                             if($canned && db_num_rows($canned)) {
                              ?>
-                               Canned Response:&nbsp;
+                               Modelo de Resposta:&nbsp;
                                <select id="canned" name="canned"
                                 onChange="getCannedResponse(this.options[this.selectedIndex].value,this.form,'response');this.selectedIndex='0';" >
-                                <option value="0" selected="selected">Select a premade reply</option>
+                                <option value="0" selected="selected">Selecione uma resposta pronta</option>
                                 <?while(list($cannedId,$title)=db_fetch_row($canned)) { ?>
                                  <option value="<?=$cannedId?>" ><?=Format::htmlchars($title)?></option>
                                 <?}?>
-                               </select>&nbsp;&nbsp;&nbsp;<label><input type='checkbox' value='1' name=append checked="true" />Append</label>
+                               </select>&nbsp;&nbsp;&nbsp;<label><input type='checkbox' value='1' name=append checked="true" />Anexar</label>
                             <?}?>
                             <textarea name="response" id="response" cols="90" rows="9" wrap="soft" style="width:90%"><?=$info['response']?></textarea>
                         </div>
                         <?php if($cfg->canUploadFiles()){ //TODO: may be allow anyways and simply email out attachment?? ?>
                         <div style="margin-top: 3px;">
-                            <label for="attachment" >Attach File:</label>
+                            <label for="attachment" >Anexar Arquivo:</label>
                             <input type="file" name="attachment" id="attachment" size=30px value="<?=$info['attachment']?>" /> 
                                 <font class="error">&nbsp;<?=$errors['attachment']?></font>
                         </div>
@@ -317,24 +317,24 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                          $info['signature']=!$info['signature']?'none':$info['signature']; //change 'none' to 'mine' to default to staff signature.
                          if($appendStaffSig || $appendDeptSig) { ?>
                           <div style="margin-top: 10px;">
-                                <label for="signature" nowrap>Append Signature:</label>
+                                <label for="signature" nowrap>Anexar Assinatura:</label>
                                 <label><input type="radio" name="signature" value="none" checked > None</label>
                                 <?if($appendStaffSig) {?>
-                               <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > My signature</label>
+                               <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > Minha Assinatura</label>
                                 <?}?>
                                 <?if($appendDeptSig) {?>
-                                <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Dept Signature</label>
+                                <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura Dept</label>
                                 <?}?>
                            </div>
                          <?}?>
                         <div style="margin-top: 3px;">
-                            <b>Ticket Status:</b>
+                            <b>Status do Ticket:</b>
                             <?
                             $checked=isset($info['ticket_status'])?'checked':''; //Staff must explicitly check the box to change status..
                             if($ticket->isOpen()){?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Close" <?=$checked?> > Close on Reply</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Close" <?=$checked?> > Fechar na Resposta</label>
                             <?}else{ ?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reopen" <?=$checked?> > Reopen on Reply</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reopen" <?=$checked?> > Abrir na Resposta</label>
                             <?}?>
                         </div>
                         <p>
@@ -354,12 +354,12 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
                         <input type="hidden" name="a" value="postnote">
                         <div>
-                            <label for="title">Note Title:</label>
+                            <label for="title">Título da Nota:</label>
                             <input type="text" name="title" id="title" value="<?=$info['title']?>" size=30px />
                             </select><font class="error">*&nbsp;<?=$errors['title']?></font>
                         </div>
                         <div style="margin-top: 3px;">
-                            <label for="note" valign="top">Enter note content.
+                            <label for="note" valign="top">Digite o conteúdo da nota.
                                 <font class="error">*&nbsp;<?=$errors['note']?></font></label><br/>
                             <textarea name="note" id="note" cols="80" rows="7" wrap="soft" style="width:90%"><?=$info['note']?></textarea>
                         </div>
@@ -369,13 +369,13 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         if(!$ticket->isAssigned() || $thisuser->isadmin()  || $thisuser->isManager() || $thisuser->getId()==$ticket->getStaffId()) {
                          ?>
                         <div style="margin-top: 3px;">
-                            <b>Ticket Status:</b>
+                            <b>Status do Ticket:</b>
                             <?
                             $checked=($info && isset($info['ticket_status']))?'checked':''; //not selected by default.
                             if($ticket->isOpen()){?>
-                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Close" <?=$checked?> > Close Ticket</label>
+                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Close" <?=$checked?> > Fechar Ticket</label>
                             <?}else{ ?>
-                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Reopen" <?=$checked?> > Reopen Ticket</label>
+                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Reopen" <?=$checked?> > Reabrir Ticket</label>
                             <?}?>
                         </div>
                         <?}?>
@@ -400,14 +400,14 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
                         <input type="hidden" name="a" value="transfer">
                         <div>
-                            <span for="dept_id">Department:</span>
+                            <span for="dept_id">Departamento:</span>
                             <select id="dept_id" name="dept_id">
-                                <option value="" selected="selected">-Select Target Dept.-</option>
+                                <option value="" selected="selected">-Selecione Dept Alvo.-</option>
                                 <?
                                 $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE dept_id!='.db_input($ticket->getDeptId()));
                                 while (list($deptId,$deptName) = db_fetch_row($depts)){
                                     $selected = ($info['dept_id']==$deptId)?'selected':''; ?>
-                                    <option value="<?=$deptId?>"<?=$selected?>><?=$deptName?> Department </option>
+                                    <option value="<?=$deptId?>"<?=$selected?>><?=$deptName?> Departamento </option>
                                 <?
                                 }?>
                             </select><font class='error'>&nbsp;*<?=$errors['dept_id']?></font>
@@ -440,9 +440,9 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
                         <input type="hidden" name="a" value="assign">
                         <div>
-                            <span for="staffId">Staff Member:</span>
+                            <span for="staffId">Membro:</span>
                             <select id="staffId" name="staffId">
-                                <option value="0" selected="selected">-Select Staff Member.-</option>
+                                <option value="0" selected="selected">-Selecione membro da equipe.-</option>
                                 <?
                                 //TODO: make sure the user's group is also active....DO a join.
                                 $sql=' SELECT staff_id,CONCAT_WS(", ",lastname,firstname) as name FROM '.STAFF_TABLE.
@@ -459,7 +459,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                             </select><font class='error'>&nbsp;*<?=$errors['staffId']?></font>
                         </div>
                         <div>
-                            <span >Comments/message for assignee. &nbsp;(<i>Saved as internal note</i>)
+                            <span >Comentário/mensagem para destinatário. &nbsp;(<i>Salvo como nota interna</i>)
                                 <font class='error'>&nbsp;*<?=$errors['assign_message']?></font></span>
                             <textarea name="assign_message" id="assign_message" cols="80" rows="7" 
                                 wrap="soft" style="width:90%;"><?=$info['assign_message']?></textarea>
