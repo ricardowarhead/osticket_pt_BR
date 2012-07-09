@@ -35,30 +35,30 @@ if($_POST && $errors){
     <input type='hidden' name='id' value='<?=$ticket->getId()?>'>
     <input type='hidden' name='a' value='update'>
     <tr><td align="left" colspan=2 class="msg">
-        Update Ticket #<?=$ticket->getExtId()?>&nbsp;&nbsp;(<a href="tickets.php?id=<?=$ticket->getId()?>" style="color:black;">View Ticket</a>)<br></td></tr>
+        Atualização de Ticket #<?=$ticket->getExtId()?>&nbsp;&nbsp;(<a href="tickets.php?id=<?=$ticket->getId()?>" style="color:black;">View Ticket</a>)<br></td></tr>
     <tr>
-        <td align="left" nowrap width="120"><b>Email Address:</b></td>
+        <td align="left" nowrap width="120"><b>Endereço de e-mail:</b></td>
         <td>
             <input type="text" id="email" name="email" size="25" value="<?=$info['email']?>">
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['email']?></font>
         </td>
     </tr>
     <tr>
-        <td align="left" ><b>Full Name:</b></td>
+        <td align="left" ><b>Nome completo:</b></td>
         <td>
             <input type="text" id="name" name="name" size="25" value="<?=$info['name']?>">
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['name']?></font>
         </td>
     </tr>
     <tr>
-        <td align="left"><b>Subject:</b></td>
+        <td align="left"><b>Assunto:</b></td>
         <td>
             <input type="text" name="subject" size="35" value="<?=$info['subject']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['subject']?></font>
         </td>
     </tr>
     <tr>
-        <td align="left">Telephone:</td>
+        <td align="left">Telefone:</td>
         <td><input type="text" name="phone" size="25" value="<?=$info['phone']?>">
              &nbsp;Ext&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
             &nbsp;<font class="error">&nbsp;<?=$errors['phone']?></font></td>
@@ -67,7 +67,7 @@ if($_POST && $errors){
     <tr>
         <td align="left" valign="top">Due Date:</td>
         <td>
-            <i>Time is based on your time zone (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
+            <i>O horário é baseado na sua localização (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
             <input id="duedate" name="duedate" value="<?=Format::htmlchars($info['duedate'])?>"
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('duedate')); return false;"><img src='images/cal.png'border=0 alt=""></a>
@@ -85,7 +85,7 @@ if($_POST && $errors){
       $sql='SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_TABLE.' ORDER BY priority_urgency DESC';
       if(($priorities=db_query($sql)) && db_num_rows($priorities)){ ?>
       <tr>
-        <td align="left">Priority:</td>
+        <td align="left">Prioridade:</td>
         <td>
             <select name="pri">
               <?
@@ -101,10 +101,10 @@ if($_POST && $errors){
     $services= db_query('SELECT topic_id,topic,isactive FROM '.TOPIC_TABLE.' ORDER BY topic');
     if($services && db_num_rows($services)){ ?>
     <tr>
-        <td align="left" valign="top">Help Topic:</td>
+        <td align="left" valign="top">Tópicos de ajuda:</td>
         <td>
             <select name="topicId">    
-                <option value="0" selected >None</option>
+                <option value="0" selected >Nenhum</option>
                 <?if(!$info['topicId'] && $info['topic']){ //old helptopic?>
                 <option value="0" selected ><?=$info['topic']?> (deleted)</option>
                 <?
@@ -123,7 +123,7 @@ if($_POST && $errors){
     <?
     }?>
     <tr>
-        <td align="left" valign="top"><b>Internal Note:</b></td>
+        <td align="left" valign="top"><b>Nota interna:</b></td>
         <td>
             <i>Reasons for the edit.</i><font class="error"><b>*&nbsp;<?=$errors['note']?></b></font><br/>
             <textarea name="note" cols="45" rows="5" wrap="soft"><?=$info['note']?></textarea></td>
