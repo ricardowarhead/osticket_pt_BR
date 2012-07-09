@@ -23,31 +23,31 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
 <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
     <tr class="header"><td colspan=2><?=$title?></td></tr>
     <tr class="subheader">
-        <td colspan=2 >Disabling auto response will overwrite dept settings.</td>
+        <td colspan=2 >Disativar resposta automática irá substituir as configurações de departamento.</td>
     </tr>
     <tr>
-        <th width="20%">Help Topic:</th>
+        <th width="20%">Tópico de Ajuda:</th>
         <td><input type="text" name="topic" size=45 value="<?=$info['topic']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['topic']?></font></td>
     </tr>
-    <tr><th>Topic Status</th>
+    <tr><th>Status do Tópico</th>
         <td>
-            <input type="radio" name="isactive"  value="1"   <?=$info['isactive']?'checked':''?> />Active
-            <input type="radio" name="isactive"  value="0"   <?=!$info['isactive']?'checked':''?> />Disabled
+            <input type="radio" name="isactive"  value="1"   <?=$info['isactive']?'checked':''?> />Ativado
+            <input type="radio" name="isactive"  value="0"   <?=!$info['isactive']?'checked':''?> />Desativado
         </td>
     </tr>
     <tr>
-        <th nowrap>Auto Response:</th>
+        <th nowrap>Resposta Automática:</th>
         <td>
             <input type="checkbox" name="noautoresp" value=1 <?=$info['noautoresp']? 'checked': ''?> >
-                <b>Disable</b> autoresponse for this topic.   (<i>Overwrite Dept setting</i>)
+                <b>Desativado</b> resposta automática para este tópico.   (<i>Substituir configuração de Dept</i>)
         </td>
     </tr>
     <tr>
-        <th>New Ticket Priority:</th>
+        <th>Prioridade do novo Ticket:</th>
         <td>
             <select name="priority_id">
-                <option value=0>Select Priority</option>
+                <option value=0>Selecione Prioridade</option>
                 <?
                 while (list($id,$name) = db_fetch_row($priorities)){
                     $selected = ($info['priority_id']==$id)?'selected':''; ?>
@@ -58,10 +58,10 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         </td>
     </tr>
     <tr>
-        <th nowrap>New Ticket Department:</th>
+        <th nowrap>Departamento do novo Ticket:</th>
         <td>
             <select name="dept_id">
-                <option value=0>Select Department</option>
+                <option value=0>Selecione Departamento</option>
                 <?
                 while (list($id,$name) = db_fetch_row($depts)){
                     $selected = ($info['dept_id']==$id)?'selected':''; ?>
