@@ -7,7 +7,7 @@ if(defined('AUTO_REFRESH') && is_numeric(AUTO_REFRESH_RATE) && AUTO_REFRESH_RATE
 echo '<meta http-equiv="refresh" content="'.AUTO_REFRESH_RATE.'" />';
 }
 ?>
-<title>osTicket :: Staff Control Panel</title>
+<title>osTicket :: Painel de Controle Staff</title>
 <link rel="stylesheet" href="css/main.css" media="screen">
 <link rel="stylesheet" href="css/style.css" media="screen">
 <link rel="stylesheet" href="css/tabs.css" type="text/css">
@@ -31,14 +31,14 @@ if($sysnotice){?>
 <div id="container">
     <div id="header">
         <a id="logo" href="index.php" title="osTicket"><img src="images/ostlogo.jpg" width="188" height="72" alt="osTicket"></a>
-        <p id="info">Welcome back, <strong><?=$thisuser->getUsername()?></strong> 
+        <p id="info">Bem-vindo de volta, <strong><?=$thisuser->getUsername()?></strong> 
            <?php
             if($thisuser->isAdmin() && !defined('ADMINPAGE')) { ?>
-            | <a href="admin.php">Admin Panel</a> 
+            | <a href="admin.php">Painel do Administador</a> 
             <?}else{?>
-            | <a href="index.php">Staff Panel</a>
+            | <a href="index.php">Painel Staff</a>
             <?}?>
-            | <a href="profile.php?t=pref">My Preference</a> | <a href="logout.php">Log Out</a></p>
+            | <a href="profile.php?t=pref">Minhas Preferências</a> | <a href="logout.php">Sair</a></p>
     </div>
     <div id="nav">
         <ul id="main_nav" <?=!defined('ADMINPAGE')?'class="dist"':''?>>
@@ -48,7 +48,7 @@ if($sysnotice){?>
                 <li><a <?=$tab['active']?'class="active"':''?> href="<?=$tab['href']?>" title="<?=$tab['title']?>"><?=$tab['desc']?></a></li>
             <?}
             }else{ //?? ?>
-                <li><a href="profile.php" title="My Preference">My Account</a></li>
+                <li><a href="profile.php" title="My Preference">Minhas Conta</a></li>
             <?}?>
         </ul>
         <ul id="sub_nav">
