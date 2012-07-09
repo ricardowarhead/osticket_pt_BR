@@ -156,7 +156,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         <tr class="header"><td colspan=2>Configurações SMTP (opcional)</b></td></tr>
         <tr class="subheader"><td colspan=2>
              Quando habilitar o <b>email account</b> vai usar o servidor SMTP ao invés de usar a função interna mail() do PHP para saída de e-mails.<br>
-            <b>Please be patient, the system will try to login to SMTP server to validate the entered login info.</b>
+            <b>Seja paciente, o sistema entrará no servidor SMTP para validar suas informações de login.</b>
                 <font class="error">&nbsp;<?=$errors['smtp']?></font></td></tr>
         <tr><th>Status</th>
             <td>
@@ -165,17 +165,17 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
                 &nbsp;<font class="error">&nbsp;<?=$errors['smtp_active']?></font>
             </td>
         </tr>
-        <tr><th>SMTP Host</th>
+        <tr><th>SMTP (Host)</th>
             <td><input type="text" name="smtp_host" size=35 value="<?=$info['smtp_host']?>">
                 &nbsp;<font class="error">&nbsp;<?=$errors['smtp_host']?></font>
             </td>
         </tr>
-        <tr><th>SMTP Port</th>
+        <tr><th>SMTP (Porta)</th>
             <td><input type="text" name="smtp_port" size=6 value="<?=$info['smtp_port']?$info['smtp_port']:''?>">
                 &nbsp;<font class="error">&nbsp;<?=$errors['smtp_port']?></font>
             </td>
         </tr>
-        <tr><th>Authentication Required?</th>
+        <tr><th>Autenticação necessária?</th>
             <td>
 
                  <label><input type="radio" name="smtp_auth"  value="1"
@@ -185,8 +185,8 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
                 <font class="error">&nbsp;<?=$errors['smtp_auth']?></font>
             </td>
         </tr>
-        <tr><th>Encryption</th>
-            <td>Best available authentication method is auto-selected based on what the sever supports.</td>
+        <tr><th>Criptografia</th>
+            <td>O melhor método de autenticação disponível será auto selecionado com base no que o servidor suporta.</td>
         </tr>
     </table>
    </td></tr>
