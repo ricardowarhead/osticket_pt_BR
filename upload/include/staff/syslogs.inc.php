@@ -77,12 +77,12 @@ $query="$qselect $qfrom $qwhere ORDER BY log.created DESC LIMIT ".$pageNav->getS
 $result = db_query($query);
 $showing=db_num_rows($resp)?$pageNav->showing():"";
 ?>
-<div class="msg">System Logs</div>
+<div class="msg">Logs do Sistema</div>
 <div id='filter' >
  <form action="admin.php?t=syslog" method="get">
     <input type="hidden" name="t" value="syslog" />
     <div style="padding-left:15px;">
-        Date Span:
+        Período de data:
         &nbsp;From&nbsp;<input id="sd" size=15 name="startDate" value="<?=Format::htmlchars($_REQUEST['startDate'])?>" 
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('sd')); return false;"><img src='images/cal.png'border=0 alt=""></a>
@@ -91,12 +91,12 @@ $showing=db_num_rows($resp)?$pageNav->showing():"";
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF >
                 <a href="#" onclick="event.cancelBubble=true;calendar(getObj('ed')); return false;"><img src='images/cal.png'border=0 alt=""></a>
             &nbsp;&nbsp;
-            &nbsp;Type:
+            &nbsp;Tipo:
             <select name='type'>
-                <option value="" selected>All</option>
-                <option value="Error" <?=($type=='Error')?'selected="selected"':''?>>Errors</option>
-                <option value="Warning" <?=($type=='Warning')?'selected="selected"':''?>>Warnings</option>
-                <option value="Debug" <?=($type=='Debug')?'selected="selected"':''?>>Debug</option>
+                <option value="" selected>Todos</option>
+                <option value="Error" <?=($type=='Error')?'selected="selected"':''?>>Erros</option>
+                <option value="Warning" <?=($type=='Warning')?'selected="selected"':''?>>Avisos</option>
+                <option value="Debug" <?=($type=='Debug')?'selected="selected"':''?>>Modificar</option>
             </select>
             &nbsp;&nbsp;
             <input type="submit" Value="Go!" />
@@ -138,7 +138,7 @@ $showing=db_num_rows($resp)?$pageNav->showing():"";
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //not tickets found!! ?> 
-            <tr class="<?=$class?>"><td><b>Query returned 0 results.</b></td></tr>
+            <tr class="<?=$class?>"><td><b>Cosulta retornou 0 resultados.</b></td></tr>
         <?
         endif; ?>
        </table>
@@ -146,7 +146,7 @@ $showing=db_num_rows($resp)?$pageNav->showing():"";
     <?
     if($num>0){ 
     ?>
-        <tr><td style="padding-left:20px">page:<?=$pageNav->getPageLinks()?></td></tr>
+        <tr><td style="padding-left:20px">pagina:<?=$pageNav->getPageLinks()?></td></tr>
     <?} ?>
     </form>
  </table>
