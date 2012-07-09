@@ -65,10 +65,10 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 <div align="left">
     <form action="kb.php" method="GET" >
     <input type='hidden' name='a' value='search'>
-    Search for:&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
-    category
+    Procurar por:&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
+    categoria
     <select name="dept">
-            <option value=0>All Departments</option>
+            <option value=0>Todos Departamentos</option>
             <?
             $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE dept_id!='.db_input($ticket['dept_id']));
             while (list($deptId,$deptName) = db_fetch_row($depts)){
@@ -89,11 +89,11 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th>
-                <a href="kb.php?sort=title&order=<?=$negorder?><?=$qstr?>" title="Sort By Title <?=$negorder?>">Reply Title</a></th>
+                <a href="kb.php?sort=title&order=<?=$negorder?><?=$qstr?>" title="Sort By Title <?=$negorder?>">Título da Resposta</a></th>
             <th width=50>Status</th>
-	        <th width=200>Category/Dept</th> 
+	        <th width=200>Categoria/Dept</th> 
 	        <th width=150 nowrap>
-                <a href="kb.php?sort=updatedate&order=<?=$negorder?><?=$qstr?>" title="Sort By Update Date <?=$negorder?>">Last Updated</a></th>
+                <a href="kb.php?sort=updatedate&order=<?=$negorder?><?=$qstr?>" title="Sort By Update Date <?=$negorder?>">Último Updated</a></th>
         </tr>
         <?
         $class = 'row1';
@@ -122,7 +122,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //nothin' found!! ?> 
-            <tr class="<?=$class?>"><td colspan=6><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=6><b>Consulta retornou 0 resultados</b></td></tr>
         <?
         endif; ?>
     </table>
@@ -131,10 +131,10 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
    if(db_num_rows($replies)>0): //Show options..
     ?>
    <tr><td style="padding-left:20px">
-        Select:&nbsp;
-        <a href="#" onclick="return select_all(document.forms['premade'],true)">All</a>&nbsp;
-        <a href="#" onclick="return toogle_all(document.forms['premade'],true)">Toggle</a>&nbsp;
-        <a href="#" onclick="return reset_all(document.forms['premade'])">None</a>&nbsp;
+        Selecione:&nbsp;
+        <a href="#" onclick="return select_all(document.forms['premade'],true)">Todos</a>&nbsp;
+        <a href="#" onclick="return toogle_all(document.forms['premade'],true)">Aleatório</a>&nbsp;
+        <a href="#" onclick="return reset_all(document.forms['premade'])">Nenhum</a>&nbsp;
         &nbsp;page:<?=$pageNav->getPageLinks()?>&nbsp;
     </td></td>
     <tr><td align="center">
