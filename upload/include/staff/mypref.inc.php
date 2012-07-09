@@ -1,13 +1,13 @@
 <?php
 if(!defined('OSTSCPINC') || !is_object($thisuser) || !$rep) die('Kwaheri');
 ?>
-<div class="msg">&nbsp;My Preferences</div>
+<div class="msg">&nbsp;Minhas Preferências</div>
 <table width="100%" border="0" cellspacing=2 cellpadding=3>
  <form action="profile.php" method="post">
  <input type="hidden" name="t" value="pref">
  <input type="hidden" name="id" value="<?=$thisuser->getId()?>">
     <tr>
-        <td width="145" nowrap>Maximum Page size:</td>        
+        <td width="145" nowrap>Tamanho máximo da página:</td>        
         <td>
             <select name="max_page_size">
                 <?
@@ -15,18 +15,18 @@ if(!defined('OSTSCPINC') || !is_object($thisuser) || !$rep) die('Kwaheri');
                 for ($i = 5; $i <= 50; $i += 5) {?>
                     <option <?=$pagelimit== $i ? 'SELECTED':''?>><?=$i?></option>
                 <?}?>
-            </select> Tickets/items per page.
+            </select> Tickets/itens por página.
         </td>
     </tr>
     <tr>
-        <td nowrap>Auto Refresh Rate:</td>
+        <td nowrap>Auto taxa de atualização:</td>
         <td>
             <input type="input" size=3 name="auto_refresh_rate" value="<?=$rep['auto_refresh_rate']?>">
-            in Mins. (<i>Tickets page refresh rate in minutes. Enter 0 to disable</i>)
+            Em mins. (<i>Taxa de atualização da página em minutos. Digite 0 para desativar</i>)
         </td>
     </tr>
     <tr>
-        <td nowrap>Preferred Timezone:</td>
+        <td nowrap>Região Preferida:</td>
         <td>
             <select name="timezone_offset">
                 <?
@@ -43,12 +43,12 @@ if(!defined('OSTSCPINC') || !is_object($thisuser) || !$rep) die('Kwaheri');
         </td>
     </tr>
     <tr>
-        <td>Daylight Savings:</td>
+        <td>Horário de verão:</td>
         <td>
-            <input type="checkbox" name="daylight_saving" <?=$rep['daylight_saving'] ? 'checked': ''?>>Observe daylight saving
+            <input type="checkbox" name="daylight_saving" <?=$rep['daylight_saving'] ? 'checked': ''?>>Observar o horário de verão
         </td>
     </tr>
-   <tr><td>Current Time:</td>
+   <tr><td>Hora Atual:</td>
         <td><b><i><?=Format::date($cfg->getDateTimeFormat(),Misc::gmtime(),$rep['timezone_offset'],$rep['daylight_saving'])?></i></b></td>
     </tr>  
     <tr>
