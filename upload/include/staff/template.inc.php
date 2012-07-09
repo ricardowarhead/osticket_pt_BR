@@ -2,7 +2,7 @@
 if(!defined('OSTADMININC') || !$thisuser->isadmin() || !is_object($template)) die('Access Denied');
 $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getInfo());
 ?>
-<div class="msg">Email Templates</div>
+<div class="msg">Modelos de Email</div>
 <table width="100%" border="0" cellspacing=0 cellpadding=0>
   <form action="admin.php?t=templates" method="post">
     <input type="hidden" name="t" value="templates">
@@ -10,168 +10,168 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
     <input type="hidden" name="id" value="<?=$template->getId()?>">
     <tr><td>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
-            <tr class="header"><td colspan=2 >Template Info</td></tr>
-            <tr class="subheader"><td colspan=2><b>Last updated on <?=Format::db_daydatetime($template->getUpdateDate())?></b></td></tr>
+            <tr class="header"><td colspan=2 >Informações dos modelos</td></tr>
+            <tr class="subheader"><td colspan=2><b>Último updated em <?=Format::db_daydatetime($template->getUpdateDate())?></b></td></tr>
             <tr>
-                <th>Name</th>
+                <th>Nome</th>
                 <td>
                     <input type="text" size="45" name="name" value="<?=$tpl['name']?>">
                             &nbsp;<font class="error">*&nbsp;<?=$errors['name']?></font></td>
             </tr>
             <tr>
-                <th>Internal notes:</th>
-                <td><i>Administrative notes</i>&nbsp;<font class="error">&nbsp;<?=$errors['notes']?></font>
+                <th>Nota Interna:</th>
+                <td><i>Notas Administrativas</i>&nbsp;<font class="error">&nbsp;<?=$errors['notes']?></font>
                     <textarea rows="5" cols="75" name="notes"><?=$tpl['notes']?></textarea>
                         &nbsp;<font class="error">&nbsp;<?=$errors['notes']?></font></td>
             </tr>
         </table>
-        <div class="msg">User</div>
+        <div class="msg">Usuário</div>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
-            <tr class="header"><td colspan=2 >New Ticket Autoresponse</td></tr>
+            <tr class="header"><td colspan=2 >Resposta automática ao novo Ticket</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Autoresponse sent to user on new ticket if enabled.
-                Meant to give the user the ticket ID which can be used to check the status online.</td>
+                Resposta automática enviada ao usuário do novo Ticket.
+                Destinado a dar ao utilizador o ID do Ticke, que pode ser utilizado para verificar seu status.</td>
                 </tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_autoresp_subj" value="<?=$tpl['ticket_autoresp_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_autoresp_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="ticket_autoresp_body"><?=$tpl['ticket_autoresp_body']?></textarea>
                         &nbsp;<font class="error">&nbsp;<?=$errors['ticket_autoresp_body']?></font></td>
             </tr>
-            <tr class="header"><td colspan=2 >New Message Autoresponse</td></tr>
+            <tr class="header"><td colspan=2 >Nova mensagem automática</td></tr>
             <tr class="subheader"><td colspan=2 > 
-                Confirmation sent to user when a new message is appended to an existing ticket. (email and web replies)</td>
+                Confirmação enviada ao usurário quando uma nova mensagem é anexada a um Ticket existente. (respostas via e-mail e web)</td>
             </tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="message_autoresp_subj" value="<?=$tpl['message_autoresp_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['message_autoresp_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="message_autoresp_body"><?=$tpl['message_autoresp_body']?></textarea>
                             &nbsp;<font class="error">&nbsp;<?=$errors['message_autoresp_body']?></font></td>
             </tr>
-            <tr class="header"><td colspan=2 >New Ticket Notice</td></tr>
+            <tr class="header"><td colspan=2 >Aviso do novo Ticket</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Notice sent to user, if enabled, on new ticket <b>created by staff</b> on their behalf.</td>
+                Observação enviada para o usuário, se habilitado, <b>criado pela staff</b> em seu nome.</td>
                 </tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_notice_subj" value="<?=$tpl['ticket_notice_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_notice_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="ticket_notice_body"><?=$tpl['ticket_notice_body']?></textarea>
                         &nbsp;<font class="error">&nbsp;<?=$errors['ticket_notice_body']?></font></td>
             </tr>
-            <tr class="header"><td  colspan=2 >Over Ticket limit Notice</td></tr>
+            <tr class="header"><td  colspan=2 >Aviso sobre limite de Tickets</td></tr>
             <tr class="subheader"><td colspan=2 >
-                A one time notice sent when user has reached the max allowed open tickets defined in preferences.
-                <br/>Admin email gets alert each time a support ticket request is denied.
+                Aviso enviado quando o usuário atinge o máximo permitido de Tickets abertos definido nas preferências.
+                <br/>Administradores recebem notificações cada vez que um pedido de permissão de ajuda é negado.
             </td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_overlimit_subj" value="<?=$tpl['ticket_overlimit_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_overlimit_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="ticket_overlimit_body"><?=$tpl['ticket_overlimit_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_overlimit_body']?></font></td>
             </tr>
-            <tr class="header"><td colspan=2 >&nbsp;Ticket Response/Reply</td></tr>
+            <tr class="header"><td colspan=2 >&nbsp;Resposta do Ticket</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Message template used when responding to a ticket or simply alerting the user about a response/answer availability.
+                Modelo de mensagem enviada ao usuário quando Ticket respondido ou alertar o usuário sobre uma resposta/disponibilidade de resposta.
             </td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_reply_subj" value="<?=$tpl['ticket_reply_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_reply_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</td>
+                <th>Mensagem:</td>
                 <td><textarea rows="7" cols="75" name="ticket_reply_body"><?=$tpl['ticket_reply_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_reply_body']?></font></td>
             </tr>
         </table>
         <span class="msg">Staff</span>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
-            <tr class="header"><td colspan=2 >New Ticket Alert</td></tr>
-            <tr class="subheader"><td colspan=2 >Alert sent to staff ( if enabled) on new ticket.</td></tr>
+            <tr class="header"><td colspan=2 >Alerta de Novo Ticket</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado à staff (se ativada) sobre novo Ticket.</td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_alert_subj" value="<?=$tpl['ticket_alert_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="ticket_alert_body"><?=$tpl['ticket_alert_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_body']?></font></td>
             </tr>
-            <tr class="header"><td colspan=2 >New Message Alert</td></tr>
-            <tr class="subheader"><td colspan=2 >Alert sent to staff ( if enabled) when user replies to an existing ticket.</td></tr>
+            <tr class="header"><td colspan=2 >Alerta de Nova Mensagem</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado à staff (se ativada) quando o usuário responde a um Ticket existente.</td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="message_alert_subj" value="<?=$tpl['message_alert_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['message_alert_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="message_alert_body"><?=$tpl['message_alert_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['message_alert_body']?></font></td>
             </tr>
 
 
-            <tr class="header"><td colspan=2 >New Internal Note Alert</td></tr>
-            <tr class="subheader"><td colspan=2 >Alert sent to selected staff ( if enabled) when an internal note is appended to a ticket.</td></tr>
+            <tr class="header"><td colspan=2 >Alerta de Nova Nota Interna</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado para staff selecionada (se ativado) quando uma nota interna é anexada a um Ticket.</td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="note_alert_subj" value="<?=$tpl['note_alert_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['note_alert_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="note_alert_body"><?=$tpl['note_alert_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['note_alert_body']?></font></td>
             </tr>
 
-            <tr class="header"><td colspan=2 >Ticket Assigned Alert/Notice</td></tr>
-            <tr class="subheader"><td colspan=2 >Alert sent to staff on ticket assignment.</td></tr>
+            <tr class="header"><td colspan=2 >Alerta na Atribuição de Ticket</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado a staff na atribuição de Ticket.</td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="assigned_alert_subj" value="<?=$tpl['assigned_alert_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['assigned_alert_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="assigned_alert_body"><?=$tpl['assigned_alert_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['assigned_alert_body']?></font></td>
             </tr>
-            <tr class="header"><td colspan=2 >Overdue/Stale Ticket Alert/Notice</td></tr>
-            <tr class="subheader"><td colspan=2 >Alert sent to staff on stale or overdue tickets.</td></tr>
+            <tr class="header"><td colspan=2 >Alerta de Ticket Vencido/Atrasado</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado a staff sobre Tickets vencidos ou em atraso.</td></tr>
             <tr>
-                <th>Subject</th>
+                <th>Assunto</th>
                 <td>
                     <input type="text" size="65" name="ticket_overdue_subj" value="<?=$tpl['ticket_overdue_subj']?>">
                             &nbsp;<font class="error">&nbsp;<?=$errors['ticket_overdue_subj']?></font></td>
             </tr>
             <tr>
-                <th>Message Body:</th>
+                <th>Mensagem:</th>
                 <td><textarea rows="7" cols="75" name="ticket_overdue_body"><?=$tpl['ticket_overdue_body']?></textarea>
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_overdue_body']?></font></td>
             </tr>

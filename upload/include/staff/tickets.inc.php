@@ -277,7 +277,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
   <table>
     <tr>
         <td>Consulta: </td><td><input type="text" id="query" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>"></td>
-        <td>Dept:</td>
+        <td>Departamento:</td>
         <td><select name="dept"><option value=0>Todos Departamentos</option>
             <?
                 //Showing only departments the user has access to...
@@ -293,10 +293,10 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             }?>
             </select>
         </td>
-        <td>Estado:</td><td>
+        <td>Status:</td><td>
     
         <select name="status">
-            <option value='any' selected >Qualquer estado</option>
+            <option value='any' selected >Qualquer status</option>
             <option value="open" <?=!strcasecmp($_REQUEST['status'],'Open')?'selected':''?>>Abrir</option>
             <option value="overdue" <?=!strcasecmp($_REQUEST['status'],'overdue')?'selected':''?>>Vencido</option>
             <option value="closed" <?=!strcasecmp($_REQUEST['status'],'Closed')?'selected':''?>>Fechado</option>
@@ -321,7 +321,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
        <td>       
         <select name="stype">
             <option value="LIKE" <?=(!$_REQUEST['stype'] || $_REQUEST['stype'] == 'LIKE') ?'selected':''?>>Scan (%)</option>
-            <option value="FT"<?= $_REQUEST['stype'] == 'FT'?'selected':''?>>Fulltext</option>
+            <option value="FT"<?= $_REQUEST['stype'] == 'FT'?'selected':''?>>Texto completo</option>
         </select>
  
 
@@ -337,8 +337,8 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             <option value="dept" <?= $sort == 'dept' ?'selected':''?>>Dept.</option>
         </select>
         <select name="order">
-            <option value="DESC"<?= $_REQUEST['order'] == 'DESC' ?'selected':''?>>Descending</option>
-            <option value="ASC"<?= $_REQUEST['order'] == 'ASC'?'selected':''?>>Ascending</option>
+            <option value="DESC"<?= $_REQUEST['order'] == 'DESC' ?'selected':''?>>Anterior</option>
+            <option value="ASC"<?= $_REQUEST['order'] == 'ASC'?'selected':''?>>Posterior</option>
         </select>
        </td>
         <td>Resultados por página:</td><td>
@@ -352,7 +352,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
      </td>
      <td>
      <input type="submit" name="advance_search" class="button" value="Search">
-       &nbsp;[ <a href="#" onClick="showHide('advance','basic'); return false;" >Basico</a> ]
+       &nbsp;[ <a href="#" onClick="showHide('advance','basic'); return false;" >Básico</a> ]
     </td>
   </tr>
  </table>
@@ -452,7 +452,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     ?>
         <tr><td style="padding-left:20px">
             <?if($canDelete || $canClose) { ?>
-            Select:
+            Selecione:
                 <a href="#" onclick="return select_all(document.forms['tickets'],true)">Todos</a>&nbsp;
                 <a href="#" onclick="return reset_all(document.forms['tickets'])">Nenhum</a>&nbsp;
                 <a href="#" onclick="return toogle_all(document.forms['tickets'],true)">Alternar</a>&nbsp;
