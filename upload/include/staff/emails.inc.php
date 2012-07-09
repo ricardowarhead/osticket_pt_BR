@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 //List all EMAILS
 $sql='SELECT email.email_id,email,name,email.noautoresp,email.dept_id,dept_name,priority_desc,email.created,email.updated '.
      ' FROM '.EMAIL_TABLE.' email '.
@@ -7,7 +7,7 @@ $sql='SELECT email.email_id,email,name,email.noautoresp,email.dept_id,dept_name,
      ' LEFT JOIN '.TICKET_PRIORITY_TABLE.' pri ON pri.priority_id=email.priority_id ';
 $emails=db_query($sql.' ORDER BY email'); 
 ?>
- <div class="msg">Emails</div>
+ <div class="msg">E-mails</div>
  <table width="100%" border="0" cellspacing=0 cellpadding=0>
     <form action="admin.php?t=email" method="POST" name="email" onSubmit="return checkbox_checker(document.forms['email'],1,0);">
     <input type='hidden' name='t' value='email'>
@@ -16,11 +16,11 @@ $emails=db_query($sql.' ORDER BY email');
     <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th>Email Address</th>
-            <th>AutoResp.</th>
-            <th>Department</th>
-            <th>Priority</th>
-	        <th>Last Updated</th>
+	        <th>Endereço de e-mail</th>
+            <th>Resposta automática</th>
+            <th>Departamento</th>
+            <th>Prioridade</th>
+	        <th>Última atualização</th>
         </tr>
         <?
         $class = 'row1';
@@ -71,7 +71,7 @@ $emails=db_query($sql.' ORDER BY email');
     <tr>
         <td align="center">
             <input class="button" type="submit" name="delete" value="Delete Selected Emails" 
-                onClick=' return confirm("Are you sure you want to DELETE selected emails?");'>
+                onClick=' return confirm("Tem certeza que deseja excluir os e-mails selecionados?");'>
         </td>
     </tr>
     <?
