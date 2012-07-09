@@ -1,11 +1,11 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 
 //List all groups.   
 $sql='SELECT grp.group_id,group_name,group_enabled,count(staff.staff_id) as users, grp.created,grp.updated'
      .' FROM '.GROUP_TABLE.' grp LEFT JOIN '.STAFF_TABLE.' staff USING(group_id)';
 $groups=db_query($sql.' GROUP BY grp.group_id ORDER BY group_name');    
-$showing=($num=db_num_rows($groups))?'User Groups':'No groups??';
+$showing=($num=db_num_rows($groups))?'Grupos de usuários':'Sem grupos??';
 ?>
 <div class="msg"><?=$showing?></div>
 <table width="100%" border="0" cellspacing=1 cellpadding=2>
@@ -15,11 +15,11 @@ $showing=($num=db_num_rows($groups))?'User Groups':'No groups??';
     <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th width=200>Group Name</th>
-            <th width=100>Group Status</th>
-	        <th width=10>&nbsp;Members</th>
-	        <th>&nbsp;Create Date</th>
-	        <th>Last Updated</th>
+	        <th width=200>Nome do grupo</th>
+            <th width=100>Status do grupo</th>
+	        <th width=10>&nbsp;Membros</th>
+	        <th>&nbsp;Data de criação</th>
+	        <th>Última atualização</th>
         </tr>
         <?
         $class = 'row1';
@@ -37,7 +37,7 @@ $showing=($num=db_num_rows($groups))?'User Groups':'No groups??';
                 <td width=7px>
                   <input type="checkbox" name="grps[]" value="<?=$row['group_id']?>" <?=$sel?'checked':''?>  onClick="highLight(this.value,this.checked);">
                 <td><a href="admin.php?t=grp&id=<?=$row['group_id']?>"><?=Format::htmlchars($row['group_name'])?></a></td>
-                <td><b><?=$row['group_enabled']?'Active':'Disabled'?></b></td>
+                <td><b><?=$row['group_enabled']?'Ativado':'Desativado'?></b></td>
                 <td>&nbsp;&nbsp;<a href="admin.php?t=staff&gid=<?=$row['group_id']?>"><?=$row['users']?></a></td>
                 <td><?=Format::db_date($row['created'])?></td>
                 <td><?=Format::db_datetime($row['updated'])?></td>
@@ -46,7 +46,7 @@ $showing=($num=db_num_rows($groups))?'User Groups':'No groups??';
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //not tickets found!! ?> 
-            <tr class="<?=$class?>"><td colspan=6><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=6><b>A consulta retornou 0 resultados</b></td></tr>
         <?
         endif; ?>
     </table>
@@ -64,11 +64,11 @@ $showing=($num=db_num_rows($groups))?'User Groups':'No groups??';
     <tr>
         <td align="center">
             <input class="button" type="submit" name="activate_grps" value="Enable" 
-                onClick=' return confirm("Are you sure you want to ENABLE selected group(s)");'>
+                onClick=' return confirm("Tem certeza que deseja HABILITAR o(s) grupo(s) selecionado(s)");'>
             <input class="button" type="submit" name="disable_grps" value="Disable" 
-                onClick=' return confirm("Are you sure you want to DISABLE selected group(s)");'>
+                onClick=' return confirm("Tem certeza que deseja DESABILITAR o(s) grupo(s) selecionado(s)");'>
             <input class="button" type="submit" name="delete_grps" value="Delete" 
-                onClick=' return confirm("Are you sure you want to DELETE selected group(s)");'>
+                onClick=' return confirm("Tem certeza que deseja EXCLUIR o(s) grupo(s) selecionado(s)");'>
         </td>
     </tr>
     <?
