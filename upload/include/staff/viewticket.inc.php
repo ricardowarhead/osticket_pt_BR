@@ -413,7 +413,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                             </select><font class='error'>&nbsp;*<?=$errors['dept_id']?></font>
                         </div>
                         <div>
-                            <span >Comments/Reasons for the transfer. &nbsp;(<i>Internal note</i>)
+                            <span >Motivo da tranferência. &nbsp;(<i>Nota interna</i>)
                                 <font class='error'>&nbsp;*<?=$errors['message']?></font></span>
                             <textarea name="message" id="message" cols="80" rows="7" wrap="soft" style="width:90%;"><?=$info['message']?></textarea>
                         </div>
