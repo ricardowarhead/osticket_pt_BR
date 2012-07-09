@@ -11,29 +11,29 @@ $info=($_POST && $errors)?Format::input($_POST):Format::htmlchars($cfg->getSMTPI
  <input type="hidden" name="t" value="smtp">
  <tr><td>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>SMTP Server Setting (Optional)</b></td></tr>
+        <tr class="header"><td colspan=2>Configuração do Servidor SMTP (Opcional)</b></td></tr>
         <tr class="subheader"><td colspan=2>
-             When enabled the system will use an SMTP server rather than the internal PHP mail() function for outgoing emails.<br>
-             Leave the username and password empty of the SMTP server doesn't require authentication<br/>
-            <b>Please be patient, the system will try to login to SMTP server to validate the entered login info.</b></td></tr>
-        <tr><th>Enable SMTP</th>
+             Quando ativado o sistema irá utilizar um servidor SMTP em vez do email PHP () para emails enviados.<br>
+             Deixe o nome de usuário e senha vazia para o servidor SMTP não exigir autenticação.<br/>
+            <b>Por favor, seja paciente, o sistema irá tentar efetuar login no servidor SMTP para validar a informação de login.</b></td></tr>
+        <tr><th>Permitir SMTP</th>
             <td>
                 <input type="radio" name="isenabled"  value="1"   <?=$info['isenabled']?'checked':''?> /><b>Yes</b>
                 <input type="radio" name="isenabled"  value="0"   <?=!$info['isenabled']?'checked':''?> />No
                 &nbsp;<font class="error">&nbsp;<?=$errors['isenabled']?></font>
             </td>
         </tr>
-        <tr><th>SMTP Host</th>
+        <tr><th>Host SMPT</th>
             <td><input type="text" name="host" size=35 value="<?=$info['host']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['host']?></font>
             </td>
         </tr>
-        <tr><th>SMTP Port</th>
+        <tr><th>Porta SMTP</th>
             <td><input type="text" name="port" size=6 value="<?=$info['port']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['port']?></font>
             </td>
         </tr>
-        <tr><th>Encryption</th>
+        <tr><th>Criptografia</th>
             <td>
                  <input type="radio" name="issecure"  value="0"  
                     <?=!$info['issecure']?'checked':''?> />None
@@ -47,21 +47,21 @@ $info=($_POST && $errors)?Format::input($_POST):Format::htmlchars($cfg->getSMTPI
                 &nbsp;<font class="error">*&nbsp;<?=$errors['userid']?></font>
             </td>
         </tr>
-        <tr><th>Password</th>
+        <tr><th>Senha</th>
             <td><input type="password" name="userpass" size=35 value="<?=$info['userpass']?>" autocomplete='off'>
                 &nbsp;<font class="error">*&nbsp;<?=$errors['userpass']?></font>
             </td>
         </tr>
-        <tr><th>Email Address</th>
+        <tr><th>Email</th>
             <td>
                 <input type="text" name="fromaddress" size=30 value="<?=$info['fromaddress']?>">
                     &nbsp;<font class="error">*&nbsp;<?=$errors['fromaddress']?></font>
             </td>
         </tr>
-        <tr><th>Email Name:</th>
+        <tr><th>Nome Email:</th>
             <td>
                 <input type="text" name="fromname" size=30 value="<?=$info['fromname']?>">&nbsp;<font class="error">&nbsp;<?=$errors['fromname']?></font>
-                &nbsp;&nbsp;(<i>Optional email's FROM name.</i>)
+                &nbsp;&nbsp;(<i>Nome para email opcional.</i>)
             </td>
         </tr>
     </table>
