@@ -24,13 +24,13 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
      <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th>Full Name</th>
-            <th>User Name</th>
+	        <th>Nome Completo</th>
+            <th>Username</th>
             <th>Status</th>
-            <th>Group</th>
+            <th>Grupo</th>
             <th>Dept</th>
-            <th>Created</th>
-            <th>Last Login</th>
+            <th>Criação</th>
+            <th>Último Login</th>
         </tr>
         <?
         $class = 'row1';
@@ -60,7 +60,7 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: ?> 
-            <tr class="<?=$class?>"><td colspan=8><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=8><b>Consulta retornou 0 resultados</b></td></tr>
         <?
         endif; ?>
      </table>
@@ -70,10 +70,10 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
      ?>
     <tr><td>
         <div style="margin-left:20px;">
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['staff'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['staff'],true)">Toggle</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['staff'])">None</a>&nbsp;&nbsp;
+            Selecionar:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['staff'],true)">Todos</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['staff'],true)">Alterne</a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['staff'])">Nenhum</a>&nbsp;&nbsp;
         </div>
     </td></tr>
     <tr><td align="center">
