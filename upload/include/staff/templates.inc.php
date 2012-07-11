@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 
 
 $select='SELECT tpl.*,count(dept.tpl_id) as depts ';
