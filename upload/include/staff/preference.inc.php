@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 
 //Get the config info.
 $config=($errors && $_POST)?Format::input($_POST):Format::htmlchars($cfg->getConfig());
@@ -34,7 +34,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
         <tr class="header" ><td colspan=2>Definições Gerais</td></tr>
         <tr class="subheader">
-            <td colspan=2">O modo offline irá desabilitar interface do cliente e <b>só</b> permitirá o acesso ao Painel de Controle aos <b>super administradores</b></td>
+            <td colspan=2">O modo offline irá desativar a interface do cliente e <b>apenas</b> permitirá o acesso ao Painel de Controle dos atendentes aos <b>super administradores</b></td>
         </tr>
         <tr><th><b>Ajuda de Status</b></th>
             <td>
@@ -67,7 +67,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr><th>Departamento Padrão:</th>
             <td>
                 <select name="default_dept_id">
-                    <option value=0>Selecione Dept Padrão</option>
+                    <option value=0>Selecione o departamento padrão</option>
                     <?
                     while (list($id,$name) = db_fetch_row($depts)){
                     $selected = ($config['default_dept_id']==$id)?'SELECTED':''; ?>
@@ -100,7 +100,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>
                 &nbsp;Limpar os logs após
                 <select name="log_graceperiod">
-                    <option value=0 selected> Nenhum (Disabilitado)</option>
+                    <option value=0 selected> Nenhum (Desabilitado)</option>
                     <?
                     for ($i = 1; $i <=12; $i++) {
                         ?>
@@ -110,7 +110,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>
             </td>
         </tr>
-        <tr><th>Logins Excessivos:</th>
+        <tr><th>Máximo de logins do atendente:</th>
             <td>
                 <select name="staff_max_logins">
                   <?php
@@ -129,16 +129,16 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select> min. tempo livre (pena em minutos)
             </td>
         </tr>
-        <tr><th>Tempo limite de sessão Staff:</th>
+        <tr><th>Tempo limite de sessão atendente:</th>
             <td>
               <input type="text" name="staff_session_timeout" size=6 value="<?=$config['staff_session_timeout']?>">
-                (<i>Tempo máximo de Staff inativo em minutos. Digite 0 para desativar o tempo limite.</i>)
+                (<i>Tempo máximo do atendente inativo em minutos. Digite 0 para desativar o tempo limite.</i>)
             </td>
         </tr>
-       <tr><th>Sessão Bind Staff de IP:</th>
+       <tr><th>Vincular sessão do atendente ao IP:</th>
             <td>
               <input type="checkbox" name="staff_ip_binding" <?=$config['staff_ip_binding']?'checked':''?>>
-               Sessão Bind Staff para entrar IP.
+               Vincular sessão do atendente ao IP de login.
             </td>
         </tr>
 
@@ -151,7 +151,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                     }
 
                     ?>
-                </select> attempt(s) allowed
+                </select> tentativa(s) permitida(s)
                 &nbsp;before a
                 <select name="client_login_timeout">
                   <?php
@@ -159,26 +159,26 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                         echo sprintf('<option value="%d" %s>%d</option>',$i,(($config['client_login_timeout']==$i)?'selected="selected"':''),$i);
                     }
                     ?>
-                </select> min. timeout (penalty in minutes)
+                </select> min. tempo limite (perda em minutos)
             </td>
         </tr>
 
-        <tr><th>Client Session Timeout:</th>
+        <tr><th>Tempo limite de sessão do cliente:</th>
             <td>
               <input type="text" name="client_session_timeout" size=6 value="<?=$config['client_session_timeout']?>">
-                (<i>Client's max Idle time in minutes. Enter 0 to disable timeout</i>)
+                (<i>Máximo de tempo ocioso do cliente em minutos. Digite 0 para desativar o tempo limite.</i>)
             </td>
         </tr>
-        <tr><th>Clickable URLs:</th>
+        <tr><th>URLs clicáveis:</th>
             <td>
               <input type="checkbox" name="clickable_urls" <?=$config['clickable_urls']?'checked':''?>>
-                Make URLs clickable
+                Fazer URLs clicáveis
             </td>
         </tr>
-        <tr><th>Enable Auto Cron:</th>
+        <tr><th>Habilitar Auto Cron:</th>
             <td>
               <input type="checkbox" name="enable_auto_cron" <?=$config['enable_auto_cron']?'checked':''?>>
-                Enable cron call on staff's activity
+                Habilitar o cron para chamar o atendente em atividade.
             </td>
         </tr>
     </table>
@@ -186,33 +186,33 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
         <tr class="header"><td colspan=2>Date &amp; Time</td></tr>
         <tr class="subheader">
-            <td colspan=2>Please refer to <a href="http://php.net/date" target="_blank">PHP Manual</a> for supported parameters.</td>
+            <td colspan=2>Por favor, consulte <a href="http://php.net/date" target="_blank">PHP Manual</a> para parâmetros suportados.</td>
         </tr>
-        <tr><th>Time Format:</th>
+        <tr><th>Formato do tempo:</th>
             <td>
                 <input type="text" name="time_format" value="<?=$config['time_format']?>">
                     &nbsp;<font class="error">*&nbsp;<?=$errors['time_format']?></font>
                     <i><?=Format::date($config['time_format'],$gmtime,$config['timezone_offset'],$config['enable_daylight_saving'])?></i></td>
         </tr>
-        <tr><th>Date Format:</th>
+        <tr><th>Formato da data:</th>
             <td><input type="text" name="date_format" value="<?=$config['date_format']?>">
                         &nbsp;<font class="error">*&nbsp;<?=$errors['date_format']?></font>
                         <i><?=Format::date($config['date_format'],$gmtime,$config['timezone_offset'],$config['enable_daylight_saving'])?></i>
             </td>
         </tr>
-        <tr><th>Date &amp; Time Format:</th>
+        <tr><th>Data &amp; Formato do tempo:</th>
             <td><input type="text" name="datetime_format" value="<?=$config['datetime_format']?>">
                         &nbsp;<font class="error">*&nbsp;<?=$errors['datetime_format']?></font>
                         <i><?=Format::date($config['datetime_format'],$gmtime,$config['timezone_offset'],$config['enable_daylight_saving'])?></i>
             </td>
         </tr>
-        <tr><th>Day, Date &amp; Time Format:</th>
+        <tr><th>Dia, Data &amp; Formato do tempo:</th>
             <td><input type="text" name="daydatetime_format" value="<?=$config['daydatetime_format']?>">
                         &nbsp;<font class="error">*&nbsp;<?=$errors['daydatetime_format']?></font>
                         <i><?=Format::date($config['daydatetime_format'],$gmtime,$config['timezone_offset'],$config['enable_daylight_saving'])?></i>
             </td>
         </tr>
-        <tr><th>Default Timezone:</th>
+        <tr><th>Fuso horário padrão:</th>
             <td>
                 <select name="timezone_offset">
                     <?
@@ -230,7 +230,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
             </td>
         </tr>
         <tr>
-            <th>Daylight Saving:</th>
+            <th>Horário de verão:</th>
             <td>
                 <input type="checkbox" name="enable_daylight_saving" <?=$config['enable_daylight_saving'] ? 'checked': ''?>>Observe daylight savings
             </td>
@@ -238,15 +238,15 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
     </table>
    
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>Ticket Options &amp; Settings</td></tr>
-        <tr class="subheader"><td colspan=2>If enabled ticket lock get auto-renewed on form activity.</td></tr>
-        <tr><th valign="top">Ticket IDs:</th>
+        <tr class="header"><td colspan=2>Opções de ticket &amp; Configurações</td></tr>
+        <tr class="subheader"><td colspan=2>Se habilitar ticket fechado, começar auto-renovação na atividade do formulário.</td></tr>
+        <tr><th valign="top">IDs dos tickets:</th>
             <td>
                 <input type="radio" name="random_ticket_ids"  value="0"   <?=!$config['random_ticket_ids']?'checked':''?> /> Sequential
                 <input type="radio" name="random_ticket_ids"  value="1"   <?=$config['random_ticket_ids']?'checked':''?> />Random  (recommended)
             </td>
         </tr>
-        <tr><th valign="top">Ticket Priority:</th>
+        <tr><th valign="top">Prioridade de ticket:</th>
             <td>
                 <select name="default_priority_id">
                     <?
@@ -255,97 +255,97 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                         <option value="<?=$id?>"<?=($config['default_priority_id']==$id)?'selected':''?>><?=$tag?></option>
                     <?
                     }?>
-                </select> &nbsp;Default priority<br/>
+                </select> &nbsp;Prioridade padrão<br/>
                 <input type="checkbox" name="allow_priority_change" <?=$config['allow_priority_change'] ?'checked':''?>>
-                    Allow user to overwrite/set priority (new web tickets)<br/>
+                    Permitir ao usuário reescrever/configurar a prioridade (novos web tickets)<br/>
                 <input type="checkbox" name="use_email_priority" <?=$config['use_email_priority'] ?'checked':''?> >
-                    Use email priority when available (new emailed tickets)
+                    Usar a prioridade do e-mail quando disponível (novos tickets por e-mail)
 
             </td>
         </tr>
-        <tr><th>Maximum <b>Open</b> Tickets:</th>
+        <tr><th>Máximo de tickets <b>abertos</b>:</th>
             <td>
               <input type="text" name="max_open_tickets" size=4 value="<?=$config['max_open_tickets']?>"> 
-                per email. (<i>Helps with spam and flood control. Enter 0 for unlimited</i>)
+                por e-mail. (<i>Ajuda com spam e controle de flood. Digite 0 para ilimitado.</i>)
             </td>
         </tr>
-        <tr><th>Auto-Lock Time:</td>
+        <tr><th>Tempo de bloqueio automático:</td>
             <td>
               <input type="text" name="autolock_minutes" size=4 value="<?=$config['autolock_minutes']?>">
                  <font class="error"><?=$errors['autolock_minutes']?></font>
-                (<i>Minutes to lock a ticket on activity. Enter 0 to disable locking</i>)
+                (<i>Minutos para fechar um ticket em atividade. Digite 0 para desabilitar o fechamento.</i>)
             </td>
         </tr>
-        <tr><th>Ticket Grace Period:</th>
+        <tr><th>Pedíodo de carência de tickets:</th>
             <td>
               <input type="text" name="overdue_grace_period" size=4 value="<?=$config['overdue_grace_period']?>">
-                (<i>Hours before ticket is marked overdue. Enter 0 to disable aging.</i>)
+                (<i>Horas antes o ticket é marcado em atraso. Digite 0 para desabilitar o envelhecimento.</i>)
             </td>
         </tr>
-        <tr><th>Reopened Tickets:</th>
+        <tr><th>Reabertura de tickets:</th>
             <td>
               <input type="checkbox" name="auto_assign_reopened_tickets" <?=$config['auto_assign_reopened_tickets'] ? 'checked': ''?>> 
-                Auto-assign reopened tickets to last respondent 'available'. (<i> 3 months limit</i>)
+                Atribuição automática de reabertura de tickets para o último demandado 'disponível'. (<i> limite de 3 meses</i>)
             </td>
         </tr>
-        <tr><th>Assigned Tickets:</th>
+        <tr><th>Atribuição de tickets:</th>
             <td>
               <input type="checkbox" name="show_assigned_tickets" <?=$config['show_assigned_tickets']?'checked':''?>>
-                Show assigned tickets on open queue.
+                Mostrar tickets atribuídos para abrir fila.
             </td>
         </tr>
-        <tr><th>Answered Tickets:</th>
+        <tr><th>Tickets respondidos:</th>
             <td>
               <input type="checkbox" name="show_answered_tickets" <?=$config['show_answered_tickets']?'checked':''?>>
-                Show answered tickets on open queue.
+                Mostrar tickets respondidos para abrir fila.
             </td>
         </tr>
-        <tr><th>Ticket Activity Log:</th>
+        <tr><th>Log de atividade de ticket:</th>
             <td>
               <input type="checkbox" name="log_ticket_activity" <?=$config['log_ticket_activity']?'checked':''?>>
-                Log ticket's activity as internal notes.
+                Log de atividade de tickets como nota interna.
             </td>
         </tr>
-        <tr><th>Staff Identity:</th>
+        <tr><th>Identidade do atendente:</th>
             <td>
               <input type="checkbox" name="hide_staff_name" <?=$config['hide_staff_name']?'checked':''?>>
-                Hide staff's name on responses.
+                Esconder nome do atendente na resposta.
             </td>
         </tr>
-        <tr><th>Human Verification:</th>
+        <tr><th>Verificação pessoal:</th>
             <td>
                 <?php
                    if($config['enable_captcha'] && !$errors['enable_captcha']) {?>
                         <img src="../captcha.php" border="0" align="left">&nbsp;
                 <?}?>
               <input type="checkbox" name="enable_captcha" <?=$config['enable_captcha']?'checked':''?>>
-                Enable captcha on new web tickets.&nbsp;<font class="error">&nbsp;<?=$errors['enable_captcha']?></font><br/>
+                Habilitar captcha nos novos web tickets.&nbsp;<font class="error">&nbsp;<?=$errors['enable_captcha']?></font><br/>
             </td>
         </tr>
 
     </table>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2 >Email Settings</td></tr>
-        <tr class="subheader"><td colspan=2>Note that global settings can be disabled at dept/email level.</td></tr>
-        <tr><th valign="top"><br><b>Incoming Emails</b>:</th>
-            <td><i>For mail fetcher (POP/IMAP) to work you must set a cron job or simply enable auto-cron</i><br/>
+        <tr class="header"><td colspan=2 >Configurações de e-mail</td></tr>
+        <tr class="subheader"><td colspan=2>Observe que as configurações globais podem ser desabilitadas no nível departamento/e-mail.</td></tr>
+        <tr><th valign="top"><br><b>E-mails recebidos</b>:</th>
+            <td><i>Para e-mail (POP/IMAP) trabalhar você deve definir um cron job ou simplesmente habilitar o auto-cront</i><br/>
                 <input type="checkbox" name="enable_mail_fetch" value=1 <?=$config['enable_mail_fetch']? 'checked': ''?>  > Enable POP/IMAP email fetch
-                    &nbsp;&nbsp;(<i>Global setting which can be disabled at email level</i>) <br/>
+                    &nbsp;&nbsp;(<i>Configuração global que pode ser desabilitada no e-mail</i>) <br/>
                 <input type="checkbox" name="enable_email_piping" value=1 <?=$config['enable_email_piping']? 'checked': ''?>  > Enable email piping
-                   &nbsp;(<i>You pipe we accept policy</i>)<br/>
+                   &nbsp;(<i>Canalizando, nós aceitamos política</i>)<br/>
                 <input type="checkbox" name="strip_quoted_reply" <?=$config['strip_quoted_reply'] ? 'checked':''?>>
-                    Strip quoted reply (<i>depends on the tag below</i>)<br/>
-                <input type="text" name="reply_separator" value="<?=$config['reply_separator']?>"> Reply Separator Tag
+                    Tira resposta citada (<i>depende da tag abaixo</i>)<br/>
+                <input type="text" name="reply_separator" value="<?=$config['reply_separator']?>"> Responde separador de tag
                 &nbsp;<font class="error">&nbsp;<?=$errors['reply_separator']?></font>
             </td>
         </tr>
-        <tr><th valign="top"><br><b>Outgoing Emails</b>:</th>
+        <tr><th valign="top"><br><b>E-mails enviados</b>:</th>
             <td>
-                <i><b>Default Email:</b> Only applies to outgoing emails with no SMTP settings.</i><br/>
+                <i><b>Default Email:</b> Somente se aplica para e-mails enviados sem configurações SMTP</i><br/>
                 <select name="default_smtp_id"
                     onChange="document.getElementById('overwrite').style.display=(this.options[this.selectedIndex].value>0)?'block':'none';">
-                    <option value=0>Select One</option>
-                    <option value=0 selected="selected">None: Use PHP mail function</option>
+                    <option value=0>Selecionar um</option>
+                    <option value=0 selected="selected">Nenhum: Use função de correio do PHP</option>
                     <?
                     $emails=db_query('SELECT email_id,email,name,smtp_host FROM '.EMAIL_TABLE.' WHERE smtp_active=1');
                     if($emails && db_num_rows($emails)) {
@@ -360,14 +360,14 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                  </select>&nbsp;&nbsp;<font class="error">&nbsp;<?=$errors['default_smtp_id']?></font><br/>
                  <span id="overwrite" style="display:<?=($config['default_smtp_id']?'display':'none')?>">
                     <input type="checkbox" name="spoof_default_smtp" <?=$config['spoof_default_smtp'] ? 'checked':''?>>
-                        Allow spoofing (No Overwrite).&nbsp;<font class="error">&nbsp;<?=$errors['spoof_default_smtp']?></font><br/>
+                        Permitir falsificação (Não substituir).&nbsp;<font class="error">&nbsp;<?=$errors['spoof_default_smtp']?></font><br/>
                         </span>
              </td>
         </tr>
-        <tr><th>Default System Email:</th>
+        <tr><th>Sistema de e-mail padrão:</th>
             <td>
                 <select name="default_email_id">
-                    <option value=0 disabled>Select One</option>
+                    <option value=0 disabled>Selecionar um</option>
                     <?
                     $emails=db_query('SELECT email_id,email,name FROM '.EMAIL_TABLE);
                     while (list($id,$email,$name) = db_fetch_row($emails)){ 
@@ -379,11 +379,11 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                  </select>
                  &nbsp;<font class="error">*&nbsp;<?=$errors['default_email_id']?></font></td>
         </tr>
-        <tr><th valign="top">Default Alert Email:</th>
+        <tr><th valign="top">E-mail de alerta padrão:</th>
             <td>
                 <select name="alert_email_id">
-                    <option value=0 disabled>Select One</option>
-                    <option value=0 selected="selected">Use Default System Email (above)</option>
+                    <option value=0 disabled>Selecionar um</option>
+                    <option value=0 selected="selected">Usar sistema de e-mail padrão (acima)</option>
                     <?
                     $emails=db_query('SELECT email_id,email,name FROM '.EMAIL_TABLE.' WHERE email_id != '.db_input($config['default_email_id']));
                     while (list($id,$email,$name) = db_fetch_row($emails)){
@@ -394,10 +394,10 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                     }?>
                  </select>
                  &nbsp;<font class="error">*&nbsp;<?=$errors['alert_email_id']?></font>
-                <br/><i>Used to send out alerts and notices to staff.</i>
+                <br/><i>Usado para enviar outros alertas e notícias para o atendente.</i>
             </td>
         </tr>
-        <tr><th>System Admin Email Address:</th>
+        <tr><th>Sistema de administração de endereço de e-mail:</th>
             <td>
                 <input type="text" size=25 name="admin_email" value="<?=$config['admin_email']?>">
                     &nbsp;<font class="error">*&nbsp;<?=$errors['admin_email']?></font></td>
@@ -405,81 +405,81 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
     </table>
 
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>Autoresponders &nbsp;(Global Setting)</td></tr>
-        <tr class="subheader"><td colspan=2">This is global setting which can be disabled at department level.</td></tr>
-        <tr><th valign="top">New Ticket:</th>
-            <td><i>Autoresponse includes the ticket ID required to check status of the ticket</i><br>
-                <input type="radio" name="ticket_autoresponder"  value="1"   <?=$config['ticket_autoresponder']?'checked':''?> />Enable
-                <input type="radio" name="ticket_autoresponder"  value="0"   <?=!$config['ticket_autoresponder']?'checked':''?> />Disable
+        <tr class="header"><td colspan=2>Respostas automáticas &nbsp;(configuração global)</td></tr>
+        <tr class="subheader"><td colspan=2">Esta é a configuração global que pode ser desativada a nível departamental.</td></tr>
+        <tr><th valign="top">Novo ticket:</th>
+            <td><i>Resposta automática inclui a identificação do ticket necessário para verificação do status do ticket</i><br>
+                <input type="radio" name="ticket_autoresponder"  value="1"   <?=$config['ticket_autoresponder']?'checked':''?> />Habilitado
+                <input type="radio" name="ticket_autoresponder"  value="0"   <?=!$config['ticket_autoresponder']?'checked':''?> />Desabilitado
             </td>
         </tr>
-        <tr><th valign="top">New Ticket by Staff:</th>
-            <td><i>Notice sent when staff creates a ticket on behalf of the user (Staff can disable)</i><br>
-                <input type="radio" name="ticket_notice_active"  value="1"   <?=$config['ticket_notice_active']?'checked':''?> />Enable
-                <input type="radio" name="ticket_notice_active"  value="0"   <?=!$config['ticket_notice_active']?'checked':''?> />Disable
+        <tr><th valign="top">Novo ticket pelo atendente:</th>
+            <td><i>Notificação enviada quando o atendente cria um ticket em nome do usuário (atendente pode desativar)</i><br>
+                <input type="radio" name="ticket_notice_active"  value="1"   <?=$config['ticket_notice_active']?'checked':''?> />Habilitado
+                <input type="radio" name="ticket_notice_active"  value="0"   <?=!$config['ticket_notice_active']?'checked':''?> />Desabilitado
             </td>
         </tr>
-        <tr><th valign="top">New Message:</th>
-            <td><i>Message appended to an existing ticket confirmation</i><br>
-                <input type="radio" name="message_autoresponder"  value="1"   <?=$config['message_autoresponder']?'checked':''?> />Enable
-                <input type="radio" name="message_autoresponder"  value="0"   <?=!$config['message_autoresponder']?'checked':''?> />Disable
+        <tr><th valign="top">Nova mensagem:</th>
+            <td><i>Mensagem anexada a uma confirmação de existência de ticket</i><br>
+                <input type="radio" name="message_autoresponder"  value="1"   <?=$config['message_autoresponder']?'checked':''?> />Habilitado
+                <input type="radio" name="message_autoresponder"  value="0"   <?=!$config['message_autoresponder']?'checked':''?> />Desabilitado
             </td>
         </tr>
-        <tr><th valign="top">Overlimit notice:</th>
-            <td><i>Ticket denied notice sent <b>only once</b> on limit violation to the user.</i><br/>               
-                <input type="radio" name="overlimit_notice_active"  value="1"   <?=$config['overlimit_notice_active']?'checked':''?> />Enable
-                <input type="radio" name="overlimit_notice_active"  value="0"   <?=!$config['overlimit_notice_active']?'checked':''?> />Disable
-                <br><i><b>Note:</b> Admin gets alerts on ALL denials by default.</i><br>
+        <tr><th valign="top">Aviso de limte:</th>
+            <td><i>Ticket enviado, notica enviada <b>apenas uma vez</b> sobre a violação de limite para o usuário.</i><br/>               
+                <input type="radio" name="overlimit_notice_active"  value="1"   <?=$config['overlimit_notice_active']?'checked':''?> />Habilitado
+                <input type="radio" name="overlimit_notice_active"  value="0"   <?=!$config['overlimit_notice_active']?'checked':''?> />Desabilitado
+                <br><i><b>Observação:</b> Administradores recebem alertas sobre TODAS as recusas por padrão.</i><br>
             </td>
         </tr>
     </table>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
-        <tr class="header"><td colspan=2>&nbsp;Alerts &amp; Notices</td></tr>
+        <tr class="header"><td colspan=2>&nbsp;Alertas &amp; Observações</td></tr>
         <tr class="subheader"><td colspan=2>
-            Notices sent to user use 'No Reply Email' whereas alerts to staff use 'Alert Email' set above as FROM address respectively.</td>
+            Observações enviadas ao usuário usa-se 'nenhum e-mail de resposta' assim como aletas para atendente usa-se 'e-mail de alerta' estabelecido acima respectivamente a partir do endereço.</td>
         </tr>
-        <tr><th valign="top">New Ticket Alert:</th>
+        <tr><th valign="top">Alerta de novo ticket:</th>
             <td>
-                <input type="radio" name="ticket_alert_active"  value="1"   <?=$config['ticket_alert_active']?'checked':''?> />Enable
-                <input type="radio" name="ticket_alert_active"  value="0"   <?=!$config['ticket_alert_active']?'checked':''?> />Disable
-                <br><i>Select recipients</i>&nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_active']?></font><br>
-                <input type="checkbox" name="ticket_alert_admin" <?=$config['ticket_alert_admin']?'checked':''?>> Admin Email
-                <input type="checkbox" name="ticket_alert_dept_manager" <?=$config['ticket_alert_dept_manager']?'checked':''?>> Department Manager
-                <input type="checkbox" name="ticket_alert_dept_members" <?=$config['ticket_alert_dept_members']?'checked':''?>> Department Members (spammy)
+                <input type="radio" name="ticket_alert_active"  value="1"   <?=$config['ticket_alert_active']?'checked':''?> />Habilitado
+                <input type="radio" name="ticket_alert_active"  value="0"   <?=!$config['ticket_alert_active']?'checked':''?> />Desabilitado
+                <br><i>Selecionar destinatários</i>&nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_active']?></font><br>
+                <input type="checkbox" name="ticket_alert_admin" <?=$config['ticket_alert_admin']?'checked':''?>> E-mail do administrador
+                <input type="checkbox" name="ticket_alert_dept_manager" <?=$config['ticket_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos
+                <input type="checkbox" name="ticket_alert_dept_members" <?=$config['ticket_alert_dept_members']?'checked':''?>> Membros de departalmento (spammy)
             </td>
         </tr>
-        <tr><th valign="top">New Message Alert:</th>
+        <tr><th valign="top">Alerta de nova mensagem:</th>
             <td>
-              <input type="radio" name="message_alert_active"  value="1"   <?=$config['message_alert_active']?'checked':''?> />Enable
-              <input type="radio" name="message_alert_active"  value="0"   <?=!$config['message_alert_active']?'checked':''?> />Disable
-              <br><i>Select recipients</i>&nbsp;<font class="error">&nbsp;<?=$errors['message_alert_active']?></font><br>
-              <input type="checkbox" name="message_alert_laststaff" <?=$config['message_alert_laststaff']?'checked':''?>> Last Respondent
-              <input type="checkbox" name="message_alert_assigned" <?=$config['message_alert_assigned']?'checked':''?>> Assigned Staff
-              <input type="checkbox" name="message_alert_dept_manager" <?=$config['message_alert_dept_manager']?'checked':''?>> Department Manager (spammy)
+              <input type="radio" name="message_alert_active"  value="1"   <?=$config['message_alert_active']?'checked':''?> />Habilitado
+              <input type="radio" name="message_alert_active"  value="0"   <?=!$config['message_alert_active']?'checked':''?> />Desabilitado
+              <br><i>Selecionar destinatários</i>&nbsp;<font class="error">&nbsp;<?=$errors['message_alert_active']?></font><br>
+              <input type="checkbox" name="message_alert_laststaff" <?=$config['message_alert_laststaff']?'checked':''?>> Último demandado
+              <input type="checkbox" name="message_alert_assigned" <?=$config['message_alert_assigned']?'checked':''?>> Atendente atribuído
+              <input type="checkbox" name="message_alert_dept_manager" <?=$config['message_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos (spammy)
             </td>
         </tr>
-        <tr><th valign="top">New Internal Note Alert:</th>
+        <tr><th valign="top">Alerta de nova nota interna:</th>
             <td>
-              <input type="radio" name="note_alert_active"  value="1"   <?=$config['note_alert_active']?'checked':''?> />Enable
-              <input type="radio" name="note_alert_active"  value="0"   <?=!$config['note_alert_active']?'checked':''?> />Disable
-              <br><i>Select recipients</i>&nbsp;<font class="error">&nbsp;<?=$errors['note_alert_active']?></font><br>
-              <input type="checkbox" name="note_alert_laststaff" <?=$config['note_alert_laststaff']?'checked':''?>> Last Respondent
-              <input type="checkbox" name="note_alert_assigned" <?=$config['note_alert_assigned']?'checked':''?>> Assigned Staff
-              <input type="checkbox" name="note_alert_dept_manager" <?=$config['note_alert_dept_manager']?'checked':''?>> Department Manager (spammy)
+              <input type="radio" name="note_alert_active"  value="1"   <?=$config['note_alert_active']?'checked':''?> />Habilitado
+              <input type="radio" name="note_alert_active"  value="0"   <?=!$config['note_alert_active']?'checked':''?> />Desabilitado
+              <br><i>Selecionar destinatários</i>&nbsp;<font class="error">&nbsp;<?=$errors['note_alert_active']?></font><br>
+              <input type="checkbox" name="note_alert_laststaff" <?=$config['note_alert_laststaff']?'checked':''?>> Último demandado
+              <input type="checkbox" name="note_alert_assigned" <?=$config['note_alert_assigned']?'checked':''?>> Atendente atribuído
+              <input type="checkbox" name="note_alert_dept_manager" <?=$config['note_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos (spammy)
             </td>
         </tr>
-        <tr><th valign="top">Overdue Ticket Alert:</th>
+        <tr><th valign="top">Alerta de bilhetes em atraso:</th>
             <td>
-              <input type="radio" name="overdue_alert_active"  value="1"   <?=$config['overdue_alert_active']?'checked':''?> />Enable
-              <input type="radio" name="overdue_alert_active"  value="0"   <?=!$config['overdue_alert_active']?'checked':''?> />Disable
-              <br><i>Admin Email gets an alert by default. Select additional recipients below</i>&nbsp;<font class="error">&nbsp;<?=$errors['overdue_alert_active']?></font><br>
-              <input type="checkbox" name="overdue_alert_assigned" <?=$config['overdue_alert_assigned']?'checked':''?>> Assigned Staff
-              <input type="checkbox" name="overdue_alert_dept_manager" <?=$config['overdue_alert_dept_manager']?'checked':''?>> Department Manager
-              <input type="checkbox" name="overdue_alert_dept_members" <?=$config['overdue_alert_dept_members']?'checked':''?>> Department Members (spammy)
+              <input type="radio" name="overdue_alert_active"  value="1"   <?=$config['overdue_alert_active']?'checked':''?> />Habilitado
+              <input type="radio" name="overdue_alert_active"  value="0"   <?=!$config['overdue_alert_active']?'checked':''?> />Desabilitado
+              <br><i>E-maiol do administrador recebe um e-mail por padrão. Selecione mais destinatários abaixo</i>&nbsp;<font class="error">&nbsp;<?=$errors['overdue_alert_active']?></font><br>
+              <input type="checkbox" name="overdue_alert_assigned" <?=$config['overdue_alert_assigned']?'checked':''?>> Atendente atribuído
+              <input type="checkbox" name="overdue_alert_dept_manager" <?=$config['overdue_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos
+              <input type="checkbox" name="overdue_alert_dept_members" <?=$config['overdue_alert_dept_members']?'checked':''?>> Membros de departalmento (spammy)
             </td>
         </tr>
-        <tr><th valign="top">System Errors:</th>
-            <td><i>Enabled errors are sent to admin email set above</i><br>
+        <tr><th valign="top">Erros do sistema:</th>
+            <td><i>Habilitar erros para serem eviados para o e-mail do administrador definido acima</i><br>
               <input type="checkbox" name="send_sys_errors" <?=$config['send_sys_errors']?'checked':'checked'?> disabled>System Errors
               <input type="checkbox" name="send_sql_errors" <?=$config['send_sql_errors']?'checked':''?>>SQL errors
               <input type="checkbox" name="send_login_errors" <?=$config['send_login_errors']?'checked':''?>>Excessive Login attempts
