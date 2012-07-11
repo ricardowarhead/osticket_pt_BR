@@ -107,14 +107,14 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td align="left" valign="top">Nota Interna:</td>
         <td>
-            <i>Nota(s) Interna Opcional.</i><font class="error"><b>&nbsp;<?=$errors['note']?></b></font><br/>
+            <i>Nota(s) Interna(s) Opcional.</i><font class="error"><b>&nbsp;<?=$errors['note']?></b></font><br/>
             <textarea name="note" cols="55" rows="5" wrap="soft"><?=$info['note']?></textarea></td>
     </tr>
 
     <tr>
         <td align="left" valign="top">Data de Vencimento:</td>
         <td>
-            <i>Tempo baseado no seu fuso horário (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
+            <i>Tempo baseado no fuso horário local (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
             <input id="duedate" name="duedate" value="<?=Format::htmlchars($info['duedate'])?>"
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('duedate')); return false;"><img src='images/cal.png'border=0 alt=""></a>
@@ -168,7 +168,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         <td>Atribuir a:</td>
         <td>
             <select id="staffId" name="staffId">
-                <option value="0" selected="selected">-Atribuir a Staff-</option>
+                <option value="0" selected="selected">-Atribuir ao Atendente-</option>
                 <?
                     //TODO: make sure the user's group is also active....DO a join.
                     $sql=' SELECT staff_id,CONCAT_WS(", ",lastname,firstname) as name FROM '.STAFF_TABLE.' WHERE isactive=1 AND onvacation=0 ';
@@ -180,7 +180,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
                     }?>
             </select><font class='error'>&nbsp;<?=$errors['staffId']?></font>
                 &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>Enviar alerta de atribuição a staff.
+                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>Enviar alerta de atribuição ao atendente.
         </td>
     </tr>
     <tr>
