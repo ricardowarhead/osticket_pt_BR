@@ -10,13 +10,13 @@
 </head>
 <body id="loginBody">
 <div id="loginBox">
-	<h1 id="logo"><a href="index.php">Painel de Controle osTicket</a></h1>
+	<h1 id="logo"><a href="index.php">Painel de Controle do Atendende</a></h1>
 	<h1><?=$msg?></h1>
 	<br />
 	<form action="login.php" method="post">
 	<input type="hidden" name=do value="scplogin" />
     <table border=0 align="center">
-        <tr><td width=100px align="right"><b>Username</b>:</td><td><input type="text" name="username" id="name" value="" /></td></tr>
+        <tr><td width=100px align="right"><b>Usuário</b>:</td><td><input type="text" name="username" id="name" value="" /></td></tr>
         <tr><td align="right"><b>Senha</b>:</td><td><input type="password" name="passwd" id="pass" /></td></tr>
         <tr><td>&nbsp;</td><td>&nbsp;&nbsp;<input class="submit" type="submit" name="submit" value="Login" /></td></tr>
     </table>
