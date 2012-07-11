@@ -37,7 +37,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr class="header"><td colspan=2>Conta de Usuário</td></tr>
         <tr class="subheader"><td colspan=2>Informações da Conta</td></tr>
         <tr>
-            <th>Username:</th>
+            <th>Usuário:</th>
             <td><input type="text" name="username" value="<?=$rep['username']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['username']?></font></td>
         </tr>
@@ -117,7 +117,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         </tr>
         <tr class="header"><td colspan=2>Permissão de conta, status &amp; Configurações</td></tr>
         <tr class="subheader"><td colspan=2>
-            As permissões da staff baseia-se também no grupo atribuído. <b>Administrador não é limitado por configurações do grupo.</b></td>
+            As permissões do atendente baseia-se também no grupo atribuído. <b>Administrador não é limitado por configurações do grupo.</b></td>
         </tr> 
         <tr><th><b>Status da Conta</b></th>
             <td>
