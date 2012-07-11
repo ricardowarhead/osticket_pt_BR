@@ -60,7 +60,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
             </tr>
             <tr class="header"><td colspan=2 >Aviso do novo Ticket</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Observação enviada para o usuário, se habilitado, <b>criado pela staff</b> em seu nome.</td>
+                Observação enviada para o usuário, se habilitado, <b>criado pelo atendente</b> em seu nome.</td>
                 </tr>
             <tr>
                 <th>Assunto</th>
@@ -75,7 +75,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
             </tr>
             <tr class="header"><td  colspan=2 >Aviso sobre limite de Tickets</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Aviso enviado quando o usuário atinge o máximo permitido de Tickets abertos definido nas preferências.
+                Aviso enviado quando o usuário atinge o máximo permitido de tickets abertos definido nas preferências.
                 <br/>Administradores recebem notificações cada vez que um pedido de permissão de ajuda é negado.
             </td></tr>
             <tr>
@@ -91,7 +91,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
             </tr>
             <tr class="header"><td colspan=2 >&nbsp;Resposta do Ticket</td></tr>
             <tr class="subheader"><td colspan=2 >
-                Modelo de mensagem enviada ao usuário quando Ticket respondido ou alertar o usuário sobre uma resposta/disponibilidade de resposta.
+                Modelo de mensagem enviada ao usuário quando ticket respondido ou alertar o usuário sobre uma resposta/disponibilidade de resposta.
             </td></tr>
             <tr>
                 <th>Assunto</th>
@@ -105,10 +105,10 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_reply_body']?></font></td>
             </tr>
         </table>
-        <span class="msg">Staff</span>
+        <span class="msg">Atendente</span>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
             <tr class="header"><td colspan=2 >Alerta de Novo Ticket</td></tr>
-            <tr class="subheader"><td colspan=2 >Alerta enviado à staff (se ativada) sobre novo Ticket.</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado ao atendente (se ativado) sobre novo ticket.</td></tr>
             <tr>
                 <th>Assunto</th>
                 <td>
@@ -121,7 +121,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
                     &nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_body']?></font></td>
             </tr>
             <tr class="header"><td colspan=2 >Alerta de Nova Mensagem</td></tr>
-            <tr class="subheader"><td colspan=2 >Alerta enviado à staff (se ativada) quando o usuário responde a um Ticket existente.</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado ao atendente (se ativado) quando o usuário responde a um ticket existente.</td></tr>
             <tr>
                 <th>Assunto</th>
                 <td>
@@ -136,7 +136,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
 
 
             <tr class="header"><td colspan=2 >Alerta de Nova Nota Interna</td></tr>
-            <tr class="subheader"><td colspan=2 >Alerta enviado para staff selecionada (se ativado) quando uma nota interna é anexada a um Ticket.</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado para o atendente selecionado (se ativado) quando uma nota interna é anexada a um ticket.</td></tr>
             <tr>
                 <th>Assunto</th>
                 <td>
@@ -150,7 +150,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
             </tr>
 
             <tr class="header"><td colspan=2 >Alerta na Atribuição de Ticket</td></tr>
-            <tr class="subheader"><td colspan=2 >Alerta enviado a staff na atribuição de Ticket.</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado ao atendente na atribuição de ticket.</td></tr>
             <tr>
                 <th>Assunto</th>
                 <td>
@@ -163,7 +163,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
                     &nbsp;<font class="error">&nbsp;<?=$errors['assigned_alert_body']?></font></td>
             </tr>
             <tr class="header"><td colspan=2 >Alerta de Ticket Vencido/Atrasado</td></tr>
-            <tr class="subheader"><td colspan=2 >Alerta enviado a staff sobre Tickets vencidos ou em atraso.</td></tr>
+            <tr class="subheader"><td colspan=2 >Alerta enviado ao atendente sobre tickets vencidos ou em atraso.</td></tr>
             <tr>
                 <th>Assunto</th>
                 <td>
