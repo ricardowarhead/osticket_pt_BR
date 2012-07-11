@@ -19,10 +19,10 @@ if(!defined('OSTSCPINC') || !is_object($thisuser) || !$rep) die('Kwaheri');
         </td>
     </tr>
     <tr>
-        <td nowrap>Auto taxa de atualização:</td>
+        <td nowrap>Taxa de Auto-atualização:</td>
         <td>
             <input type="input" size=3 name="auto_refresh_rate" value="<?=$rep['auto_refresh_rate']?>">
-            Em mins. (<i>Taxa de atualização da página em minutos. Digite 0 para desativar</i>)
+            Em mins. (<i>Taxa de auto-atualização da página em minutos. Digite 0 para desativar</i>)
         </td>
     </tr>
     <tr>
