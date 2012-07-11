@@ -23,7 +23,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
 <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
     <tr class="header"><td colspan=2><?=$title?></td></tr>
     <tr class="subheader">
-        <td colspan=2 >Disativar resposta automática irá substituir as configurações de departamento.</td>
+        <td colspan=2 >Desativar resposta automática irá substituir as configurações de departamento.</td>
     </tr>
     <tr>
         <th width="20%">Tópico de Ajuda:</th>
