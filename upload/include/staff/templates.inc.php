@@ -144,7 +144,7 @@ $deletable=0;
                 <tr><td>%status</td><td>Status</td></tr>
                 <tr><td>%priority</td><td>Prioridade</td></tr>
                 <tr><td>%dept</td><td>Departamento</td></tr>
-                <tr><td>%assigned_staff</td><td>Staff Designado (se houver)</td></tr>
+                <tr><td>%assigned_staff</td><td>Atendente Designado (se houver)</td></tr>
                 <tr><td>%createdate</td><td>Data de Criação</td></tr>
                 <tr><td>%duedate</td><td>Data de Vencimento</td></tr>
                 <tr><td>%closedate</td><td>Data de Fechamento</td></tr>
@@ -155,9 +155,9 @@ $deletable=0;
                 <tr><td width="100">%message</td><td>Mensagem (de entrada)</td></tr>
                 <tr><td>%response</td><td>Resposta (de saída)</td></tr>
                 <tr><td>%note</td><td>Nota Interna</td></tr>
-                <tr><td>%staff</td><td>Nome da Staff (aleta/notificação)</td></tr>
-                <tr><td>%assignee</td><td>Staff Atribuída</td></tr>
-                <tr><td>%assigner</td><td>Atribuir Staff ao ticket</td></tr>
+                <tr><td>%staff</td><td>Nome da Atendente (aleta/notificação)</td></tr>
+                <tr><td>%assignee</td><td>Atendente Atribuída</td></tr>
+                <tr><td>%assigner</td><td>Atribuir atendente ao ticket</td></tr>
                 <tr><td>%url</td><td>osTicket's base url (FQDN)</td></tr>
 
             </table>
