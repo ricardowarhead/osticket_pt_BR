@@ -119,7 +119,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr class="subheader"><td colspan=2>
             As permissões da staff baseia-se também no grupo atribuído. <b>Administrador não é limitado por configurações do grupo.</b></td>
         </tr> 
-        <tr><th><b>Account Status</b></th>
+        <tr><th><b>Status da Conta</b></th>
             <td>
                         <input type="radio" name="isactive"  value="1" <?=$rep['isactive']?'checked':''?> /><b>Ativo</b>
                         <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Bloqueado</b>
@@ -129,19 +129,19 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr><th><b>Tipo de Conta</b></th>
             <td class="mainTableAlt">
                         <input type="radio" name="isadmin"  value="1" <?=$rep['isadmin']?'checked':''?> /><font color="red"><b>Admin</b></font>
-                        <input type="radio" name="isadmin"  value="0" <?=!$rep['isadmin']?'checked':''?> /><b>Staff</b>
+                        <input type="radio" name="isadmin"  value="0" <?=!$rep['isadmin']?'checked':''?> /><b>Atendente</b>
                         &nbsp;&nbsp;
             </td>
         </tr>
         <tr><th>Directory Listagem</th>
             <td>
-               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no directory staff
+               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no directory atendente
             </td>
         </tr>
         <tr><th>Modo de Tendência</th>
             <td class="mainTableAlt">
              <input type="checkbox" name="onvacation" <?=$rep['onvacation'] ? 'checked': ''?>>
-                Staff no modo de tendência. (<i>Nenhuma atribuição de ticket ou alerta</i>)
+                Atendente no modo de tendência. (<i>Nenhuma atribuição de ticket ou alerta</i>)
                 &nbsp;<font class="error">&nbsp;<?=$errors['vacation']?></font>
             </td>
         </tr>
