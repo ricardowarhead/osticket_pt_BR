@@ -58,7 +58,7 @@ $info=($_POST && $errors)?Format::input($_POST):Format::htmlchars($cfg->getSMTPI
                     &nbsp;<font class="error">*&nbsp;<?=$errors['fromaddress']?></font>
             </td>
         </tr>
-        <tr><th>Nome Email:</th>
+        <tr><th>Nome do Email:</th>
             <td>
                 <input type="text" name="fromname" size=30 value="<?=$info['fromname']?>">&nbsp;<font class="error">&nbsp;<?=$errors['fromname']?></font>
                 &nbsp;&nbsp;(<i>Nome para email opcional.</i>)
