@@ -34,7 +34,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
         <tr class="header" ><td colspan=2>Definições Gerais</td></tr>
         <tr class="subheader">
-            <td colspan=2">O modo offline irá desabilitar interface do cliente e <b>só</b> permitirá o acesso ao Painel de Controle aos <b>super administradores</b></td>
+            <td colspan=2">O modo offline irá desativar a interface do cliente e <b>apenas</b> permitirá o acesso ao Painel de Controle dos atendentes aos <b>super administradores</b></td>
         </tr>
         <tr><th><b>Ajuda de Status</b></th>
             <td>
@@ -110,7 +110,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 </select>
             </td>
         </tr>
-        <tr><th>Logins Excessivos:</th>
+        <tr><th>Máximo de logins do atendente:</th>
             <td>
                 <select name="staff_max_logins">
                   <?php
@@ -135,10 +135,10 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 (<i>Tempo máximo do atendente inativo em minutos. Digite 0 para desativar o tempo limite.</i>)
             </td>
         </tr>
-       <tr><th>Sessão Bind Staff de IP:</th>
+       <tr><th>Vincular sessão do atendente ao IP:</th>
             <td>
               <input type="checkbox" name="staff_ip_binding" <?=$config['staff_ip_binding']?'checked':''?>>
-               Sessão Bind Staff para entrar IP.
+               Vincular sessão do atendente ao IP de login.
             </td>
         </tr>
 
