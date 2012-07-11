@@ -41,7 +41,7 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
                 <td><?=$ticket->getEmail()?></td>
             </tr>
             <tr>
-                <th>Telefone: </th>
+                <th>Telefone:</th>
                 <td><?=Format::phone($ticket->getPhoneNumber())?></td>
             </tr>
         </table>
