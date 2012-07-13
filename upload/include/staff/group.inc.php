@@ -1,12 +1,12 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 
 $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($group);
 if($group && $_REQUEST['a']!='new'){
-    $title='Edit Group: '.$group['group_name'];
+    $title='Editar Group: '.$group['group_name'];
     $action='update';
 }else {
-    $title='Add New Group';
+    $title='Adicionar novo grupo';
     $action='create';
     $info['group_enabled']=isset($info['group_enabled'])?$info['group_enabled']:1; //Default to active 
 }
@@ -23,24 +23,24 @@ if($group && $_REQUEST['a']!='new'){
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
         <tr class="header"><td colspan=2><?=Format::htmlchars($title)?></td></tr>
         <tr class="subheader"><td colspan=2>
-            Group permissions set below applies cross all group members, but don't apply to adminstrators and Dept. managers in some cases.
+            As configurações de permissões de grupo se aplicam entre os membros do grupo, mas não se aplicam aos administradores e gerentes de grupo em alguns casos.
             </td></tr>
-        <tr><th>Group Name:</th>
+        <tr><th>Nome do grupo:</th>
             <td><input type="text" name="group_name" size=25 value="<?=$info['group_name']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['group_name']?></font>
                     
             </td>
         </tr>
         <tr>
-            <th>Group Status:</th>
+            <th>Status do grupo:</th>
             <td>
                 <input type="radio" name="group_enabled"  value="1"   <?=$info['group_enabled']?'checked':''?> /> Active
                 <input type="radio" name="group_enabled"  value="0"   <?=!$info['group_enabled']?'checked':''?> />Disabled
                 &nbsp;<font class="error">&nbsp;<?=$errors['group_enabled']?></font>
             </td>
         </tr>
-        <tr><th valign="top"><br>Dept Access</th>
-            <td class="mainTableAlt"><i>Select departments group members are allowed to access in addition to thier own department.</i>
+        <tr><th valign="top"><br>Acesso ao departamento</th>
+            <td class="mainTableAlt"><i>A seleção de membros para o grupo de departamentos são permitidos para acesso na adicão em seu próprio departamento.</i>
                 &nbsp;<font class="error">&nbsp;<?=$errors['depts']?></font><br/>
                 <?
                 //Try to save the state on error...
@@ -55,53 +55,53 @@ if($group && $_REQUEST['a']!='new'){
                 <a href="#" onclick="return reset_all(document.forms['group'])">Select None</a>&nbsp;&nbsp; 
             </td>
         </tr>
-        <tr><th>Can <b>Create</b> Tickets</th>
+        <tr><th>Para <b>Criar</b> Tickets</th>
             <td>
-                <input type="radio" name="can_create_tickets"  value="1"   <?=$info['can_create_tickets']?'checked':''?> />Yes 
-                <input type="radio" name="can_create_tickets"  value="0"   <?=!$info['can_create_tickets']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Ability to open tickets on behalf of users!</i>
+                <input type="radio" name="can_create_tickets"  value="1"   <?=$info['can_create_tickets']?'checked':''?> />Sim 
+                <input type="radio" name="can_create_tickets"  value="0"   <?=!$info['can_create_tickets']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Capacidade de abrir tickets em nome de usuários!</i>
             </td>
         </tr>
-        <tr><th>Can <b>Edit</b> Tickets</th>
+        <tr><th>Para <b>Editar</b> Tickets</th>
             <td>
-                <input type="radio" name="can_edit_tickets"  value="1"   <?=$info['can_edit_tickets']?'checked':''?> />Yes
-                <input type="radio" name="can_edit_tickets"  value="0"   <?=!$info['can_edit_tickets']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Ability to edit tickets. Admins & Dept managers are allowed by default.</i>
+                <input type="radio" name="can_edit_tickets"  value="1"   <?=$info['can_edit_tickets']?'checked':''?> />Sim
+                <input type="radio" name="can_edit_tickets"  value="0"   <?=!$info['can_edit_tickets']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Capacidade de editar tickets. Administradores & Gerentes de Departamento são permitidos por padrão.</i>
             </td>
         </tr>
-        <tr><th>Can <b>Close</b> Tickets</th>
+        <tr><th>Para <b>Fechar</b> Tickets</th>
             <td>
-                <input type="radio" name="can_close_tickets"  value="1" <?=$info['can_close_tickets']?'checked':''?> />Yes
-                <input type="radio" name="can_close_tickets"  value="0" <?=!$info['can_close_tickets']?'checked':''?> />No
-                &nbsp;&nbsp;<i><b>Mass Close Only:</b> Staff can still close one ticket at a time when set to No</i>
+                <input type="radio" name="can_close_tickets"  value="1" <?=$info['can_close_tickets']?'checked':''?> />Sim
+                <input type="radio" name="can_close_tickets"  value="0" <?=!$info['can_close_tickets']?'checked':''?> />Não
+                &nbsp;&nbsp;<i><b>Somente fechar em massa:</b> Atendente poderá fechar um ticket durante um período quando definido como NÃO</i>
             </td>
         </tr>
-        <tr><th>Can <b>Transfer</b> Tickets</th>
+        <tr><th>Para <b>Transferir</b> Tickets</th>
             <td>
-                <input type="radio" name="can_transfer_tickets"  value="1" <?=$info['can_transfer_tickets']?'checked':''?> />Yes
-                <input type="radio" name="can_transfer_tickets"  value="0" <?=!$info['can_transfer_tickets']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Ability to transfer tickets from one dept to another.</i>
+                <input type="radio" name="can_transfer_tickets"  value="1" <?=$info['can_transfer_tickets']?'checked':''?> />Sim
+                <input type="radio" name="can_transfer_tickets"  value="0" <?=!$info['can_transfer_tickets']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Capacidade para transferir tickets de um departamento para outro.</i>
             </td>
         </tr>
-        <tr><th>Can <b>Delete</b> Tickets</th>
+        <tr><th>Para <b>Excluir</b> Tickets</th>
             <td>
-                <input type="radio" name="can_delete_tickets"  value="1"   <?=$info['can_delete_tickets']?'checked':''?> />Yes
-                <input type="radio" name="can_delete_tickets"  value="0"   <?=!$info['can_delete_tickets']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Deleted tickets can't be recovered!</i>
+                <input type="radio" name="can_delete_tickets"  value="1"   <?=$info['can_delete_tickets']?'checked':''?> />Sim
+                <input type="radio" name="can_delete_tickets"  value="0"   <?=!$info['can_delete_tickets']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Tickets excluídos não podem ser recuperados!</i>
             </td>
         </tr>
-        <tr><th>Can Ban Emails</th>
+        <tr><th>Para Banir/Proibir E-mails</th>
             <td>
-                <input type="radio" name="can_ban_emails"  value="1" <?=$info['can_ban_emails']?'checked':''?> />Yes
-                <input type="radio" name="can_ban_emails"  value="0" <?=!$info['can_ban_emails']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Ability to add/remove emails from banlist via tickets interface.</i>
+                <input type="radio" name="can_ban_emails"  value="1" <?=$info['can_ban_emails']?'checked':''?> />Sim
+                <input type="radio" name="can_ban_emails"  value="0" <?=!$info['can_ban_emails']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Capacidade para adicionar/remover da lista de banidos/proibidos via interface ticket.</i>
             </td>
         </tr>
-        <tr><th>Can Manage Premade</th>
+        <tr><th>Para gerenciamento preparado</th>
             <td>
-                <input type="radio" name="can_manage_kb"  value="1" <?=$info['can_manage_kb']?'checked':''?> />Yes
-                <input type="radio" name="can_manage_kb"  value="0" <?=!$info['can_manage_kb']?'checked':''?> />No
-                &nbsp;&nbsp;<i>Ability to add/update/disable/delete premade responses.</i>
+                <input type="radio" name="can_manage_kb"  value="1" <?=$info['can_manage_kb']?'checked':''?> />Sim
+                <input type="radio" name="can_manage_kb"  value="0" <?=!$info['can_manage_kb']?'checked':''?> />Não
+                &nbsp;&nbsp;<i>Capacidade para adicionar/atualizar/desativar/excluir respostas preparadas.</i>
             </td>
         </tr>
     </table>
