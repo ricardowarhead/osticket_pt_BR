@@ -16,7 +16,7 @@
 **********************************************************************/
 
 require('staff.inc.php');
-if(!$thisuser->canManageKb() && !$thisuser->isadmin()) die('Access denied');
+if(!$thisuser->canManageKb() && !$thisuser->isadmin()) die('Acesso Negado');
 
 $page='';
 $answer=null; //clean start.
@@ -38,13 +38,13 @@ if($_POST):
     case 'update':
     case 'add':
         if(!$_POST['id'] && $_POST['a']=='update')
-            $errors['err']='Missing or invalid group ID';
+            $errors['err']='Falta ou ID de grupo inválido';
 
         if(!$_POST['title'])
-            $errors['title']='Title/subject required';
+            $errors['title']='Título/tema exigido';
                 
         if(!$_POST['answer'])
-            $errors['answer']='Reply required';
+            $errors['answer']='Resposta Necessária';
 
         if(!$errors){
             $sql=' SET updated=NOW(),isenabled='.db_input($_POST['isenabled']).
@@ -54,49 +54,49 @@ if($_POST):
             if($_POST['a']=='add'){ //create
                 $res=db_query('INSERT INTO '.KB_PREMADE_TABLE.' '.$sql.',created=NOW()');
                 if(!$res or !($replyID=db_insert_id()))
-                    $errors['err']='Unable to create the reply. Internal error';
+                    $errors['err']='Não foi possível criar a resposta. Erro interno';
                 else
-                    $msg='Premade reply created';
+                    $msg='Resposta automática criada';
             }elseif($_POST['a']=='update'){ //update
                 $res=db_query('UPDATE '.KB_PREMADE_TABLE.' '.$sql.' WHERE premade_id='.db_input($_POST['id']));
                 if($res && db_affected_rows()){
-                    $msg='Premade reply updated';
+                    $msg='Resposta automática atualizada';
                     $answer=db_fetch_array(db_query('SELECT * FROM '.KB_PREMADE_TABLE.' WHERE premade_id='.db_input($id)));
                 }
                 else
-                    $errors['err']='Internal update error occured. Try again';
+                    $errors['err']='Ocorreu um erro interno de atualização. Tente novamente';
             }
             if($errors['err'] && db_errno()==1062)
-                $errors['title']='Title already exists!';
+                $errors['title']='Título já existe!';
             
         }else{
-            $errors['err']=$errors['err']?$errors['err']:'Error(s) occured. Try again';
+            $errors['err']=$errors['err']?$errors['err']:'Ocorreu erro(s). Tente novamente';
         }
         break;
     case 'process':
         if(!$_POST['canned'] || !is_array($_POST['canned']))
-            $errors['err']='You must select at least one item';
+            $errors['err']='Você deve selecionar pelo menos um item';
         else{
             $msg='';
             $ids=implode(',',$_POST['canned']);
             $selected=count($_POST['canned']);
-            if(isset($_POST['enable'])) {
+            if(isset($_POST['habilitar'])) {
                 if(db_query('UPDATE '.KB_PREMADE_TABLE.' SET isenabled=1,updated=NOW() WHERE isenabled=0 AND premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected selected replies enabled";
-            }elseif(isset($_POST['disable'])) {
+                    $msg=db_affected_rows()." of  $selected habilitada respostas selecionadas";
+            }elseif(isset($_POST['desabilitar'])) {
                 if(db_query('UPDATE '.KB_PREMADE_TABLE.' SET isenabled=0, updated=NOW() WHERE isenabled=1 AND premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected selected replies disabled";
-            }elseif(isset($_POST['delete'])) {
+                    $msg=db_affected_rows()." of  $selected desativada respostas selecionadas";
+            }elseif(isset($_POST['deletar'])) {
                 if(db_query('DELETE FROM '.KB_PREMADE_TABLE.' WHERE premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected selected replies deleted";
+                    $msg=db_affected_rows()." of  $selected excluída respostas selecionadas";
             }
 
             if(!$msg)
-                $errors['err']='Error occured. Try again';
+                $errors['err']='Ocorreu um erro. Tente novamente';
         }
         break;
     default:
-        $errors['err']='Unknown action';
+        $errors['err']='Ação desconhecida';
     endswitch;
 endif;
 //new reply??
@@ -106,8 +106,8 @@ if(!$page && $_REQUEST['a']=='add' && !$replyID)
     $inc=$page?$page:'premade.inc.php';
 
 $nav->setTabActive('kbase');
-$nav->addSubMenu(array('desc'=>'Premade Replies','href'=>'kb.php','iconclass'=>'premade'));
-$nav->addSubMenu(array('desc'=>'New Premade Reply','href'=>'kb.php?a=add','iconclass'=>'newPremade'));
+$nav->addSubMenu(array('desc'=>'Respostas automáticas','href'=>'kb.php','iconclass'=>'premade'));
+$nav->addSubMenu(array('desc'=>'Nova resposta automática','href'=>'kb.php?a=add','iconclass'=>'newPremade'));
 require_once(STAFFINC_DIR.'header.inc.php');
 require_once(STAFFINC_DIR.$inc);
 require_once(STAFFINC_DIR.'footer.inc.php');
