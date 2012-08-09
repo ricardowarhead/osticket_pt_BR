@@ -17,7 +17,7 @@
 
 require('staff.inc.php');
 $nav->setTabActive('directory');
-$nav->addSubMenu(array('desc'=>'Staff Members','href'=>'directory.php','iconclass'=>'staff'));
+$nav->addSubMenu(array('desc'=>'Membros Atendentes','href'=>'directory.php','iconclass'=>'staff'));
 
 $WHERE=' WHERE isvisible=1 ';
 $sql=' SELECT staff.staff_id,staff.dept_id, firstname,lastname,email,phone,phone_ext,mobile,dept_name,onvacation '.
@@ -103,7 +103,7 @@ require_once(STAFFINC_DIR.'header.inc.php');
 </table>
 <?
 else:
-echo "<b>Problems displaying directory</b>";
+echo "<b>Problemas na visualização do diretório</b>";
 endif;
 include_once(STAFFINC_DIR.'footer.inc.php');
 ?>
