@@ -16,18 +16,18 @@
 **********************************************************************/
 require('staff.inc.php');
 //TODO: alert admin on any error on this file.
-if(!$thisuser || !$thisuser->isStaff() || !$_GET['id'] || !$_GET['ref']) die('Access Denied');
+if(!$thisuser || !$thisuser->isStaff() || !$_GET['id'] || !$_GET['ref']) die('Acesso Negado');
 $sql='SELECT attach_id,ref_id,ticket.ticket_id,dept_id,file_name,file_key,staff_id,ticket.created FROM '.TICKET_ATTACHMENT_TABLE.
     ' LEFT JOIN '.TICKET_TABLE.' ticket USING(ticket_id) '.
     ' WHERE attach_id='.db_input($_GET['id']);
 //valid ID??
-if(!($resp=db_query($sql)) || !db_num_rows($resp)) die('Invalid file');
+if(!($resp=db_query($sql)) || !db_num_rows($resp)) die('Arquivo Inválido');
 list($id,$refid,$tid,$deptID,$filename,$key,$staffId,$createDate)=db_fetch_row($resp);
 //Still paranoid...:)...check the secret session based hash.
 $hash=MD5($tid*$refid.session_id());
-if(!$_GET['ref'] || strcmp($hash,$_GET['ref'])) die('Access Denied');
+if(!$_GET['ref'] || strcmp($hash,$_GET['ref'])) die('Acesso Negado');
 //Check ticket access,
-if($staffId!=$thisuser->getId() && !$thisuser->canAccessDept($deptID)) die("You do not have access to the ticket");
+if($staffId!=$thisuser->getId() && !$thisuser->canAccessDept($deptID)) die("Você não tem acesso ao Ticket");
 
 //see if the file actually exits.
 
@@ -38,7 +38,7 @@ $file=rtrim($cfg->getUploadDir(),'/')."/$month/$key".'_'.$filename;
 if(!file_exists($file))
     $file=rtrim($cfg->getUploadDir(),'/')."/$key".'_'.$filename;
 
-if(!file_exists($file)) die('No such file');
+if(!file_exists($file)) die('Arquivo não existe');
 
 $extension =substr($filename,-3);
 switch(strtolower($extension))
