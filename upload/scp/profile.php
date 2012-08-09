@@ -18,14 +18,14 @@
 require_once('staff.inc.php');
 $msg='';
 if($_POST && $_POST['id']!=$thisuser->getId()) { //Check dummy ID used on the form.
- $errors['err']='Internal Error. Action Denied';
+ $errors['err']='Erro Interno. Acesso Negado';
 }
 
 if(!$errors && $_POST) { //Handle post
     switch(strtolower($_REQUEST['t'])):
     case 'pref':
         if(!is_numeric($_POST['auto_refresh_rate']))
-            $errors['err']='Invalid auto refresh value.';
+            $errors['err']='Valor de atualização automática inválida.';
 
         if(!$errors) {
 
@@ -40,9 +40,9 @@ if(!$errors && $_POST) { //Handle post
                 $thisuser->reload();
                 $_SESSION['TZ_OFFSET']=$thisuser->getTZoffset();
                 $_SESSION['daylight']=$thisuser->observeDaylight();
-                $msg='Preference Updated Successfully';
+                $msg='Preferência atualizada com sucesso';
             }else{
-                $errors['err']='Preference update error.';
+                $errors['err']='Erro de atualização de preferências.';
             }
         }
         break;
