@@ -15,19 +15,19 @@
     $Id: $
 **********************************************************************/
 require_once('../main.inc.php');
-if(!defined('INCLUDE_DIR')) die('Fatal Error. Kwaheri!');
+if(!defined('INCLUDE_DIR')) die('Erro fatal. Kwaheri!');
 
 require_once(INCLUDE_DIR.'class.staff.php');
 
 $msg=$_SESSION['_staff']['auth']['msg'];
-$msg=$msg?$msg:'Authentication Required';
+$msg=$msg?$msg:'Autenticação necessária';
 if($_POST && (!empty($_POST['username']) && !empty($_POST['passwd']))){
     //$_SESSION['_staff']=array(); #Uncomment to disable login strikes.
-    $msg='Invalid login';
+    $msg='Login inválido';
     if($_SESSION['_staff']['laststrike']) {
         if((time()-$_SESSION['_staff']['laststrike'])<$cfg->getStaffLoginTimeout()) {
-            $msg='Excessive failed login attempts';
-            $errors['err']='You\'ve reached maximum failed login attempts allowed.';
+            $msg='Excesso de tentativas de login';
+            $errors['err']='Número máximo de tentativas de login chegou ao fim.';
         }else{ //Timeout is over.
             //Reset the counter for next round of attempts after the timeout.
             $_SESSION['_staff']['laststrike']=null;
@@ -57,17 +57,17 @@ if($_POST && (!empty($_POST['username']) && !empty($_POST['passwd']))){
     //If we get to this point we know the login failed.
     $_SESSION['_staff']['strikes']+=1;
     if(!$errors && $_SESSION['_staff']['strikes']>$cfg->getStaffMaxLogins()) {
-        $msg='Access Denied';
-        $errors['err']='Forgot your login info? Contact IT Dept.';
+        $msg='Acesso Negado';
+        $errors['err']='Esqueceu seu login? Entre em contato com Departamento de TI';
         $_SESSION['_staff']['laststrike']=time();
-        $alert='Excessive login attempts by a staff member?'."\n".
+        $alert='Excesso de tentativas de login por um membro da equipe?'."\n".
                'Username: '.$_POST['username']."\n".'IP: '.$_SERVER['REMOTE_ADDR']."\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".
                'Attempts #'.$_SESSION['_staff']['strikes']."\n".'Timeout: '.($cfg->getStaffLoginTimeout()/60)." minutes \n\n";
         Sys::log(LOG_ALERT,'Excessive login attempts (staff)',$alert,($cfg->alertONLoginError()));
     }elseif($_SESSION['_staff']['strikes']%2==0){ //Log every other failed login attempt as a warning.
         $alert='Username: '.$_POST['username']."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
                "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_staff']['strikes'];
-        Sys::log(LOG_WARNING,'Failed login attempt (staff)',$alert);
+        Sys::log(LOG_WARNING,'Tentativa de login falhou (atendente)',$alert);
     }
 }
 define("OSTSCPINC",TRUE); //Make includes happy!
