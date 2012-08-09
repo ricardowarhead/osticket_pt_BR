@@ -23,23 +23,23 @@ ini_set('display_startup_errors','0');
 
 //TODO: disable direct access via the browser? i,e All request must have REFER? 
 
-if(!defined('INCLUDE_DIR'))	Http::response(500,'config error');
+if(!defined('INCLUDE_DIR'))	Http::response(500,'erro de configuração');
 
 if(!$thisuser || !$thisuser->isValid()) {
-	Http::response(401,'Access Denied. IP '.$_SERVER['REMOTE_ADDR']);
+	Http::response(401,'Acesso Negado. IP '.$_SERVER['REMOTE_ADDR']);
 	exit;
 }
 
 //---------check required global vars --------//
 if(!$_REQUEST['api'] || !$_REQUEST['f']){
-    Http::response(416,'Invalid params');
+    Http::response(416,'parâmetros inválidos');
     exit;
 }
 //------Do the AJAX Dance ----------------//
 define('OSTAJAXINC',TRUE);
 $file='ajax.'.Format::file_name(strtolower($_REQUEST['api'])).'.php';
 if(!file_exists(INCLUDE_DIR.$file)){
-    Http::response(405,'invalid method');
+    Http::response(405,'método inválido');
     exit;
 }
 
@@ -47,13 +47,13 @@ $class=ucfirst(strtolower($_REQUEST['api'])).'AjaxAPI';
 $func=$_REQUEST['f'];
 
 if(is_callable($func)){ //if the function is callable B4 we include the source file..play with the user...
-Http::response(500,'This is secure ajax assjax '.$_SERVER['REMOTE_ADDR']);
+Http::response(500,'Este é seguro ajax assjax '.$_SERVER['REMOTE_ADDR']);
 exit;
 }
 require(INCLUDE_DIR.$file);
 
 if(!is_callable(array($class,$func))){
- Http::response(416,'invalid method/call '.Format::htmlchars($func));
+ Http::response(416,'método/chamada inválido '.Format::htmlchars($func));
  exit;
 }
 
