@@ -77,11 +77,11 @@ require_once(STAFFINC_DIR.'header.inc.php');
 <div class="msg">Staff Members</div>
 <table border="0" cellspacing=0 cellpadding=2 class="dtable" width="100%">
     <tr>
-        <th>Name</th>
+        <th>Nome</th>
         <th>Dept</th>
         <th>Email</th>
-        <th>Phone</th>
-        <th>Mobile</th>
+        <th>Fone</th>
+        <th>Cel</th>
     </tr>
     <?
     $class = 'row1';
