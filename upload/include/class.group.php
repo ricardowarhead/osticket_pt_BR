@@ -31,19 +31,19 @@ class Group {
     function save($id,$vars,&$errors) {
 
         if($id && !$vars['group_id'])
-            $errors['err']='Missing or invalid group ID';
+            $errors['err']='Faltando ou ID de grupo inválido';
             
         if(!$vars['group_name']) {
-            $errors['group_name']='Group name required';
+            $errors['group_name']='Nome do grupo necessário';
         }elseif(strlen($vars['group_name'])<5) {
-            $errors['group_name']='Group name must be at least 5 chars.';
+            $errors['group_name']='Nome do grupo deve ser de pelo menos 5 caracteres.';
         }else {
             $sql='SELECT group_id FROM '.GROUP_TABLE.' WHERE group_name='.db_input($vars['group_name']);
             if($id)
                 $sql.=' AND group_id!='.db_input($id);
 
             if(db_num_rows(db_query($sql)))
-                $errors['group_name']='Group name already exists';
+                $errors['group_name']='Nome do grupo já existe';
         }
         
         if(!$errors){
@@ -62,13 +62,13 @@ class Group {
             if($id) {
                 $res=db_query('UPDATE '.GROUP_TABLE.' '.$sql.' WHERE group_id='.db_input($id));
                 if(!$res || !db_affected_rows())
-                    $errors['err']='Internal error occured';
+                    $errors['err']='Ocorreu um erro interno';
             }else{
                 $res=db_query('INSERT INTO '.GROUP_TABLE.' '.$sql.',created=NOW()');
                 if($res && ($gID=db_insert_id()))
                     return $gID;
                 
-                $errors['err']='Unable to create the group. Internal error';
+                $errors['err']='Não foi possível criar grupo. Erro interno.';
             }
         }
 
