@@ -62,12 +62,12 @@ if(!is_object($thisuser) || !$thisuser->getId() || !$thisuser->isValid()){
 //2) if not super admin..check system and group status
 if(!$thisuser->isadmin()){
     if($cfg->isHelpDeskOffline()){
-        staffLoginPage('Sistema offline');
+        staffLoginPage('Sistema offline.');
         exit;
     }
 
     if(!$thisuser->isactive() || !$thisuser->isGroupActive()) {
-        staffLoginPage('Acesso negado. Contate a administração');
+        staffLoginPage('Acesso negado. Contate os administradores.');
         exit;
     }
 }
