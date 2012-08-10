@@ -16,11 +16,11 @@
 **********************************************************************/
 if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__))) die('kwaheri rafiki!');
 
-if(!file_exists('main.inc.php')) die('Fatal Error.');
+if(!file_exists('main.inc.php')) die('Erro Fatal.');
 
 require_once('main.inc.php');
 
-if(!defined('INCLUDE_DIR')) die('Fatal error');
+if(!defined('INCLUDE_DIR')) die('Erro Fatal');
 
 /*Some more include defines specific to client only */
 define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
@@ -34,7 +34,7 @@ if(!is_object($cfg) || !$cfg->getId() || $cfg->isHelpDeskOffline()) {
 
 //Forced upgrade? Version mismatch.
 if(defined('THIS_VERSION') && strcasecmp($cfg->getVersion(),THIS_VERSION)) {
-    die('System is offline for an upgrade.');
+    die('O sistema está offline para um upgrade.');
     exit;
 }
 
