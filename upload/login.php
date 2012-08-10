@@ -22,19 +22,19 @@ define('OSTCLIENTINC',TRUE); //make includes happy
 require_once(INCLUDE_DIR.'class.client.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
 //We are ready baby
-$loginmsg='Authentication Required';
+$loginmsg='Autenticação necessária';
 if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
-    $loginmsg='Authentication Required';
+    $loginmsg='Autenticação necessária';
     $email=trim($_POST['lemail']);
     $ticketID=trim($_POST['lticket']);
     //$_SESSION['_client']=array(); #Uncomment to disable login strikes.
     
     //Check time for last max failed login attempt strike.
-    $loginmsg='Invalid login';
+    $loginmsg='Login inválido';
     if($_SESSION['_client']['laststrike']) {
         if((time()-$_SESSION['_client']['laststrike'])<$cfg->getClientLoginTimeout()) {
-            $loginmsg='Excessive failed login attempts';
-            $errors['err']='You\'ve reached maximum failed login attempts allowed. Try again later or <a href="open.php">open a new ticket</a>';
+            $loginmsg='Tentativas de logon com falha excessiva';
+            $errors['err']='Você alcançou o mámximo de tentativas de logon permitidas. Tente novamente mais tarde ou <a href="open.php">abra um novo ticket</a>';
         }else{ //Timeout is over.
             //Reset the counter for next round of attempts after the timeout.
             $_SESSION['_client']['laststrike']=null;
@@ -57,8 +57,8 @@ if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
             $_SESSION['TZ_OFFSET']=$cfg->getTZoffset();
             $_SESSION['daylight']=$cfg->observeDaylightSaving();
             //Log login info...
-            $msg=sprintf("%s/%s logged in [%s]",$ticket->getEmail(),$ticket->getExtId(),$_SERVER['REMOTE_ADDR']);
-            Sys::log(LOG_DEBUG,'User login',$msg);
+            $msg=sprintf("%s/%s logado em [%s]",$ticket->getEmail(),$ticket->getExtId(),$_SERVER['REMOTE_ADDR']);
+            Sys::log(LOG_DEBUG,'Usuário de login',$msg);
             //Redirect tickets.php
             session_write_close();
             session_regenerate_id();
@@ -70,18 +70,18 @@ if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
     //If we get to this point we know the login failed.
     $_SESSION['_client']['strikes']+=1;
     if(!$errors && $_SESSION['_client']['strikes']>$cfg->getClientMaxLogins()) {
-        $loginmsg='Access Denied';
-        $errors['err']='Forgot your login info? Please <a href="open.php">open a new ticket</a>.';
+        $loginmsg='Acesso negado';
+        $errors['err']='Esqueceu suas informações de login? Por favor, <a href="open.php">abra um novo ticket</a>.';
         $_SESSION['_client']['laststrike']=time();
-        $alert='Excessive login attempts by a client?'."\n".
-                'Email: '.$_POST['lemail']."\n".'Ticket#: '.$_POST['lticket']."\n".
-                'IP: '.$_SERVER['REMOTE_ADDR']."\n".'Time:'.date('M j, Y, g:i a T')."\n\n".
-                'Attempts #'.$_SESSION['_client']['strikes'];
-        Sys::log(LOG_ALERT,'Excessive login attempts (client)',$alert,($cfg->alertONLoginError()));
+        $alert='Tentativas excessivas de login por um cliente?'."\n".
+                'E-mail: '.$_POST['lemail']."\n".'Ticket#: '.$_POST['lticket']."\n".
+                'IP: '.$_SERVER['REMOTE_ADDR']."\n".'Hora:'.date('M j, Y, g:i a T')."\n\n".
+                'Tentativas #'.$_SESSION['_client']['strikes'];
+        Sys::log(LOG_ALERT,'Tentativas excessivas de login (cliente)',$alert,($cfg->alertONLoginError()));
     }elseif($_SESSION['_client']['strikes']%2==0){ //Log every other failed login attempt as a warning.
-        $alert='Email: '.$_POST['lemail']."\n".'Ticket #: '.$_POST['lticket']."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
-               "\n".'TIME: '.date('M j, Y, g:i a T')."\n\n".'Attempts #'.$_SESSION['_client']['strikes'];
-        Sys::log(LOG_WARNING,'Failed login attempt (client)',$alert);
+        $alert='E-mail: '.$_POST['lemail']."\n".'Ticket #: '.$_POST['lticket']."\n".'IP: '.$_SERVER['REMOTE_ADDR'].
+               "\n".'Hora: '.date('M j, Y, g:i a T')."\n\n".'Tentativas #'.$_SESSION['_client']['strikes'];
+        Sys::log(LOG_WARNING,'Falha de tentativa de login (cliente)',$alert);
     }
 endif;
 require(CLIENTINC_DIR.'header.inc.php');
