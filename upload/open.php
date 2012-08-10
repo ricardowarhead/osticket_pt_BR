@@ -22,19 +22,19 @@ if($_POST):
     $_POST['deptId']=$_POST['emailId']=0; //Just Making sure we don't accept crap...only topicId is expected.
     if(!$thisuser && $cfg->enableCaptcha()){
         if(!$_POST['captcha'])
-            $errors['captcha']='Enter text shown on the image';
+            $errors['captcha']='Digite o texto mostrado na imagem.';
         elseif(strcmp($_SESSION['captcha'],md5($_POST['captcha'])))
-            $errors['captcha']='Invalid - try again!';
+            $errors['captcha']='Invalido - tente novamente!';
     }
     //Ticket::create...checks for errors..
     if(($ticket=Ticket::create($_POST,$errors,SOURCE))){
-        $msg='Support ticket request created';
+        $msg='Solicitação de ticker de suporte criada';
         if($thisclient && $thisclient->isValid()) //Logged in...simply view the newly created ticket.
             @header('Location: tickets.php?id='.$ticket->getExtId());
         //Thank the user and promise speedy resolution!
         $inc='thankyou.inc.php';
     }else{
-        $errors['err']=$errors['err']?$errors['err']:'Unable to create a ticket. Please correct errors below and try again!';
+        $errors['err']=$errors['err']?$errors['err']:'Não foi possível criar um ticket. Por favor, corrija os erros abaixo e tente novamente!';
     }
 endif;
 
