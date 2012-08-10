@@ -110,10 +110,10 @@ class Template {
         }
 
         if(!$errors && $var['id'] && $var['id']!=$this->getId())
-            $errors['err']='Internal error. Try again';
+            $errors['err']='Erro interno. Tente novamente';
 
         if(!$errors['name'] && ($tid=Template::getIdByName($var['name'])) && $tid!=$this->getId())
-             $errors['name']='Name already in use';
+             $errors['name']='Nome já está em uso';
                         
         if(!$errors) {
         
@@ -143,7 +143,7 @@ class Template {
                  ' WHERE tpl_id='.db_input($this->getId());
 
             if(!db_query($sql) || !db_affected_rows())
-                $errors['err']='Unable to update. Internal error occured';
+                $errors['err']='Não foi possível atualizar. Erro interno';
                         
         }
 
@@ -167,16 +167,16 @@ class Template {
         global $cfg;
 
         if(!$var['name'])
-            $errors['name']='required';
+            $errors['name']='obrigatório';
         elseif(!$errors && Template::getIdByName($var['name'])) 
-             $errors['name']='Name already in use';
+             $errors['name']='Nome já está em uso';
               
         if(!$var['copy_template'])
-            $errors['copy_template']='required';
+            $errors['copy_template']='obrigatório';
         else if(!$errors){
             $template= new Template($var['copy_template'],$cfg->getId());
             if(!is_object($template) || !$template->getId())
-                $errors['copy_template']='Unknown template';
+                $errors['copy_template']='Modelo desconhecido';
         }
 
         $id=0;
@@ -208,7 +208,7 @@ class Template {
                  ',ticket_reply_body='.db_input(Format::striptags($info['ticket_reply_body']));
             //echo $sql;
             if(!db_query($sql) || !($id=db_insert_id()))
-                $errors['err']='Unable to create the template. Internal error occured';
+                $errors['err']='Não foi possível criar o modelo. Erro interno';
         }
         return $id;
     }
