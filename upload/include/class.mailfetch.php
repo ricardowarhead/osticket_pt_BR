@@ -326,8 +326,8 @@ class MailFetcher {
 
         //We require imap ext to fetch emails via IMAP/POP3
         if(!function_exists('imap_open')) {
-            $msg='PHP must be compiled with IMAP extension enabled for IMAP/POP3 fetch to work!';
-            Sys::log(LOG_WARN,'Mail Fetch Error',$msg);
+            $msg='PHP deve ser compilado com extensão IMAP habilitado para buscar a trabalhar IMAP/POP3!';
+            Sys::log(LOG_WARN,'Erro em buscar o email',$msg);
             return;
         }
 
@@ -353,13 +353,13 @@ class MailFetcher {
                 db_query('UPDATE '.EMAIL_TABLE.' SET mail_errors=mail_errors+1, mail_lasterror=NOW() WHERE email_id='.db_input($row['email_id']));
                 if($errors>=$MAX_ERRORS){
                     //We've reached the MAX consecutive errors...will attempt logins at delayed intervals
-                    $msg="\nThe system is having trouble fetching emails from the following mail account: \n".
-                        "\nUser: ".$row['userid'].
+                    $msg="\nO sistema está tendo problemas para coletar e-mails da conta do e-mail seguinte: \n".
+                        "\nUsuário: ".$row['userid'].
                         "\nHost: ".$row['mail_host'].
-                        "\nError: ".$fetcher->getLastError().
-                        "\n\n ".$errors.' consecutive errors. Maximum of '.$MAX_ERRORS. ' allowed'.
-                        "\n\n This could be connection issues related to the host. Next delayed login attempt in aprox. 10 minutes";
-                    Sys::alertAdmin('Mail Fetch Failure Alert',$msg,true);
+                        "\nErro: ".$fetcher->getLastError().
+                        "\n\n ".$errors.' erros consecutivos. Máximo de '.$MAX_ERRORS. ' permitido'.
+                        "\n\n Isso pode ser problemas de conexão relacionados ao hospedeiro. Próxima tentativa de login em aprox. 10 minutos";
+                    Sys::alertAdmin('Alerta de falha na busca por email',$msg,true);
                 }
             }
         }

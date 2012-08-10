@@ -481,34 +481,34 @@ class Config {
                 && (!isset($var['ticket_alert_admin']) 
                     && !isset($var['ticket_alert_dept_manager'])
                     && !isset($var['ticket_alert_dept_members']))){        
-            $errors['ticket_alert_active']='No target recipient(s) selected';
+            $errors['ticket_alert_active']='Sem destinatário(s) alvo selecionado';
         }       
         if($var['message_alert_active']
                 && (!isset($var['message_alert_laststaff'])
                     && !isset($var['message_alert_assigned'])
                     && !isset($var['message_alert_dept_manager']))){
-            $errors['message_alert_active']='No target recipient(s) selected';
+            $errors['message_alert_active']='Sem destinatário(s) alvo selecionado';
         }
 
         if($var['note_alert_active']
                 && (!isset($var['note_alert_laststaff'])
                     && !isset($var['note_alert_assigned'])
                     && !isset($var['note_alert_dept_manager']))){
-            $errors['note_alert_active']='No target recipient(s) selected';
+            $errors['note_alert_active']='Sem destinatário(s) alvo selecionado';
         }
 
         if($var['strip_quoted_reply'] && !$var['reply_separator'])
-            $errors['reply_separator']='Reply separator required (?)';
+            $errors['reply_separator']='Separador de resposta necessária (?)';
 
         if($var['enable_captcha']){
             if (!extension_loaded('gd'))
-                $errors['enable_captcha']='The GD extension required';
+                $errors['enable_captcha']='Extensão GD necessária';
             elseif(!function_exists('imagepng'))
-                $errors['enable_captcha']='PNG support required for Image Captcha';
+                $errors['enable_captcha']='Suporte PNG necessário para a imagem captcha';
         }
 
         if(!$errors['admin_email'] && Email::getIdByEmail($var['admin_email'])) //Make sure admin email is not also a system email.
-            $errors['admin_email']='Email already setup as system email';
+            $errors['admin_email']='E-mail já está configurado como e-mail do sistema';
 
 
 

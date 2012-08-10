@@ -205,32 +205,32 @@ class Dept {
         global $cfg;
                 
         if($id && $id!=$_POST['dept_id'])
-            $errors['err']='Missing or invalid Dept ID';
+            $errors['err']='Ausente ou inválido identificação do departamento';
             
         if(!$_POST['email_id'] || !is_numeric($_POST['email_id']))
-            $errors['email_id']='Dept email required';
+            $errors['email_id']='E-mail do departamento obrigatório';
             
         if(!is_numeric($_POST['tpl_id']))
-            $errors['tpl_id']='Template required';
+            $errors['tpl_id']='Modelo exigido';
             
         if(!$_POST['dept_name']) {
-            $errors['dept_name']='Dept name required';
+            $errors['dept_name']='Nome do departamento exigido';
         }elseif(strlen($_POST['dept_name'])<4) {
-            $errors['dept_name']='Dept name must be at least 4 chars.';
+            $errors['dept_name']='Nome do departamento deve ter no mínimo 4 caracteres.';
         }else{
             $sql='SELECT dept_id FROM '.DEPT_TABLE.' WHERE dept_name='.db_input($_POST['dept_name']);
             if($id)
                 $sql.=' AND dept_id!='.db_input($id);
                 
             if(db_num_rows(db_query($sql)))
-                $errors['dept_name']='Department already exist';
+                $errors['dept_name']='Departamento já existe';
         }
 
         if($_POST['ispublic'] && !$_POST['dept_signature'])
-            $errors['dept_signature']='Signature required';
+            $errors['dept_signature']='Sinatura obrigatória';
             
         if(!$_POST['ispublic'] && ($_POST['dept_id']==$cfg->getDefaultDeptId()))
-            $errors['ispublic']='Default department can not be private';
+            $errors['ispublic']='Departamento de padrão não pode ser privado';
 
         if(!$errors){
         
@@ -249,13 +249,13 @@ class Dept {
             if($id) {
                 $sql='UPDATE '.DEPT_TABLE.' '.$sql.' WHERE dept_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())
-                    $errors['err']='Unable to update '.Format::input($_POST['dept_name']).' Dept. Error occured';
+                    $errors['err']='Não é possível atualizar '.Format::input($_POST['dept_name']).' Ocorreu um erro no departamento';
             }else{
                 $sql='INSERT INTO '.DEPT_TABLE.' '.$sql.',created=NOW()';
                 if(db_query($sql) && ($deptID=db_insert_id()))
                     return $deptID;
 
-                $errors['err']='Unable to create department. Internal error';
+                $errors['err']='Não é possível criar departamento. Erro interno.';
             }
         }
 

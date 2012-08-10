@@ -23,12 +23,12 @@ class Api {
         $passphrase=$cfg->getAPIPassphrase();
 
         if(!$passphrase)
-            $errors['err']='API passphrase missing.';
+            $errors['err']='Senha API faltando.';
 
         if(!$ip || !Validator::is_ip($ip))
-            $errors['ip']='Valid IP required';
+            $errors['ip']='IP válido obrigatório';
         elseif(Api::getKey($ip))
-            $errors['ip']='API key for the IP already exists';
+            $errors['ip']='Chave API para o IP já existe';
 
         $id=0;
         if(!$errors) {
@@ -48,11 +48,11 @@ class Api {
         global $cfg;
 
         if(!$phrase)
-            $errors['phrase']='Required';
+            $errors['phrase']='Obrigatório';
         elseif(str_word_count($_POST['phrase'])<3)
-            $errors['phrase']='Must be at least 3 words long.';
+            $errors['phrase']='Deve ter, pelo menos, 3 palavras longas.';
         elseif(!strcmp($cfg->getAPIPassphrase(),$phrase))
-            $errors['phrase']='Already set';
+            $errors['phrase']='Já está definido';
         else{
             $sql='UPDATE '.CONFIG_TABLE.' SET updated=NOW(), api_passphrase='.db_input($phrase).
                 ' WHERE id='.db_input($cfg->getId());

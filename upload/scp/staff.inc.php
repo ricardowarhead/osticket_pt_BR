@@ -15,11 +15,11 @@
     $Id: $
 **********************************************************************/
 if(basename($_SERVER['SCRIPT_NAME'])==basename(__FILE__)) die('Kwaheri rafiki!'); //Say hi to our friend..
-if(!file_exists('../main.inc.php')) die('Fatal error..get tech support');
+if(!file_exists('../main.inc.php')) die('Erro fatal... obter suporte técnico.');
 define('ROOT_PATH','../'); //Path to the root dir.
 require_once('../main.inc.php');
 
-if(!defined('INCLUDE_DIR')) die('Fatal error');
+if(!defined('INCLUDE_DIR')) die('Erro fatal.');
 
 /*Some more include defines specific to staff only */
 define('STAFFINC_DIR',INCLUDE_DIR.'staff/');
@@ -54,7 +54,7 @@ function staffLoginPage($msg) {
 $thisuser = new StaffSession($_SESSION['_staff']['userID']); /*always reload???*/
 //1) is the user Logged in for real && is staff.
 if(!is_object($thisuser) || !$thisuser->getId() || !$thisuser->isValid()){
-    $msg=(!$thisuser || !$thisuser->isValid())?'Authentication Required':'Session timed out due to inactivity';
+    $msg=(!$thisuser || !$thisuser->isValid())?'Autenticação necessária':'Sessão expirada devido a inatividade.';
     staffLoginPage($msg);
     exit;
 }
@@ -62,12 +62,12 @@ if(!is_object($thisuser) || !$thisuser->getId() || !$thisuser->isValid()){
 //2) if not super admin..check system and group status
 if(!$thisuser->isadmin()){
     if($cfg->isHelpDeskOffline()){
-        staffLoginPage('System Offline');
+        staffLoginPage('Sistema offline.');
         exit;
     }
 
     if(!$thisuser->isactive() || !$thisuser->isGroupActive()) {
-        staffLoginPage('Access Denied. Contact Admin');
+        staffLoginPage('Acesso negado. Contate os administradores.');
         exit;
     }
 }
@@ -87,9 +87,9 @@ $tabs=array();
 $submenu=array();
 
 if(defined('THIS_VERSION') && strcasecmp($cfg->getVersion(),THIS_VERSION)) {
-    $errors['err']=$sysnotice=sprintf('The script is version %s while the database is version %s',THIS_VERSION,$cfg->getVersion());
+    $errors['err']=$sysnotice=sprintf('O script é a versão %s enquanto o banco de dados é a versão %s',THIS_VERSION,$cfg->getVersion());
 }elseif($cfg->isHelpDeskOffline()){
-    $sysnotice='<strong>System is set to offline mode</strong> - Client interface is disabled and ONLY admins can access staff control panel.';
+    $sysnotice='<strong>Sistema está configurado no modo offline</strong> - A tela do cliente está desativada e somente o administrador faz o acesso no painel de controle de atendentes.';
     $sysnotice.=' <a href="admin.php?t=pref">Enable</a>.';
 }
 

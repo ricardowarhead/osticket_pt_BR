@@ -259,57 +259,57 @@ class Email {
         //very basic checks
 
         if($id && $id!=$vars['email_id'])
-            $errors['err']='Internal error.';
+            $errors['err']='Erro interno.';
 
         if(!$vars['email'] || !Validator::is_email($vars['email'])){
-            $errors['email']='Valid email required';
+            $errors['email']='Email válido obrigatório';
         }elseif(($eid=Email::getIdByEmail($vars['email'])) && $eid!=$id){
-            $errors['email']='Email already exits';
+            $errors['email']='Email já existe.';
         }elseif(!strcasecmp($cfg->getAdminEmail(),$vars['email'])){
-            $errors['email']='Email already used as admin email!';
+            $errors['email']='Email já usado como email do administrador!';
         }else{ //make sure the email doesn't belong to any of the staff 
             $sql='SELECT staff_id FROM '.STAFF_TABLE.' WHERE email='.db_input($vars['email']);
             if(($res=db_query($sql)) && db_num_rows($res))
-                $errors['email']='Email in-use by a staff member';
+                $errors['email']='Email em uso por um membro do suporte.';
         }
 
 
         if(!$vars['dept_id'] || !is_numeric($vars['dept_id']))
-            $errors['dept_id']='You must select a Dept.';
+            $errors['dept_id']='Você deve selecionar um Departamento.';
             
         if(!$vars['priority_id'])
-            $errors['priority_id']='You must select a priority';
+            $errors['priority_id']='Você deve selecionar uma prioridade';
             
         if($vars['mail_active'] || ($vars['smtp_active'] && $vars['smtp_auth'])) {
             if(!$vars['userid'])
-                $errors['userid']='Username missing';
+                $errors['userid']='Nome de usuário ausente';
                 
             if(!$vars['userpass'])
-                $errors['userpass']='Password required';
+                $errors['userpass']='Senha obrigatória';
         }
         
         if($vars['mail_active']) {
             //Check pop/imapinfo only when enabled.
             if(!function_exists('imap_open'))
-                $errors['mail_active']= 'IMAP doesn\'t exist. PHP must be compiled with IMAP enabled.';
+                $errors['mail_active']= 'IMAP não existe. PHP deve ser compilado com IMAP habilitado.';
             if(!$vars['mail_host'])
-                $errors['mail_host']='Host name required';
+                $errors['mail_host']='Nome do host obrigatório';
             if(!$vars['mail_port'])
-                $errors['mail_port']='Port required';
+                $errors['mail_port']='Porta obrigatória';
             if(!$vars['mail_protocol'])
-                $errors['mail_protocol']='Select protocol';
+                $errors['mail_protocol']='Selecione protocolo';
             if(!$vars['mail_fetchfreq'] || !is_numeric($vars['mail_fetchfreq']))
-                $errors['mail_fetchfreq']='Fetch interval required';
+                $errors['mail_fetchfreq']='Buscar intervalo obrigatório';
             if(!$vars['mail_fetchmax'] || !is_numeric($vars['mail_fetchmax']))
-                $errors['mail_fetchmax']='Maximum emails required';
+                $errors['mail_fetchmax']='Máximo de e-mails exigidos';
             
         }
         
         if($vars['smtp_active']) {
             if(!$vars['smtp_host'])
-                $errors['smtp_host']='Host name required';
+                $errors['smtp_host']='Nome do host obrigatório';
             if(!$vars['smtp_port'])
-                $errors['smtp_port']='Port required';
+                $errors['smtp_port']='Porta obrigatória';
         }
         
         if(!$errors && ($vars['mail_host'] && $vars['userid'])){
@@ -318,7 +318,7 @@ class Email {
                 $sql.=' AND email_id!='.db_input($id);
                 
             if(db_num_rows(db_query($sql)))
-                $errors['userid']=$errors['host']='Another department using host/username combination.';
+                $errors['userid']=$errors['host']='Outro departamento está usando combinação de nome/host.';
         }
         
         if(!$errors && $vars['mail_active']) {
@@ -327,7 +327,7 @@ class Email {
             $fetcher = new MailFetcher($vars['userid'],$vars['userpass'],$vars['mail_host'],$vars['mail_port'],
                                             $vars['mail_protocol'],$vars['mail_encryption']);
             if(!$fetcher->connect()) {
-                $errors['userpass']='<br>Invalid login. Check '.$vars['mail_protocol'].' settings';
+                $errors['userpass']='<br>Login Inválido. Verifique as '.$vars['mail_protocol'].' configurações';
                 $errors['mail']='<br>'.$fetcher->getLastError();
             }
         }
@@ -345,7 +345,7 @@ class Email {
                            ));
             $mail = $smtp->connect();
             if(PEAR::isError($mail)) {
-                $errors['userpass']='<br>Unable to login. Check SMTP settings.';
+                $errors['userpass']='<br>Incapaz de fazer o login. Verifique as configurações de SMTP.';
                 $errors['smtp']='<br>'.$mail->getMessage();
             }else{
                 $smtp->disconnect(); //Thank you, sir!
@@ -377,17 +377,17 @@ class Email {
             if($id){ //update
                 $sql='UPDATE '.EMAIL_TABLE.' SET '.$sql.' WHERE email_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())
-                    $errors['err']='Unable to update email. Internal error occured';
+                    $errors['err']='Não é possível atualizar e-mail. Erro interno';
             }else {
                 $sql='INSERT INTO '.EMAIL_TABLE.' SET '.$sql.',created=NOW()';
                 if(!db_query($sql) or !($emailID=db_insert_id()))
-                    $errors['err']='Unable to add email. Internal error';
+                    $errors['err']='Não é possível adicionar e-mail. Erro interno';
                 else
                     return $emailID; //newly created email.
             }
             
         }else{
-            $errors['err']='Error(s) Occured. Try again';
+            $errors['err']='Erro(s). Tente novamente';
         }
 
         return $errors?FALSE:TRUE;

@@ -48,20 +48,20 @@ if(!$errors && $_POST) { //Handle post
         break;
     case 'passwd':
         if(!$_POST['password'])
-            $errors['password']='Current password required';        
+            $errors['password']='Senha atual obrigatória';        
         if(!$_POST['npassword'])
-            $errors['npassword']='New password required';
+            $errors['npassword']='Nova senha obrigatória';
         elseif(strlen($_POST['npassword'])<6)
-             $errors['npassword']='Must be atleast 6 characters';
+             $errors['npassword']='Pelo menos 6 caracteres';
         if(!$_POST['vpassword'])
-            $errors['vpassword']='Confirm new password';
+            $errors['vpassword']='Confirme nova senha';
         if(!$errors) {
             if(!$thisuser->check_passwd($_POST['password'])){
-                $errors['password']='Valid password required';
+                $errors['password']='Validar senha obrigatório';
             }elseif(strcmp($_POST['npassword'],$_POST['vpassword'])){
-                $errors['npassword']=$errors['vpassword']='New password(s) don\'t match';
+                $errors['npassword']=$errors['vpassword']='Nova senha não corresponde';
             }elseif(!strcasecmp($_POST['password'],$_POST['npassword'])){
-                $errors['npassword']='New password is same as old password';
+                $errors['npassword']='Nova senha igual a senha antiga';
             }
         }
         if(!$errors) {       
@@ -69,32 +69,32 @@ if(!$errors && $_POST) { //Handle post
                 ',change_passwd=0, passwd='.db_input(MD5($_POST['npassword'])).
                 ' WHERE staff_id='.db_input($thisuser->getId()); 
             if(db_query($sql) && db_affected_rows()){
-                $msg='Password Changed Successfully';
+                $msg='Senha alterada com sucesso!';
             }else{
-                $errors['err']='Unable to complete password change. Internal error.';
+                $errors['err']='Não é possível concluir alteração de senha. Erro interno.';
             }
         }
         break;
     case 'info':
         //Update profile info
         if(!$_POST['firstname']) {
-            $errors['firstname']='First name required';
+            $errors['firstname']='Nome obrigatório';
         }
         if(!$_POST['lastname']) {
-            $errors['lastname']='Last name required';
+            $errors['lastname']='Sobrenome obrigatório';
         }
         if(!$_POST['email'] || !Validator::is_email($_POST['email'])) {
-            $errors['email']='Valid email required';
+            $errors['email']='Email válido obrigatório';
         }
         if($_POST['phone'] && !Validator::is_phone($_POST['phone'])) {
-            $errors['phone']='Enter a valid number';
+            $errors['phone']='Digite um número válido';
         }
         if($_POST['mobile'] && !Validator::is_phone($_POST['mobile'])) {
-            $errors['mobile']='Enter a valid number';
+            $errors['mobile']='Digite um número válido';
         }
 
         if($_POST['phone_ext'] && !is_numeric($_POST['phone_ext'])) {
-            $errors['phone_ext']='Invalid ext.';
+            $errors['phone_ext']='Fone inválido';
         }
 
         if(!$errors) {
@@ -109,16 +109,16 @@ if(!$errors && $_POST) { //Handle post
                 ',signature='.db_input(Format::striptags($_POST['signature'])).
                 ' WHERE staff_id='.db_input($thisuser->getId());
             if(db_query($sql) && db_affected_rows()){
-                $msg='Profile Updated Successfully';
+                $msg='Perfil atualizado com sucesso!';
             }else{
-                $errors['err']='Error(s) occured. Profile NOT updated';
+                $errors['err']='Ocorreu um(s) erro(s). Perfil NÃO atualizado';
             }
         }else{
-            $errors['err']='Error(s) below occured. Try again';
+            $errors['err']='Ocorreu o erro abaixo. Tente novamente';
         }
         break;
     default:
-        $errors['err']='Uknown action';
+        $errors['err']='Ação desconhecida';
     endswitch;
     //Reload user info if no errors.
     if(!$errors) {
@@ -135,7 +135,7 @@ $nav->addSubMenu(array('desc'=>'Preferences','href'=>'profile.php?t=pref','iconc
 $nav->addSubMenu(array('desc'=>'Change Password','href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
 //Warnings if any.
 if($thisuser->onVacation()){
-        $warn.='Welcome back! You are listed as \'on vacation\' Please let admin or your manager know that you are back.';
+        $warn.='Bem-vindo de volta! Você está listada como \ 'de férias \' Por favor, deixe o seu gerente ou administrador saber que você está de volta.';
 }
 
 $rep=($errors && $_POST)?Format::input($_POST):Format::htmlchars($thisuser->getData());
@@ -155,7 +155,7 @@ switch(strtolower($_REQUEST['t'])) {
 }
 //Forced password Change.
 if($thisuser->forcePasswdChange()){
-    $errors['err']='You must change your password to continue.';
+    $errors['err']='Você deve mudar sua senha para continuar.';
     $inc='changepasswd.inc.php';
 }
 

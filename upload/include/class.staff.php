@@ -253,13 +253,13 @@ class Staff {
         include_once(INCLUDE_DIR.'class.dept.php');
 
         if($id && $id!=$vars['staff_id'])
-            $errors['err']='Internal Error';
+            $errors['err']='Erro interno';
             
         if(!$vars['firstname'] || !$vars['lastname'])
-            $errors['name']='First and last name required';
+            $errors['name']='Primeiro e último nome necessários';
             
         if(!$vars['username'] || strlen($vars['username'])<3)
-            $errors['username']='Username required';
+            $errors['username']='Nome necessário';
         else{
             //check if the username is already in-use.
             $sql='SELECT staff_id FROM '.STAFF_TABLE.' WHERE username='.db_input($vars['username']);
@@ -267,34 +267,34 @@ class Staff {
                 $sql.=' AND staff_id!='.db_input($id);
                 
             if(db_num_rows(db_query($sql)))
-                $errors['username']='Username already in-use';
+                $errors['username']='Nome em uso';
         }
         
         if(!$vars['email'] || !Validator::is_email($vars['email']))
-            $errors['email']='Valid email required';
+            $errors['email']='Email válido obrigatório';
         elseif(Email::getIdByEmail($vars['email']))
-            $errors['email']='Already in-use system email';
+            $errors['email']='Email já está em uso no sistema';
         
         if($vars['phone'] && !Validator::is_phone($vars['phone']))
-            $errors['phone']='Valid number required';
+            $errors['phone']='Número válido obrigatório';
         
         if($vars['mobile'] && !Validator::is_phone($vars['mobile']))
-            $errors['mobile']='Valid number required';
+            $errors['mobile']='Número válido obrigatório';
 
         if($vars['npassword'] || $vars['vpassword'] || !$id){
             if(!$vars['npassword'] && !$id)
-                $errors['npassword']='Temp password required';
+                $errors['npassword']='Senha temporária necessária';
             elseif($vars['npassword'] && strcmp($vars['npassword'],$vars['vpassword']))
-                $errors['vpassword']='Password(s) do not match';
+                $errors['vpassword']='Senha(s) não correspondem';
             elseif($vars['npassword'] && strlen($vars['npassword'])<6)
-                $errors['npassword']='Must be at least 6 characters';
+                $errors['npassword']='Deve ter pelo menos 6 caracteres';
         }
         
         if(!$vars['dept_id'])
-            $errors['dept']='Department required';
+            $errors['dept']='Departamento necessário';
             
         if(!$vars['group_id'])
-            $errors['group']='Group required';
+            $errors['group']='Grupo necessário';
 
 
         if(!$errors){
@@ -324,13 +324,13 @@ class Staff {
             if($id) {
                 $sql='UPDATE '.STAFF_TABLE.' '.$sql.' WHERE staff_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())
-                    $errors['err']='Unable to update the user. Internal error occured';
+                    $errors['err']='Não é possível atualizar o usuário. Erro interno';
             }else{
                 $sql='INSERT INTO '.STAFF_TABLE.' '.$sql.',created=NOW()';
                 if(db_query($sql) && ($uID=db_insert_id()))
                     return $uID;
 
-                $errors['err']='Unable to create user. Internal error';
+                $errors['err']='Não foi possível criar usuário. Erro interno';
             }
         }
 
