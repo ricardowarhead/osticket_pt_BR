@@ -17,18 +17,18 @@
 **********************************************************************/
 require('secure.inc.php');
 //TODO: alert admin on any error on this file.
-if(!$thisclient || !$thisclient->isClient() || !$_GET['id'] || !$_GET['ref']) die('Access Denied');
+if(!$thisclient || !$thisclient->isClient() || !$_GET['id'] || !$_GET['ref']) die('Acesso negado');
 
 $sql='SELECT attach_id,ref_id,ticket.ticket_id,ticketID,ticket.created,dept_id,file_name,file_key,email FROM '.TICKET_ATTACHMENT_TABLE.
     ' LEFT JOIN '.TICKET_TABLE.' ticket USING(ticket_id) '.
     ' WHERE attach_id='.db_input($_GET['id']);
 //valid ID??
-if(!($resp=db_query($sql)) || !db_num_rows($resp)) die('Invalid/unknown file');
+if(!($resp=db_query($sql)) || !db_num_rows($resp)) die('Arquivo Inválido/Desconhecido');
 list($id,$refid,$tid,$extid,$date,$deptID,$filename,$key,$email)=db_fetch_row($resp);
 
 //Still paranoid...:)...check the secret session based hash and email
 $hash=MD5($tid*$refid.session_id());
-if(!$_GET['ref'] || strcmp($hash,$_GET['ref']) || strcasecmp($thisclient->getEmail(),$email)) die('Access denied: Kwaheri');
+if(!$_GET['ref'] || strcmp($hash,$_GET['ref']) || strcasecmp($thisclient->getEmail(),$email)) die('Acesso negado: Kwaheri');
 
 
 //see if the file actually exits.
