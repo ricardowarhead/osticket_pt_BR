@@ -70,7 +70,7 @@
     elseif(file_exists(ROOT_DIR.'include/'))
         header('Location: '.ROOT_PATH.'setup/');
 
-    if(!$configfile || !file_exists($configfile)) die('<b>Error loading settings. Contact admin.</b>');
+    if(!$configfile || !file_exists($configfile)) die('<b>Erro no carregamento das configurações. Contate o administrador.</b>');
 
     require($configfile);
     define('CONFIG_FILE',$configfile); //used in admin.php to check perm.
@@ -139,16 +139,16 @@
     #Connect to the DB && get configuration from database
     $ferror=null;
     if (!db_connect(DBHOST,DBUSER,DBPASS) || !db_select_database(DBNAME)) {
-        $ferror='Unable to connect to the database';
+        $ferror='Não foi possível conectar ao banco de dados.';
     }elseif(!($cfg=Sys::getConfig())){
-        $ferror='Unable to load config info from DB. Get tech support.';
+        $ferror='Não foi possível carregar as informações de configuração do banco de dados. Obtenha suporte técnico.';
     }elseif(!ini_get('short_open_tag')) {
-        $ferror='Short open tag disabled! - osTicket requires it turned ON.';
+        $ferror='Abertura de tag curta desativada! - osTicket necessita dela ligada.';
     }
 
     if($ferror){ //Fatal error
-        Sys::alertAdmin('osTicket Fatal Error',$ferror); //try alerting admin.
-        die("<b>Fatal Error:</b> Contact system adminstrator."); //Generic error.
+        Sys::alertAdmin('osTicket Erro Fatal',$ferror); //try alerting admin.
+        die("<b>Erro Fatal:</b> Contate o administrador do sistema."); //Generic error.
         exit;
     }
     //Init
