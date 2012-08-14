@@ -13,7 +13,7 @@ if($_REQUEST['dept'] && is_numeric($_REQUEST['dept'])){
     $sql.=' WHERE staff.dept_id='.db_input($_REQUEST['dept']);
 }
 $users=db_query($sql.' ORDER BY lastname,firstname');
-$showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='admin.php?t=staff&a=new&dept=$id'>Add New User</a>.";        
+$showing=($num=db_num_rows($users))?"Staff Members":"Atendente não encontrado. <a href='admin.php?t=staff&a=new&dept=$id'>Add New User</a>.";        
 ?>
  <div class="msg">&nbsp;<?=$showing?>&nbsp;</div>
  <table width="100%" border="0" cellspacing=1 cellpadding=2>
@@ -25,10 +25,10 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th>Nome Completo</th>
-            <th>Username</th>
-            <th>Status</th>
+            <th>Nonme de usuário</th>
+            <th>Estado</th>
             <th>Grupo</th>
-            <th>Dept</th>
+            <th>Departamento</th>
             <th>Criação</th>
             <th>Último Login</th>
         </tr>
@@ -60,7 +60,7 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: ?> 
-            <tr class="<?=$class?>"><td colspan=8><b>Consulta retornou 0 resultados</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=8><b>Consulta retornou 0 resultado(s)</b></td></tr>
         <?
         endif; ?>
      </table>
@@ -77,12 +77,12 @@ $showing=($num=db_num_rows($users))?"Staff Members":"No staff found. <a href='ad
         </div>
     </td></tr>
     <tr><td align="center">
-        <input class="button" type="submit" name="enable" value="Enable" 
-            onClick=' return confirm("Are you sure you want to ENABLE selected user(s)?");'>
-        <input class="button" type="submit" name="disable" value="Lock" 
-            onClick=' return confirm("Are you sure you want to LOCK selected user(s)?");'>
-        <input class="button" type="submit" name="delete" value="Delete" 
-            onClick=' return confirm("Are you sure you want to DELETE selected user(s)?");'>
+        <input class="button" type="submit" name="enable" value="Habilitar" 
+            onClick=' return confirm("Tem certeza que você deseja HABILITAR o(s) usuário(s) seleccionado(s)?");'>
+        <input class="button" type="submit" name="disable" value="Bloquear" 
+            onClick=' return confirm("Tem certeza que você deseja BLOQUEAR o(s) usuário(s) seleccionado(s)?");'>
+        <input class="button" type="submit" name="delete" value="Excluir" 
+            onClick=' return confirm("Tem certeza que você deseja EXCLUIR o(s) usuário(s) seleccionado(s)?");'>
     </td></tr>
     <?
     endif;
