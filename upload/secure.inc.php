@@ -15,7 +15,7 @@
     $Id: $
 **********************************************************************/
 if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__))) die('Kwaheri rafiki!');
-if(!file_exists('client.inc.php')) die('Fatal Error.');
+if(!file_exists('client.inc.php')) die('Erro Fatal.');
 require_once('client.inc.php');
 //User must be logged in!
 if(!$thisclient || !$thisclient->getId() || !$thisclient->isValid()){
