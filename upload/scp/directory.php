@@ -58,10 +58,10 @@ require_once(STAFFINC_DIR.'header.inc.php');
 <div align="left">
     <form action="directory.php" method="POST" >
     <input type='hidden' name='a' value='search'>
-    Search for :&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
-    Dept.
+    Procurar por :&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
+    Departamento.
     <select name="dept">
-            <option value=0>All Department</option>
+            <option value=0>Todos os departamentos</option>
             <?
             $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
             while (list($deptId,$deptName) = db_fetch_row($depts)){
@@ -74,14 +74,14 @@ require_once(STAFFINC_DIR.'header.inc.php');
     </form>
 </div>
 <? if($users && db_num_rows($users)):?>
-<div class="msg">Staff Members</div>
+<div class="msg">Membros atendentes</div>
 <table border="0" cellspacing=0 cellpadding=2 class="dtable" width="100%">
     <tr>
         <th>Nome</th>
-        <th>Dept</th>
-        <th>Email</th>
-        <th>Fone</th>
-        <th>Cel</th>
+        <th>Departamento</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+        <th>Celular</th>
     </tr>
     <?
     $class = 'row1';
