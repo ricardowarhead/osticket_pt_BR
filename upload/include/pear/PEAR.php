@@ -454,18 +454,18 @@ class PEAR
                     $deleted = false;
                 }
             }
-            return $deleted ? true : PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+            return $deleted ? true : PEAR::raiseError("O erro esperado que você enviou não existe"); // IMPROVE ME
         } elseif (!empty($error_code)) {
             // $error_code comes alone, trying to unset it
             if ($this->_checkDelExpect($error_code)) {
                 return true;
             } else {
-                return PEAR::raiseError("The expected error you submitted does not exist"); // IMPROVE ME
+                return PEAR::raiseError("O erro esperado que você enviou não existe"); // IMPROVE ME
             }
         }
 
         // $error_code is empty
-        return PEAR::raiseError("The expected error you submitted is empty"); // IMPROVE ME
+        return PEAR::raiseError("O erro esperado que você enviou está vazio"); // IMPROVE ME
     }
 
     // }}}
@@ -616,12 +616,12 @@ class PEAR
                 if (is_callable($options)) {
                     $def_options = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error("retorno de erro inválido", E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error("modo de erro inválido", E_USER_WARNING);
                 break;
         }
         $stack[] = array($mode, $options);
@@ -653,12 +653,12 @@ class PEAR
                 if (is_callable($options)) {
                     $setoptions = $options;
                 } else {
-                    trigger_error("invalid error callback", E_USER_WARNING);
+                    trigger_error("retorno de erro inválido", E_USER_WARNING);
                 }
                 break;
 
             default:
-                trigger_error("invalid error mode", E_USER_WARNING);
+                trigger_error("modo de erro inválido", E_USER_WARNING);
                 break;
         }
         return true;
