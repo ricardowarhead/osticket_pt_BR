@@ -122,7 +122,7 @@ $deletable=0;
                   <?
           }?>
      </select>&nbsp;<font class="error">*&nbsp;<?=$errors['copy_template']?></font>
-     &nbsp;&nbsp; <input class="button" type="submit" name="add" value="Add">
+     &nbsp;&nbsp; <input class="button" type="submit" name="add" value="Adicionar">
  </div>
  <br/>
  <div class="msg">Variáveis</div>
@@ -140,7 +140,7 @@ $deletable=0;
                 <tr><td>%name</td><td>Nome Completo</td></tr>
                 <tr><td>%subject</td><td>Assunto</td></tr>
                 <tr><td>%topic</td><td>Tópido de Ajuda (web)</td></tr>
-                <tr><td>%phone</td><td>Telefone | ramal</td></tr>
+                <tr><td>%phone</td><td>Telefone/Ramal</td></tr>
                 <tr><td>%status</td><td>Status</td></tr>
                 <tr><td>%priority</td><td>Prioridade</td></tr>
                 <tr><td>%dept</td><td>Departamento</td></tr>
