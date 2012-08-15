@@ -133,9 +133,9 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
                         &nbsp;&nbsp;
             </td>
         </tr>
-        <tr><th>Directory Listagem</th>
+        <tr><th>Listagem de diretório</th>
             <td>
-               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no directory atendente
+               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no diretório do atendente
             </td>
         </tr>
         <tr><th>Modo de Tendência</th>
