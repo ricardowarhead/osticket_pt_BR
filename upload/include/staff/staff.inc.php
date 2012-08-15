@@ -37,7 +37,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr class="header"><td colspan=2>Conta de Usuário</td></tr>
         <tr class="subheader"><td colspan=2>Informações da Conta</td></tr>
         <tr>
-            <th>Usuário:</th>
+            <th>Nome de Usuário:</th>
             <td><input type="text" name="username" value="<?=$rep['username']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['username']?></font></td>
         </tr>
