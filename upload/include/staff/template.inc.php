@@ -1,8 +1,8 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin() || !is_object($template)) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin() || !is_object($template)) die('Acesso Negado');
 $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getInfo());
 ?>
-<div class="msg">Modelos de Email</div>
+<div class="msg">Modelos de E-mail</div>
 <table width="100%" border="0" cellspacing=0 cellpadding=0>
   <form action="admin.php?t=templates" method="post">
     <input type="hidden" name="t" value="templates">
