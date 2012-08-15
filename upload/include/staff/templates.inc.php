@@ -92,8 +92,8 @@ $deletable=0;
      ?>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="delete" value="Delete Template(s)" 
-                     onClick='return confirm("Are you sure you want to DELETE selected template(s)?");'>
+            <input class="button" type="submit" name="delete" value="Excluir Modelo(s)" 
+                     onClick='return confirm("Você tem certeza que deseja EXCLUIR o(s) modelo(s) selecionado(s)?");'>
         </td>
     </tr>
     <?
