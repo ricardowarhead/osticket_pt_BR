@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !is_object($thisuser) || !$thisuser->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !is_object($thisuser) || !$thisuser->isStaff()) die('Acesso Negado');
 $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the post data
 ?>
 <div width="100%">
@@ -194,7 +194,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
                 <?if($appendStaffSig) {?>
                     <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > Minha assinatura</label>
                  <?}?>
-                 <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura do Detp (if any)</label>
+                 <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura do Departamento (qualquer)</label>
             </div>
         </td>
     </tr>
@@ -202,9 +202,9 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td></td>
         <td>
-            <input class="button" type="submit" name="submit_x" value="Submit Ticket">
-            <input class="button" type="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="tickets.php"'>    
+            <input class="button" type="submit" name="submit_x" value="Submeter Ticket">
+            <input class="button" type="reset" value="Redefinir Valores">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="tickets.php"'>    
         </td>
     </tr>
   </form>
