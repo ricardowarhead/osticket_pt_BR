@@ -155,8 +155,8 @@ $deletable=0;
                 <tr><td width="100">%message</td><td>Mensagem (de entrada)</td></tr>
                 <tr><td>%response</td><td>Resposta (de saída)</td></tr>
                 <tr><td>%note</td><td>Nota Interna</td></tr>
-                <tr><td>%staff</td><td>Nome da Atendente (aleta/notificação)</td></tr>
-                <tr><td>%assignee</td><td>Atendente Atribuída</td></tr>
+                <tr><td>%staff</td><td>Nome do Atendente (aleta/notificação)</td></tr>
+                <tr><td>%assignee</td><td>Atendente Atribuído</td></tr>
                 <tr><td>%assigner</td><td>Atribuir atendente ao ticket</td></tr>
                 <tr><td>%url</td><td>osTicket's base url (FQDN)</td></tr>
 
