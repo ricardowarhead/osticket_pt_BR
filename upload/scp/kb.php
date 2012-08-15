@@ -38,10 +38,10 @@ if($_POST):
     case 'update':
     case 'add':
         if(!$_POST['id'] && $_POST['a']=='update')
-            $errors['err']='Falta ou ID de grupo inválido';
+            $errors['err']='ID do grupo está faltando ou é inválida';
 
         if(!$_POST['title'])
-            $errors['title']='Título/tema exigido';
+            $errors['title']='Título/Tema Exigido';
                 
         if(!$_POST['answer'])
             $errors['answer']='Resposta Necessária';
@@ -70,7 +70,7 @@ if($_POST):
                 $errors['title']='Título já existe!';
             
         }else{
-            $errors['err']=$errors['err']?$errors['err']:'Ocorreu erro(s). Tente novamente';
+            $errors['err']=$errors['err']?$errors['err']:'Ocorreram erros. Tente novamente';
         }
         break;
     case 'process':
@@ -80,15 +80,15 @@ if($_POST):
             $msg='';
             $ids=implode(',',$_POST['canned']);
             $selected=count($_POST['canned']);
-            if(isset($_POST['habilitar'])) {
+            if(isset($_POST['enable'])) {
                 if(db_query('UPDATE '.KB_PREMADE_TABLE.' SET isenabled=1,updated=NOW() WHERE isenabled=0 AND premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected habilitada respostas selecionadas";
+                    $msg=db_affected_rows()." de  $selected respostas selecionadas foram habilitadas";
             }elseif(isset($_POST['desabilitar'])) {
                 if(db_query('UPDATE '.KB_PREMADE_TABLE.' SET isenabled=0, updated=NOW() WHERE isenabled=1 AND premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected desativada respostas selecionadas";
+                    $msg=db_affected_rows()." de  $selected respostas selecionadas foram desativadas";
             }elseif(isset($_POST['deletar'])) {
                 if(db_query('DELETE FROM '.KB_PREMADE_TABLE.' WHERE premade_id IN('.$ids.')'))
-                    $msg=db_affected_rows()." of  $selected excluída respostas selecionadas";
+                    $msg=db_affected_rows()." de  $selected respostas selecionadas foram escluídas";
             }
 
             if(!$msg)
