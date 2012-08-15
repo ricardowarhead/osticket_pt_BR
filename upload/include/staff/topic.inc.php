@@ -3,11 +3,11 @@ if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
 
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 if($topic && $_REQUEST['a']!='new'){
-    $title='Edit Topic';
+    $title='Editar Tópico';
     $action='update';
     $info=$info?$info:$topic->getInfo();
 }else {
-   $title='New Help Topic';
+   $title='Novo Tópico de Ajuda';
    $action='create';
    $info['isactive']=isset($info['isactive'])?$info['isactive']:1;
 }
@@ -40,7 +40,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         <th nowrap>Resposta Automática:</th>
         <td>
             <input type="checkbox" name="noautoresp" value=1 <?=$info['noautoresp']? 'checked': ''?> >
-                <b>Desativado</b> resposta automática para este tópico.   (<i>Substituir configuração de Dept</i>)
+                <b>Desativada</b> resposta automática para este tópico.   (<i>Substituir configuração de Departamento</i>)
         </td>
     </tr>
     <tr>
