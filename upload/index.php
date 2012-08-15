@@ -35,7 +35,7 @@ require(CLIENTINC_DIR.'header.inc.php');
   Forneça o máximo de detalhes possível para que podemos ajudá-lo melhor. Para atualizar um ticket apresentado anteriormente, por favor use o formulário à direita.
   <br /><br />
   <form method="link" action="open.php">
-  <input type="submit" class="button2" value="Open New Ticket">
+  <input type="submit" class="button2" value="Abrir um Novo Ticket">
   </form>
 </div>
 <div class="rcol">
@@ -53,7 +53,7 @@ require(CLIENTINC_DIR.'header.inc.php');
     </fieldset>
     <fieldset>
         <label>&nbsp;</label>
-         <input type="submit" class="button2" value="Check Status">
+         <input type="submit" class="button2" value="Checar Estado/Situação">
     </fieldset>
   </form>
 </div>
