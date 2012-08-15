@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 
 
 $info['phrase']=($errors && $_POST['phrase'])?Format::htmlchars($_POST['phrase']):$cfg->getAPIPassphrase();
@@ -32,7 +32,7 @@ $showing=db_num_rows($result)?$pageNav->showing():'';
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 $deletable=0;
 ?>
-<div class="msg">API Keys</div>
+<div class="msg">Chave API</div>
 <hr>
 <div><b><?=$showing?></b></div>
  <table width="100%" border="0" cellspacing=1 cellpadding=2>
@@ -43,11 +43,11 @@ $deletable=0;
     <table border="0" cellspacing=0 cellpadding=2 class="dtable" align="center" width="100%">
         <tr>
 	        <th width="7px">&nbsp;</th>
-	        <th>API Key</th>
-            <th width="10" nowrap>Active</th>
-            <th width="100" nowrap>&nbsp;&nbsp;IP Address</th>
+	        <th>Chave API</th>
+            <th width="10" nowrap>Ativado</th>
+            <th width="100" nowrap>&nbsp;&nbsp;Endereço IP</th>
 	        <th width="150" nowrap>&nbsp;&nbsp;
-                <a href="admin.php?t=api&sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Create Date <?=$negorder?>">Created</a></th>
+                <a href="admin.php?t=api&sort=date&order=<?=$negorder?><?=$qstr?>" title="Ordenar por Criar Data <?=$negorder?>">Criado</a></th>
         </tr>
         <?
         $class = 'row1';
@@ -74,7 +74,7 @@ $deletable=0;
                   <input type="checkbox" name="ids[]" value="<?=$row['id']?>" <?=$sel?'checked':''?>
                         onClick="highLight(this.value,this.checked);">
                 <td>&nbsp;<?=$row['apikey']?></td>
-                <td><?=$row['isactive']?'<b>Yes</b>':'No'?></td>
+                <td><?=$row['isactive']?'<b>Sim</b>':'Não'?></td>
                 <td>&nbsp;<?=$row['ipaddr']?></td>
                 <td>&nbsp;<?=Format::db_datetime($row['created'])?></td>
             </tr>
@@ -82,7 +82,7 @@ $deletable=0;
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: //nothin' found!! ?> 
-            <tr class="<?=$class?>"><td colspan=5><b>Query returned 0 results</b>&nbsp;&nbsp;<a href="admin.php?t=templates">Index list</a></td></tr>
+            <tr class="<?=$class?>"><td colspan=5><b>Consulta retornou 0 resultados</b>&nbsp;&nbsp;<a href="admin.php?t=templates">Índice de lista</a></td></tr>
         <?
         endif; ?>
      
@@ -95,18 +95,18 @@ $deletable=0;
         <td align="center">
             <?php
             if($inactive) {?>
-                <input class="button" type="submit" name="enable" value="Enable"
-                     onClick='return confirm("Are you sure you want to ENABLE selected keys?");'>
+                <input class="button" type="submit" name="enable" value="Ativar"
+                     onClick='return confirm("Tem certeza de que deseja ATIVAR as teclas selecionadas?");'>
             <?php
             }
             if($active){?>
             &nbsp;&nbsp;
-                <input class="button" type="submit" name="disable" value="Disable"
-                     onClick='return confirm("Are you sure you want to DISABLE selected keys?");'>
+                <input class="button" type="submit" name="disable" value="Desativar"
+                     onClick='return confirm("Tem certeza de que deseja DESATIVAR chaves selecionadas?");'>
             <?}?>
             &nbsp;&nbsp;
-            <input class="button" type="submit" name="delete" value="Delete" 
-                     onClick='return confirm("Are you sure you want to DELETE selected keys?");'>
+            <input class="button" type="submit" name="delete" value="Excluir" 
+                     onClick='return confirm("Tem certeza que deseja EXCLUIR chaves selecionadas?");'>
         </td>
     </tr>
     <?
@@ -115,7 +115,7 @@ $deletable=0;
     </form>
  </table>
  <br/>
- <div class="msg">Add New IP</div>
+ <div class="msg">Adicionar novo IP</div>
  <hr>
  <div>
    Add a new IP address.&nbsp;&nbsp;<font class="error"><?=$errors['ip']?></font>
@@ -125,22 +125,22 @@ $deletable=0;
     New IP:
     <input name="ip" size=30 value="<?=($errors['ip'])?Format::htmlchars($_REQUEST['ip']):''?>" />
     <font class="error">*&nbsp;</font>&nbsp;&nbsp;
-     &nbsp;&nbsp; <input class="button" type="submit" name="add" value="Add">
+     &nbsp;&nbsp; <input class="button" type="submit" name="add" value="Adicionar">
     </form>
  </div>
  <br/>
- <div class="msg">API Passphrase</div>
+ <div class="msg">Frase Secreta API</div>
  <hr>
  <div>
-   Passphrase must be at least 3 words. Required to generate the api keys.<br/>
+   Frase secreta deve ter pelo menos 3 palavras. Necessária para gerar as chaves de API.<br/>
    <form action="admin.php?t=api" method="POST" >
     <input type=hidden name='t' value='api'>
     <input type=hidden name='do' value='update_phrase'>
-    Phrase:
+    Frase:
     <input name="phrase" size=50 value="<?=Format::htmlchars($info['phrase'])?>" />
     <font class="error">*&nbsp;<?=$errors['phrase']?></font>&nbsp;&nbsp;
-     &nbsp;&nbsp; <input class="button" type="submit" name="update" value="Submit">
+     &nbsp;&nbsp; <input class="button" type="submit" name="update" value="Alterar">
     </form>
     <br/><br/>
-    <div><i>Please note that changing the passprase does NOT invalidate existing keys. To regerate a key you need to delete and readd it.</i></div>
+    <div><i>Por favor, note que a mudança da fase passe não invalida as chaves existentes. Para gerar uma chave precisa de apagar e re adicioná-la.</i></div>
  </div>
