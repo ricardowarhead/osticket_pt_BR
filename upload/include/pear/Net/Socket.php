@@ -172,7 +172,7 @@ class Net_Socket extends PEAR {
     function disconnect()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         @fclose($this->fp);
@@ -204,7 +204,7 @@ class Net_Socket extends PEAR {
     function setBlocking($mode)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
         $this->blocking = $mode;
         socket_set_blocking($this->fp, $this->blocking);
@@ -224,7 +224,7 @@ class Net_Socket extends PEAR {
     function setTimeout($seconds, $microseconds)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return socket_set_timeout($this->fp, $seconds, $microseconds);
@@ -241,7 +241,7 @@ class Net_Socket extends PEAR {
     function setWriteBuffer($size)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $returned = stream_set_write_buffer($this->fp, $size);
@@ -268,7 +268,7 @@ class Net_Socket extends PEAR {
     function getStatus()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return socket_get_status($this->fp);
@@ -284,7 +284,7 @@ class Net_Socket extends PEAR {
     function gets($size)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return @fgets($this->fp, $size);
@@ -304,7 +304,7 @@ class Net_Socket extends PEAR {
     function read($size)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return @fread($this->fp, $size);
@@ -325,7 +325,7 @@ class Net_Socket extends PEAR {
     function write($data, $blocksize = null)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         if (is_null($blocksize) && !OS_WINDOWS) {
@@ -358,7 +358,7 @@ class Net_Socket extends PEAR {
     function writeLine($data)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return fwrite($this->fp, $data . "\r\n");
@@ -387,7 +387,7 @@ class Net_Socket extends PEAR {
     function readByte()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         return ord(@fread($this->fp, 1));
@@ -403,7 +403,7 @@ class Net_Socket extends PEAR {
     function readWord()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $buf = @fread($this->fp, 2);
@@ -420,7 +420,7 @@ class Net_Socket extends PEAR {
     function readInt()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $buf = @fread($this->fp, 4);
@@ -438,7 +438,7 @@ class Net_Socket extends PEAR {
     function readString()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $string = '';
@@ -458,7 +458,7 @@ class Net_Socket extends PEAR {
     function readIPAddress()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $buf = @fread($this->fp, 4);
@@ -478,7 +478,7 @@ class Net_Socket extends PEAR {
     function readLine()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $line = '';
@@ -508,7 +508,7 @@ class Net_Socket extends PEAR {
     function readAll()
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $data = '';
@@ -533,7 +533,7 @@ class Net_Socket extends PEAR {
     function select($state, $tv_sec, $tv_usec = 0)
     {
         if (!is_resource($this->fp)) {
-            return $this->raiseError('not connected');
+            return $this->raiseError('não conectado');
         }
 
         $read = null;
@@ -582,7 +582,7 @@ class Net_Socket extends PEAR {
     {
         if (version_compare(phpversion(), "5.1.0", ">=")) {
             if (!is_resource($this->fp)) {
-                return $this->raiseError('not connected');
+                return $this->raiseError('não conectado');
             }
             return @stream_socket_enable_crypto($this->fp, $enabled, $type);
         } else {
