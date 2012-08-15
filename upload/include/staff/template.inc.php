@@ -11,7 +11,7 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
     <tr><td>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
             <tr class="header"><td colspan=2 >Informações dos modelos</td></tr>
-            <tr class="subheader"><td colspan=2><b>Último updated em <?=Format::db_daydatetime($template->getUpdateDate())?></b></td></tr>
+            <tr class="subheader"><td colspan=2><b>Última atualização em <?=Format::db_daydatetime($template->getUpdateDate())?></b></td></tr>
             <tr>
                 <th>Nome</th>
                 <td>
