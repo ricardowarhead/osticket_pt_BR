@@ -48,20 +48,20 @@ if(!$errors && $_POST) { //Handle post
         break;
     case 'passwd':
         if(!$_POST['password'])
-            $errors['password']='Senha atual obrigatória';        
+            $errors['password']='Senha atual necessária';        
         if(!$_POST['npassword'])
-            $errors['npassword']='Nova senha obrigatória';
+            $errors['npassword']='Nova senha necessária';
         elseif(strlen($_POST['npassword'])<6)
              $errors['npassword']='Pelo menos 6 caracteres';
         if(!$_POST['vpassword'])
             $errors['vpassword']='Confirme nova senha';
         if(!$errors) {
             if(!$thisuser->check_passwd($_POST['password'])){
-                $errors['password']='Validar senha obrigatório';
+                $errors['password']='Necessário validar nova senha';
             }elseif(strcmp($_POST['npassword'],$_POST['vpassword'])){
-                $errors['npassword']=$errors['vpassword']='Nova senha não corresponde';
+                $errors['npassword']=$errors['vpassword']='A nova senha não corresponde';
             }elseif(!strcasecmp($_POST['password'],$_POST['npassword'])){
-                $errors['npassword']='Nova senha igual a senha antiga';
+                $errors['npassword']='A nova senha é igual a senha antiga';
             }
         }
         if(!$errors) {       
@@ -71,20 +71,20 @@ if(!$errors && $_POST) { //Handle post
             if(db_query($sql) && db_affected_rows()){
                 $msg='Senha alterada com sucesso!';
             }else{
-                $errors['err']='Não é possível concluir alteração de senha. Erro interno.';
+                $errors['err']='Não foi possível concluir alteração de senha. Erro interno.';
             }
         }
         break;
     case 'info':
         //Update profile info
         if(!$_POST['firstname']) {
-            $errors['firstname']='Nome obrigatório';
+            $errors['firstname']='Primeiro Nome necessário';
         }
         if(!$_POST['lastname']) {
-            $errors['lastname']='Sobrenome obrigatório';
+            $errors['lastname']='Sobrenome necessário';
         }
         if(!$_POST['email'] || !Validator::is_email($_POST['email'])) {
-            $errors['email']='Email válido obrigatório';
+            $errors['email']='E-mail válido necessário';
         }
         if($_POST['phone'] && !Validator::is_phone($_POST['phone'])) {
             $errors['phone']='Digite um número válido';
@@ -94,7 +94,7 @@ if(!$errors && $_POST) { //Handle post
         }
 
         if($_POST['phone_ext'] && !is_numeric($_POST['phone_ext'])) {
-            $errors['phone_ext']='Fone inválido';
+            $errors['phone_ext']='Telefone inválido';
         }
 
         if(!$errors) {
@@ -111,10 +111,10 @@ if(!$errors && $_POST) { //Handle post
             if(db_query($sql) && db_affected_rows()){
                 $msg='Perfil atualizado com sucesso!';
             }else{
-                $errors['err']='Ocorreu um(s) erro(s). Perfil NÃO atualizado';
+                $errors['err']='Ocorreram erros. Perfil NÃO atualizado';
             }
         }else{
-            $errors['err']='Ocorreu o erro abaixo. Tente novamente';
+            $errors['err']='Ocorreu um erro abaixo. Tente novamente';
         }
         break;
     default:
@@ -130,9 +130,9 @@ if(!$errors && $_POST) { //Handle post
 
 //Tab and Nav options.
 $nav->setTabActive('profile');
-$nav->addSubMenu(array('desc'=>'My Profile','href'=>'profile.php','iconclass'=>'user'));
-$nav->addSubMenu(array('desc'=>'Preferences','href'=>'profile.php?t=pref','iconclass'=>'userPref'));
-$nav->addSubMenu(array('desc'=>'Change Password','href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
+$nav->addSubMenu(array('desc'=>'Meu Perfil','href'=>'profile.php','iconclass'=>'user'));
+$nav->addSubMenu(array('desc'=>'Preferências','href'=>'profile.php?t=pref','iconclass'=>'userPref'));
+$nav->addSubMenu(array('desc'=>'Alterar Senha','href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
 //Warnings if any.
 if($thisuser->onVacation()){
         $warn.='Bem-vindo de volta! Você está listada como \ 'de férias \' Por favor, deixe o seu gerente ou administrador saber que você está de volta.';
