@@ -44,10 +44,10 @@ $deletable=0;
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th>
-                <a href="admin.php?t=templates&sort=name&order=<?=$negorder?><?=$qstr?>" title="Sort by name <?=$negorder?>">Nome</a></th>
+                <a href="admin.php?t=templates&sort=name&order=<?=$negorder?><?=$qstr?>" title="Ordenar por nome <?=$negorder?>">Nome</a></th>
             <th width="20" nowrap>Em uso</th>
 	        <th width="170" nowrap>&nbsp;&nbsp;
-                <a href="admin.php?t=templates&sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Create Date <?=$negorder?>">Último Update</a></th>
+                <a href="admin.php?t=templates&sort=date&order=<?=$negorder?><?=$qstr?>" title="Ordenar por Data de Criação <?=$negorder?>">Último Update</a></th>
             <th width="170" nowrap>Criado</th>
         </tr>
         <?
