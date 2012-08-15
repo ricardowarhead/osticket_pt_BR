@@ -5,13 +5,13 @@ $rep=null;
 $newuser=true;
 if($staff && $_REQUEST['a']!='new'){
     $rep=$staff->getInfo();
-    $title='Update: '.$rep['firstname'].' '.$rep['lastname'];
+    $title='Atualização: '.$rep['firstname'].' '.$rep['lastname'];
     $action='update';
-    $pwdinfo='To reset the password enter a new one below';
+    $pwdinfo='Para redefinir a senha digite uma nova abaixo';
     $newuser=false;
 }else {
-    $title='New Staff Member';
-    $pwdinfo='Temp password required';
+    $title='Novo membro atentende';
+    $pwdinfo='Necessário uma senha temporária';
     $action='create';
     $rep['resetpasswd']=isset($rep['resetpasswd'])?$rep['resetpasswd']:1;
     $rep['isactive']=isset($rep['isactive'])?$rep['isactive']:1;
@@ -59,7 +59,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
             <th>Grupo do Usuário:</th>
             <td>
                 <select name="group_id">
-                    <option value=0>Selecione Grupo</option>
+                    <option value=0>Selecionar Grupo</option>
                     <?
                     while (list($id,$name) = db_fetch_row($groups)){
                         $selected = ($rep['group_id']==$id)?'selected':''; ?>
@@ -77,7 +77,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
                 &nbsp;<font class="error">*&nbsp;<?=$errors['name']?></font></td>
         </tr>
         <tr>
-            <th>Email:</th>
+            <th>E-mail:</th>
             <td><input type="text" name="email" size=25 value="<?=$rep['email']?>">
                 &nbsp;<font class="error">*&nbsp;<?=$errors['email']?></font></td>
         </tr>
@@ -115,11 +115,11 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
             <td>
                 <input type="checkbox" name="resetpasswd" <?=$rep['resetpasswd'] ? 'checked': ''?>>Exigir uma mudança de senha no próximo login</td>
         </tr>
-        <tr class="header"><td colspan=2>Permissão de conta, status &amp; Configurações</td></tr>
+        <tr class="header"><td colspan=2>Permissão de conta, estado &amp; Configurações</td></tr>
         <tr class="subheader"><td colspan=2>
             As permissões do atendente baseia-se também no grupo atribuído. <b>Administrador não é limitado por configurações do grupo.</b></td>
         </tr> 
-        <tr><th><b>Status da Conta</b></th>
+        <tr><th><b>Estado da Conta</b></th>
             <td>
                         <input type="radio" name="isactive"  value="1" <?=$rep['isactive']?'checked':''?> /><b>Ativo</b>
                         <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Bloqueado</b>
@@ -128,7 +128,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         </tr>
         <tr><th><b>Tipo de Conta</b></th>
             <td class="mainTableAlt">
-                        <input type="radio" name="isadmin"  value="1" <?=$rep['isadmin']?'checked':''?> /><font color="red"><b>Admin</b></font>
+                        <input type="radio" name="isadmin"  value="1" <?=$rep['isadmin']?'checked':''?> /><font color="red"><b>Administrador</b></font>
                         <input type="radio" name="isadmin"  value="0" <?=!$rep['isadmin']?'checked':''?> /><b>Atendente</b>
                         &nbsp;&nbsp;
             </td>
