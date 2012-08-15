@@ -8,7 +8,7 @@ if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
  <input type="hidden" name="t" value="info">
  <input type="hidden" name="id" value="<?=$thisuser->getId()?>">
     <tr>
-        <td width="110"><b>Username:</b></td>
+        <td width="110"><b>Nome de usuário:</b></td>
         <td>&nbsp;<?=$thisuser->getUserName()?></td>
     </tr>
     <tr>
@@ -29,7 +29,7 @@ if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
     <tr>
         <td>Telefone do Escritório:</td>
         <td>
-            <input type="text" name="phone" value="<?=$rep['phone']?>" ><font class="error">&nbsp;<?=$errors['phone']?></font>&nbsp;Ext&nbsp;
+            <input type="text" name="phone" value="<?=$rep['phone']?>" ><font class="error">&nbsp;<?=$errors['phone']?></font>&nbsp;Ramal&nbsp;
             <input type="text" name="phone_ext" size=6 value="<?=$rep['phone_ext']?>" >
             <font class="error">&nbsp;<?=$errors['phone_ext']?></font>
         </td>
@@ -45,9 +45,9 @@ if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
     </tr>
     <tr><td>&nbsp;</td>
         <td> <br/>
-            <input class="button" type="submit" name="submit" value="Save">
-            <input class="button" type="reset" name="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="index.php"'>
+            <input class="button" type="submit" name="submit" value="Salvar">
+            <input class="button" type="reset" name="reset" value="Redefinir">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="index.php"'>
         </td>
     </tr>
  </form>
