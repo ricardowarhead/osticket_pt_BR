@@ -178,9 +178,9 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
         </table>
     </td></tr>
     <tr><td style="padding-left:175px">
-        <input class="button" type="submit" name="submit" value="Save Changes">
-        <input class="button" type="reset" name="reset" value="Reset Changes">
-        <input class="button" type="button" name="cancel" value="Cancel Edit" onClick='window.location.href="admin.php?t=email"'></td>
+        <input class="button" type="submit" name="submit" value="Salvar Mudanças">
+        <input class="button" type="reset" name="reset" value="Redefinir Mudanças">
+        <input class="button" type="button" name="cancel" value="Cancelar Edição" onClick='window.location.href="admin.php?t=email"'></td>
     </tr>
   </form>
 </table>
