@@ -17,7 +17,7 @@ if($search) {
   if( ($_REQUEST['query'] && strlen($_REQUEST['query'])<3) 
       || (!$_REQUEST['query'] && isset($_REQUEST['basic_search'])) ){ //Why do I care about this crap...
       $search=false; //Instead of an error page...default back to regular query..with no search.
-      $errors['err']='Search term must be more than 3 chars';
+      $errors['err']='O termo a pesquisar deve ter mais de 3 caracteres';
       $searchTerm='';
   }
 }
@@ -161,7 +161,7 @@ if($search):
     $startTime  =($_REQUEST['startDate'] && (strlen($_REQUEST['startDate'])>=8))?strtotime($_REQUEST['startDate']):0;
     $endTime    =($_REQUEST['endDate'] && (strlen($_REQUEST['endDate'])>=8))?strtotime($_REQUEST['endDate']):0;
     if( ($startTime && $startTime>time()) or ($startTime>$endTime && $endTime>0)){
-        $errors['err']='Entered date span is invalid. Selection ignored.';
+        $errors['err']='Período de data digitado é inválido. Seleção ignorada.';
         $startTime=$endTime=0;
     }else{
         //Have fun with dates.
@@ -293,11 +293,11 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             }?>
             </select>
         </td>
-        <td>Status:</td><td>
+        <td>Estado:</td><td>
     
         <select name="status">
-            <option value='any' selected >Qualquer status</option>
-            <option value="open" <?=!strcasecmp($_REQUEST['status'],'Open')?'selected':''?>>Abrir</option>
+            <option value='any' selected >Qualquer estado</option>
+            <option value="open" <?=!strcasecmp($_REQUEST['status'],'Open')?'selected':''?>>Aberto</option>
             <option value="overdue" <?=!strcasecmp($_REQUEST['status'],'overdue')?'selected':''?>>Vencido</option>
             <option value="closed" <?=!strcasecmp($_REQUEST['status'],'Closed')?'selected':''?>>Fechado</option>
         </select>
@@ -320,7 +320,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
        <td>Tipo:</td>
        <td>       
         <select name="stype">
-            <option value="LIKE" <?=(!$_REQUEST['stype'] || $_REQUEST['stype'] == 'LIKE') ?'selected':''?>>Scan (%)</option>
+            <option value="LIKE" <?=(!$_REQUEST['stype'] || $_REQUEST['stype'] == 'LIKE') ?'selected':''?>>Examinar (%)</option>
             <option value="FT"<?= $_REQUEST['stype'] == 'FT'?'selected':''?>>Texto completo</option>
         </select>
  
@@ -334,7 +334,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     	    <option value="ID" <?= $sort== 'ID' ?'selected':''?>>Ticket #</option>
             <option value="pri" <?= $sort == 'pri' ?'selected':''?>>Prioridade</option>
             <option value="date" <?= $sort == 'date' ?'selected':''?>>Data</option>
-            <option value="dept" <?= $sort == 'dept' ?'selected':''?>>Dept.</option>
+            <option value="dept" <?= $sort == 'dept' ?'selected':''?>>Departamento.</option>
         </select>
         <select name="order">
             <option value="DESC"<?= $_REQUEST['order'] == 'DESC' ?'selected':''?>>Anterior</option>
