@@ -36,7 +36,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td align="left">Telefone:</td>
         <td><input type="text" name="phone" size="25" value="<?=$info['phone']?>">
-            &nbsp;Ext&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
+            &nbsp;Ramal&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
             <font class="error">&nbsp;<?=$errors['phone']?></font></td>
     </tr>
     <tr height=2px><td align="left" colspan=2 >&nbsp;</td</tr>
@@ -98,7 +98,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <?if($cfg->canUploadFiles()) {
         ?>
     <tr>
-        <td>Ligação:</td>
+        <td>Anexo:</td>
         <td>
             <input type="file" name="attachment"><font class="error">&nbsp;<?=$errors['attachment']?></font>
         </td>
