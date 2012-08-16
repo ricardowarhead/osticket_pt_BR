@@ -1,7 +1,7 @@
 <?php
 if(!defined('OSTCLIENTINC') || !is_object($thisclient) || !is_object($ticket)) die('Kwaheri'); //bye..see ya
 //Double check access one last time...
-if(strcasecmp($thisclient->getEmail(),$ticket->getEmail())) die('Access Denied');
+if(strcasecmp($thisclient->getEmail(),$ticket->getEmail())) die('Acesso Negado');
 
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 
@@ -134,9 +134,9 @@ $dept=($dept && $dept->isPublic())?$dept:$cfg->getDefaultDept();
             </div>
             <?}?>
             <div align="left"  style="padding:10px 0 10px 0;">
-                <input class="button" type='submit' value='Post Reply' />
-                <input class="button" type='reset' value='Reset' />
-                <input class="button" type='button' value='Cancel' onClick='window.location.href="view.php"' />
+                <input class="button" type='submit' value='Enviar Resposta' />
+                <input class="button" type='reset' value='Redefinir' />
+                <input class="button" type='button' value='Cancelar' onClick='window.location.href="view.php"' />
             </div>
         </form>
     </div>
