@@ -455,19 +455,19 @@ class Config {
             return false;
         
         $f=array();
-        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>'Helpdesk URl required'); //TODO: Add url validation
-        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>'Helpdesk title required');
-        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>'Default Dept. required');
-        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>'Default email required');
-        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>'You must select template.');
-        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Enter idle time in minutes');
-        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Enter idle time in minutes');
-        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>'Time format required'); //TODO: Add date format validation  
-        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>'Date format required');
-        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Datetime format required');
-        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Day, Datetime format required');
-        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>'Valid email required');
-        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>'Enter lock time in minutes');
+        $f['helpdesk_url']=array('type'=>'string',   'required'=>1, 'error'=>'Assistência técnica URlnecessário'); //TODO: Add url validation
+        $f['helpdesk_title']=array('type'=>'string',   'required'=>1, 'error'=>'Título da Assistência Técnica exigido');
+        $f['default_dept_id']=array('type'=>'int',   'required'=>1, 'error'=>'Departamento Padrão necessário');
+        $f['default_email_id']=array('type'=>'int',   'required'=>1, 'error'=>'E-mail padrão exigido');
+        $f['default_template_id']=array('type'=>'int',   'required'=>1, 'error'=>'Você deve selecionar modelo.');
+        $f['staff_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Digite tempo inativo em minutos');
+        $f['client_session_timeout']=array('type'=>'int',   'required'=>1, 'error'=>'Digite tempo inativo em minutos');
+        $f['time_format']=array('type'=>'string',   'required'=>1, 'error'=>'Formato de tempo necessário'); //TODO: Add date format validation  
+        $f['date_format']=array('type'=>'string',   'required'=>1, 'error'=>'Formato da data requerida');
+        $f['datetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Formato de data e hora necessária');
+        $f['daydatetime_format']=array('type'=>'string',   'required'=>1, 'error'=>'Formato dia, data e hora necessária');
+        $f['admin_email']=array('type'=>'email',   'required'=>1, 'error'=>'E-mail válido necessário');
+        $f['autolock_minutes']=array('type'=>'int',   'required'=>1, 'error'=>'Digite o tempo de bloqueio em minutos');
         //TODO: check option fields for validity.
 
         //do the validation.
@@ -481,24 +481,24 @@ class Config {
                 && (!isset($var['ticket_alert_admin']) 
                     && !isset($var['ticket_alert_dept_manager'])
                     && !isset($var['ticket_alert_dept_members']))){        
-            $errors['ticket_alert_active']='Sem destinatário(s) alvo selecionado';
+            $errors['ticket_alert_active']='Sem destinatário(s) selecionado';
         }       
         if($var['message_alert_active']
                 && (!isset($var['message_alert_laststaff'])
                     && !isset($var['message_alert_assigned'])
                     && !isset($var['message_alert_dept_manager']))){
-            $errors['message_alert_active']='Sem destinatário(s) alvo selecionado';
+            $errors['message_alert_active']='Sem destinatário(s) selecionado';
         }
 
         if($var['note_alert_active']
                 && (!isset($var['note_alert_laststaff'])
                     && !isset($var['note_alert_assigned'])
                     && !isset($var['note_alert_dept_manager']))){
-            $errors['note_alert_active']='Sem destinatário(s) alvo selecionado';
+            $errors['note_alert_active']='Sem destinatário(s) selecionado';
         }
 
         if($var['strip_quoted_reply'] && !$var['reply_separator'])
-            $errors['reply_separator']='Separador de resposta necessária (?)';
+            $errors['reply_separator']='Separador de resposta necessário (?)';
 
         if($var['enable_captcha']){
             if (!extension_loaded('gd'))
