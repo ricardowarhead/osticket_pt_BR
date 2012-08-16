@@ -15,26 +15,26 @@
     $Id: $
 **********************************************************************/
 require_once('main.inc.php');
-if(!defined('INCLUDE_DIR')) die('Fatal Error');
+if(!defined('INCLUDE_DIR')) die('Erro Fatal');
 define('CLIENTINC_DIR',INCLUDE_DIR.'client/');
 define('OSTCLIENTINC',TRUE); //make includes happy
 
 require_once(INCLUDE_DIR.'class.client.php');
 require_once(INCLUDE_DIR.'class.ticket.php');
 //We are ready baby
-$loginmsg='Autenticação necessária';
+$loginmsg='Autenticaï¿½ï¿½o necessï¿½ria';
 if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
-    $loginmsg='Autenticação necessária';
+    $loginmsg='Autenticaï¿½ï¿½o necessï¿½ria';
     $email=trim($_POST['lemail']);
     $ticketID=trim($_POST['lticket']);
     //$_SESSION['_client']=array(); #Uncomment to disable login strikes.
     
     //Check time for last max failed login attempt strike.
-    $loginmsg='Login inválido';
+    $loginmsg='Login invï¿½lido';
     if($_SESSION['_client']['laststrike']) {
         if((time()-$_SESSION['_client']['laststrike'])<$cfg->getClientLoginTimeout()) {
             $loginmsg='Tentativas de logon com falha excessiva';
-            $errors['err']='Você alcançou o mámximo de tentativas de logon permitidas. Tente novamente mais tarde ou <a href="open.php">abra um novo ticket</a>';
+            $errors['err']='Vocï¿½ alcanï¿½ou o mï¿½mximo de tentativas de logon permitidas. Tente novamente mais tarde ou <a href="open.php">abra um novo ticket</a>';
         }else{ //Timeout is over.
             //Reset the counter for next round of attempts after the timeout.
             $_SESSION['_client']['laststrike']=null;
@@ -58,7 +58,7 @@ if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
             $_SESSION['daylight']=$cfg->observeDaylightSaving();
             //Log login info...
             $msg=sprintf("%s/%s logado em [%s]",$ticket->getEmail(),$ticket->getExtId(),$_SERVER['REMOTE_ADDR']);
-            Sys::log(LOG_DEBUG,'Usuário de login',$msg);
+            Sys::log(LOG_DEBUG,'Usuï¿½rio de login',$msg);
             //Redirect tickets.php
             session_write_close();
             session_regenerate_id();
@@ -71,7 +71,7 @@ if($_POST && (!empty($_POST['lemail']) && !empty($_POST['lticket']))):
     $_SESSION['_client']['strikes']+=1;
     if(!$errors && $_SESSION['_client']['strikes']>$cfg->getClientMaxLogins()) {
         $loginmsg='Acesso negado';
-        $errors['err']='Esqueceu suas informações de login? Por favor, <a href="open.php">abra um novo ticket</a>.';
+        $errors['err']='Esqueceu suas informaï¿½ï¿½es de login? Por favor, <a href="open.php">abra um novo ticket</a>.';
         $_SESSION['_client']['laststrike']=time();
         $alert='Tentativas excessivas de login por um cliente?'."\n".
                 'E-mail: '.$_POST['lemail']."\n".'Ticket#: '.$_POST['lticket']."\n".
