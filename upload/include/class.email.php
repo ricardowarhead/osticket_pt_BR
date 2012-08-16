@@ -275,7 +275,7 @@ class Email {
 
 
         if(!$vars['dept_id'] || !is_numeric($vars['dept_id']))
-            $errors['dept_id']='Você deve selecionar um Departamento.';
+            $errors['dept_id']='Você deve selecionar um departamento.';
             
         if(!$vars['priority_id'])
             $errors['priority_id']='Você deve selecionar uma prioridade';
@@ -301,7 +301,7 @@ class Email {
             if(!$vars['mail_fetchfreq'] || !is_numeric($vars['mail_fetchfreq']))
                 $errors['mail_fetchfreq']='Buscar intervalo obrigatório';
             if(!$vars['mail_fetchmax'] || !is_numeric($vars['mail_fetchmax']))
-                $errors['mail_fetchmax']='Máximo de e-mails exigidos';
+                $errors['mail_fetchmax']='Máximo de emails exigidos';
             
         }
         
@@ -345,7 +345,7 @@ class Email {
                            ));
             $mail = $smtp->connect();
             if(PEAR::isError($mail)) {
-                $errors['userpass']='<br>Incapaz de fazer o login. Verifique as configurações de SMTP.';
+                $errors['userpass']='<br>Incapaz de fazer o login. Verifique as configurações SMTP.';
                 $errors['smtp']='<br>'.$mail->getMessage();
             }else{
                 $smtp->disconnect(); //Thank you, sir!
