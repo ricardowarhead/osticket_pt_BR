@@ -230,7 +230,7 @@ class Dept {
             $errors['dept_signature']='Sinatura obrigatória';
             
         if(!$_POST['ispublic'] && ($_POST['dept_id']==$cfg->getDefaultDeptId()))
-            $errors['ispublic']='Departamento de padrão não pode ser privado';
+            $errors['ispublic']='Departamento padrão não pode ser privado';
 
         if(!$errors){
         
