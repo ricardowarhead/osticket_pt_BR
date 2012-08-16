@@ -1,5 +1,5 @@
 <?php
-$title=($cfg && is_object($cfg))?$cfg->getTitle():'osTicket :: Support Ticket System';
+$title=($cfg && is_object($cfg))?$cfg->getTitle():'osTicket :: Sistema de Suporte para Ticket';
 header("Content-Type: text/html; charset=UTF-8\r\n");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -14,7 +14,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 <div id="container">
     <div id="header">
         <a id="logo" href="index.php" title="Support Center"><img src="./images/logo2.jpg" border=0 alt="Support Center"></a>
-        <p><span>SUPPORT TICKET</span> SYSTEM</p>
+        <p>SISTEMA<span> DE SUPORTE PARA TICKET</span></p>
     </div>
     <ul id="nav">
          <?                    
