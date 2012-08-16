@@ -123,8 +123,8 @@ class Misc {
             $min=0;
        
         ob_start();
-        echo sprintf('<select name="%s" id="%s">',$name,$name);
-        echo '<option value="" selected>Time</option>';
+        echo sprintf('<selecione nome="%s" id="%s">',$name,$name);
+        echo '<valor da opção="" selected>Time</option>';
         for($i=23; $i>=0; $i--) {
             for($minute=45; $minute>=0; $minute-=15) {
                 $sel=($hr==$i && $min==$minute)?'selected="selected"':'';
