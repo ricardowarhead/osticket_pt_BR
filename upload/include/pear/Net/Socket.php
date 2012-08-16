@@ -248,7 +248,7 @@ class Net_Socket extends PEAR {
         if ($returned == 0) {
             return true;
         }
-        return $this->raiseError('Cannot set write buffer.');
+        return $this->raiseError('Não é possível definir tempo de gravação..');
     }
 
     /**
@@ -586,7 +586,7 @@ class Net_Socket extends PEAR {
             }
             return @stream_socket_enable_crypto($this->fp, $enabled, $type);
         } else {
-            return $this->raiseError('Net_Socket::enableCrypto() requires php version >= 5.1.0');
+            return $this->raiseError('Net_Socket::enableCrypto() requer a versão php >= 5.1.0');
         }
     }
 
