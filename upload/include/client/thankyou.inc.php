@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTCLIENTINC') || !is_object($ticket)) die('Kwaheri rafiki!'); //Say bye to our friend..
+if(!defined('OSTCLIENTINC') || !is_object($ticket)) die('Nazdravlje!'); //Say bye to our friend..
 
 //Please customize the message below to fit your organization speak!
 ?>
