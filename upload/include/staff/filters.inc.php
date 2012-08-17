@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 
 $select='SELECT * ';
 $from='FROM '.BANLIST_TABLE;
@@ -7,7 +7,7 @@ $where='';
 //make sure the search query is 3 chars min...defaults to no query with warning message
 if($_REQUEST['a']=='search') {
     if(!$_REQUEST['query'] || strlen($_REQUEST['query'])<3) {
-        $errors['err']='Search term must be more than 3 chars';
+        $errors['err']='O termo a pesquisar deve ter mais de 3 caracteres';
     }else{
         //Do the search
         $search=true;
@@ -60,7 +60,7 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
         <input type='hidden' name='a' value='search'>
         Query:&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
         &nbsp;&nbsp;
-        <input type="submit" name="search" class="button" value="Search">
+        <input type="submit" name="search" class="button" value="Pesquisar">
         &nbsp;<a href="#" class="msg" onClick="showHide('add','search'); return false;">(Adicionar)</a>
     </form>
 </div>
@@ -124,16 +124,16 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
     <tr>
         <td style="padding-left:20px">
             Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['banlist'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['banlist'],true)">Toggle</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['banlist'])">None</a>&nbsp;&nbsp;
+            <a href="#" onclick="return select_all(document.forms['banlist'],true)">Todos</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['banlist'],true)">Alternar</a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['banlist'])">Nenhum</a>&nbsp;&nbsp;
             &nbsp;page:<?=$pageNav->getPageLinks()?>
             
         </td>
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="delete" value="Remove From List" 
+            <input class="button" type="submit" name="delete" value="Remover da Lista" 
                      onClick='return confirm("Tem certeza que deseja remover o e-mail selecionado da lista de banidos?");'>
         </td>
     </tr>
