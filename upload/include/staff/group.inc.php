@@ -3,7 +3,7 @@ if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso negado');
 
 $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($group);
 if($group && $_REQUEST['a']!='new'){
-    $title='Editar Group: '.$group['group_name'];
+    $title='Editar Grupo: '.$group['group_name'];
     $action='update';
 }else {
     $title='Adicionar novo grupo';
@@ -32,10 +32,10 @@ if($group && $_REQUEST['a']!='new'){
             </td>
         </tr>
         <tr>
-            <th>Status do grupo:</th>
+            <th>Estado do grupo:</th>
             <td>
-                <input type="radio" name="group_enabled"  value="1"   <?=$info['group_enabled']?'checked':''?> /> Active
-                <input type="radio" name="group_enabled"  value="0"   <?=!$info['group_enabled']?'checked':''?> />Disabled
+                <input type="radio" name="group_enabled"  value="1"   <?=$info['group_enabled']?'checked':''?> /> Ativado
+                <input type="radio" name="group_enabled"  value="0"   <?=!$info['group_enabled']?'checked':''?> />Desativado
                 &nbsp;<font class="error">&nbsp;<?=$errors['group_enabled']?></font>
             </td>
         </tr>
@@ -51,8 +51,8 @@ if($group && $_REQUEST['a']!='new'){
                     <input type="checkbox" name="depts[]" value="<?=$id?>" <?=$ck?> > <?=$name?><br/>
                 <?
                 }?>
-                <a href="#" onclick="return select_all(document.forms['group'])">Select All</a>&nbsp;&nbsp;
-                <a href="#" onclick="return reset_all(document.forms['group'])">Select None</a>&nbsp;&nbsp; 
+                <a href="#" onclick="return select_all(document.forms['group'])">Selecione Todos</a>&nbsp;&nbsp;
+                <a href="#" onclick="return reset_all(document.forms['group'])">Selecione Nenhum</a>&nbsp;&nbsp; 
             </td>
         </tr>
         <tr><th>Para <b>Criar</b> Tickets</th>
@@ -106,9 +106,9 @@ if($group && $_REQUEST['a']!='new'){
         </tr>
     </table>
     <tr><td style="padding-left:165px;padding-top:20px;">
-        <input class="button" type="submit" name="submit" value="Submit">
-        <input class="button" type="reset" name="reset" value="Reset">
-        <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="admin.php?t=groups"'>
+        <input class="button" type="submit" name="submit" value="Aplicar">
+        <input class="button" type="reset" name="reset" value="Resetar">
+        <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="admin.php?t=groups"'>
         </td>
     </tr>
  </form>
