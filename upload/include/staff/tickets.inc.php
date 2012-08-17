@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !@$thisuser->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !@$thisuser->isStaff()) die('Acesso Negado');
 
 //Get ready for some deep shit..(I admit..this could be done better...but the shit just works... so shutup for now).
 
@@ -35,7 +35,7 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'overdue':
         $status='open';
         $showoverdue=true;
-        $results_type='Overdue Tickets';
+        $results_type='Tickets Vencidos';
         break;
     case 'assigned':
         //$status='Open'; //
@@ -44,7 +44,7 @@ switch(strtolower($_REQUEST['status'])){ //Status is overloaded
     case 'answered':
         $status='open';
         $showanswered=true;
-        $results_type='Answered Tickets';
+        $results_type='Tickets Respondidos';
         break;
     default:
         if(!$search)
@@ -57,10 +57,10 @@ if($stats) {
         if(!$cfg->showAnsweredTickets() && $stats['answered']) {
              $status='open';
              $showanswered=true;
-             $results_type='Answered Tickets';
+             $results_type='Tickets Respondidos';
         }elseif(!$stats['answered']) { //no open or answered tickets (+-queue?) - show closed tickets.???
             $status='closed';
-            $results_type='Closed Tickets';
+            $results_type='Tickets Fechados';
         }
     }
 }
@@ -92,7 +92,7 @@ if($status){
 
 //Sub-statuses Trust me!
 if($staffId && ($staffId==$thisuser->getId())) { //Staff's assigned tickets.
-    $results_type='Assigned Tickets';
+    $results_type='Tickets Atribuídos';
     $qwhere.=' AND ticket.staff_id='.db_input($staffId);    
 }elseif($showoverdue) { //overdue
     $qwhere.=' AND isoverdue=1 ';
@@ -236,7 +236,7 @@ $query="$qselect $qfrom $qwhere $qgroup ORDER BY $order_by $order LIMIT ".$pageN
 $tickets_res = db_query($query);
 $showing=db_num_rows($tickets_res)?$pageNav->showing():"";
 if(!$results_type) {
-    $results_type=($search)?'Search Results':ucfirst($status).' Tickets';
+    $results_type=($search)?'Resultados da Pesquisa':ucfirst($status).' Tickets';
 }
 $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
 
@@ -468,31 +468,31 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
             //If they can delete tickets...they are allowed to close--reopen..etc.
             switch (strtolower($status)) {
                 case 'closed': ?>
-                    <input class="button" type="submit" name="reopen" value="Reopen"
-                        onClick=' return confirm("Are you sure you want to reopen selected tickets?");'>
+                    <input class="button" type="submit" name="reopen" value="Reabrir"
+                        onClick=' return confirm("Tem certeza que deseja reabrir o(s) ticket(s) selecionado(s)?");'>
                     <?
                     break;
                 case 'open':
                 case 'answered':
                 case 'assigned':
                     ?>
-                    <input class="button" type="submit" name="overdue" value="Overdue"
-                        onClick=' return confirm("Are you sure you want to mark selected tickets overdue/stale?");'>
-                    <input class="button" type="submit" name="close" value="Close"
-                        onClick=' return confirm("Are you sure you want to close selected tickets?");'>
+                    <input class="button" type="submit" name="overdue" value="Vencido"
+                        onClick=' return confirm("Tem certeza que deseja marcar o(s) ticket(s) selecionado(s) como vencido/atrasado?");'>
+                    <input class="button" type="submit" name="close" value="Fechar"
+                        onClick=' return confirm("Tem certeza que deseja fechar o(s) ticket(s) selecinado(s)?");'>
                     <?
                     break;
                 default: //search??
                     ?>
-                    <input class="button" type="submit" name="close" value="Close"
-                        onClick=' return confirm("Are you sure you want to close selected tickets?");'>
-                    <input class="button" type="submit" name="reopen" value="Reopen"
-                        onClick=' return confirm("Are you sure you want to reopen selected tickets?");'>
+                    <input class="button" type="submit" name="close" value="Fechar"
+                        onClick=' return confirm("Tem certeza que deseja fechar o(s) ticket(s) selecinado(s)?");'>
+                    <input class="button" type="submit" name="reopen" value="Reabrir"
+                        onClick=' return confirm("Tem certeza que deseja reabrir o(s) ticket(s) selecinado(s)?");'>
             <?
             }
             if($canDelete) {?>
-                <input class="button" type="submit" name="delete" value="Delete" 
-                    onClick=' return confirm("Are you sure you want to DELETE selected tickets?");'>
+                <input class="button" type="submit" name="delete" value="Excluir" 
+                    onClick=' return confirm("Tem certeza que deseja EXCLUIR o(s) ticket(s) selecinado(s)?");'>
             <?}?>
         </td></tr>
         <? }
