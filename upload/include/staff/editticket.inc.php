@@ -1,7 +1,7 @@
 <?php
-if(!defined('OSTSCPINC') || !is_object($ticket) || !is_object($thisuser) || !$thisuser->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !is_object($ticket) || !is_object($thisuser) || !$thisuser->isStaff()) die('Acesso Negado');
 
-if(!($thisuser->canEditTickets() || ($thisuser->isManager() && $ticket->getDeptId()==$thisuser->getDeptId()))) die('Access Denied. Perm error.');
+if(!($thisuser->canEditTickets() || ($thisuser->isManager() && $ticket->getDeptId()==$thisuser->getDeptId()))) die('Acesso negado. Erro permanente.');
 
 if($_POST && $errors){
     $info=Format::input($_POST);
@@ -65,7 +65,7 @@ if($_POST && $errors){
     </tr>
     <tr height=1px><td align="left" colspan=2 >&nbsp;</td></tr>
     <tr>
-        <td align="left" valign="top">Due Date:</td>
+        <td align="left" valign="top">Data de Vencimento:</td>
         <td>
             <i>O horário é baseado na sua localização (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
             <input id="duedate" name="duedate" value="<?=Format::htmlchars($info['duedate'])?>"
@@ -106,7 +106,7 @@ if($_POST && $errors){
             <select name="topicId">    
                 <option value="0" selected >Nenhum</option>
                 <?if(!$info['topicId'] && $info['topic']){ //old helptopic?>
-                <option value="0" selected ><?=$info['topic']?> (deleted)</option>
+                <option value="0" selected ><?=$info['topic']?> (eliminado)</option>
                 <?
                 }
                  while (list($topicId,$topic,$active) = db_fetch_row($services)){
@@ -125,16 +125,16 @@ if($_POST && $errors){
     <tr>
         <td align="left" valign="top"><b>Nota interna:</b></td>
         <td>
-            <i>Reasons for the edit.</i><font class="error"><b>*&nbsp;<?=$errors['note']?></b></font><br/>
+            <i>Razões para a edição.</i><font class="error"><b>*&nbsp;<?=$errors['note']?></b></font><br/>
             <textarea name="note" cols="45" rows="5" wrap="soft"><?=$info['note']?></textarea></td>
     </tr>
     <tr height=2px><td align="left" colspan=2 >&nbsp;</td></tr>
     <tr>
         <td></td>
         <td>
-            <input class="button" type="submit" name="submit_x" value="Update Ticket">
-            <input class="button" type="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="tickets.php?id=<?=$ticket->getId()?>"'>    
+            <input class="button" type="submit" name="submit_x" value="Carregar Ticket">
+            <input class="button" type="reset" value="Redefinir">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="tickets.php?id=<?=$ticket->getId()?>"'>    
         </td>
     </tr>
   </form>
