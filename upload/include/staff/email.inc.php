@@ -1,6 +1,6 @@
 <?php
 if(!defined('OSTADMININC') || basename($_SERVER['SCRIPT_NAME'])==basename(__FILE__)) die('Habari/Jambo rafiki? '); //Say hi to our friend..
-if(!$thisuser || !$thisuser->isadmin()) die('Access Denied');
+if(!$thisuser || !$thisuser->isadmin()) die('Acesso Negado');
 
 $info=($_POST && $errors)?$_POST:array(); //Re-use the post info on error...savekeyboards.org
 if($email && $_REQUEST['a']!='new'){
@@ -43,7 +43,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         <tr><th>Nome do e-mail:</th>
             <td>
                 <input type="text" name="name" size=30 value="<?=$info['name']?>">&nbsp;<font class="error">&nbsp;<?=$errors['name']?></font>
-                &nbsp;&nbsp;(<i>Optional email's FROM name.</i>)
+                &nbsp;&nbsp;(<i>Email's Opcional FROM name.</i>)
             </td>
         </tr>
         <tr><th>Prioridade do novo ticket</th>
@@ -66,7 +66,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
                     <?
                     while (list($id,$name) = db_fetch_row($depts)){
                         $selected = ($info['dept_id']==$id)?'selected':''; ?>
-                        <option value="<?=$id?>"<?=$selected?>><?=$name?> Dept</option>
+                        <option value="<?=$id?>"<?=$selected?>><?=$name?> Departamento</option>
                     <?
                     }?>
                 </select>&nbsp;<font class="error">&nbsp;<?=$errors['dept_id']?></font>&nbsp;
@@ -97,10 +97,10 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
              Configuração para buscar e-mails recebidos. A busca de e-mail deve ser habilitada com o autocron ativo ou configurar cron externamente.<br>
             <b>Por favor, seja paciente, o sistema vai tentar entrar no servidor de email para validar a informação de entrada de login.</b>
             <font class="error">&nbsp;<?=$errors['mail']?></font></td></tr>
-        <tr><th>Status</th>
+        <tr><th>Estado</th>
             <td>
-                <label><input type="radio" name="mail_active"  value="1"   <?=$info['mail_active']?'checked':''?> />Enable</label>
-                <label><input type="radio" name="mail_active"  value="0"   <?=!$info['mail_active']?'checked':''?> />Disable</label>
+                <label><input type="radio" name="mail_active"  value="1"   <?=$info['mail_active']?'checked':''?> />Ativar</label>
+                <label><input type="radio" name="mail_active"  value="0"   <?=!$info['mail_active']?'checked':''?> />Desativar</label>
                 &nbsp;<font class="error">&nbsp;<?=$errors['mail_active']?></font>
             </td>
         </tr>
@@ -117,7 +117,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         <tr><th>Protocolo</th>
             <td>
                 <select name="mail_protocol">
-                    <option value='POP'>Select</option>
+                    <option value='POP'>Selecione</option>
                     <option value='POP' <?=($info['mail_protocol']=='POP')?'selected="selected"':''?> >POP</option>
                     <option value='IMAP' <?=($info['mail_protocol']=='IMAP')?'selected="selected"':''?> >IMAP</option>
                 </select>
@@ -136,32 +136,32 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         </tr>
         <tr><th>Frequencia de busca</th>
             <td>
-                <input type="text" name="mail_fetchfreq" size=4 value="<?=$info['mail_fetchfreq']?$info['mail_fetchfreq']:''?>"> Delay intervals in minutes
+                <input type="text" name="mail_fetchfreq" size=4 value="<?=$info['mail_fetchfreq']?$info['mail_fetchfreq']:''?>"> Atrasar intervalos em minutos
                 &nbsp;<font class="error">&nbsp;<?=$errors['mail_fetchfreq']?></font>
             </td>
         </tr>
         <tr><th>Máximo de e-mails por busca</th>
             <td>
-                <input type="text" name="mail_fetchmax" size=4 value="<?=$info['mail_fetchmax']?$info['mail_fetchmax']:''?>"> Maximum emails to process per fetch.
+                <input type="text" name="mail_fetchmax" size=4 value="<?=$info['mail_fetchmax']?$info['mail_fetchmax']:''?>"> E-mails máximos para processar por buscar.
                 &nbsp;<font class="error">&nbsp;<?=$errors['mail_fetchmax']?></font>
             </td>
         </tr>
         <tr><th>Apagar mensagens</th>
             <td>
                 <input type="checkbox" name="mail_delete" value=1 <?=$info['mail_delete']? 'checked': ''?> >
-                    Delete fetched message(s) (<i>recomendado quando usar POP</i>)
+                    Excluir mensagem procurada(s) (<i>recomendado quando usar POP</i>)
                 &nbsp;<font class="error">&nbsp;<?=$errors['mail_delete']?></font>
             </td>
         </tr>
         <tr class="header"><td colspan=2>Configurações SMTP (opcional)</b></td></tr>
         <tr class="subheader"><td colspan=2>
-             Quando habilitar o <b>email account</b> vai usar o servidor SMTP ao invés de usar a função interna mail() do PHP para saída de e-mails.<br>
+             Quando habilitar a <b>conta de e-mail</b> vai usar o servidor SMTP ao invés de usar a função interna de e-mail() do PHP para saída de e-mails.<br>
             <b>Seja paciente, o sistema entrará no servidor SMTP para validar suas informações de login.</b>
                 <font class="error">&nbsp;<?=$errors['smtp']?></font></td></tr>
-        <tr><th>Status</th>
+        <tr><th>Estado</th>
             <td>
-                <label><input type="radio" name="smtp_active"  value="1"   <?=$info['smtp_active']?'checked':''?> />Enable</label>
-                <label><input type="radio" name="smtp_active"  value="0"   <?=!$info['smtp_active']?'checked':''?> />Disable</label>
+                <label><input type="radio" name="smtp_active"  value="1"   <?=$info['smtp_active']?'checked':''?> />Ativado</label>
+                <label><input type="radio" name="smtp_active"  value="0"   <?=!$info['smtp_active']?'checked':''?> />Desativado</label>
                 &nbsp;<font class="error">&nbsp;<?=$errors['smtp_active']?></font>
             </td>
         </tr>
@@ -186,7 +186,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
             </td>
         </tr>
         <tr><th>Criptografia</th>
-            <td>O melhor método de autenticação disponível será auto selecionado com base no que o servidor suporta.</td>
+            <td>O melhor método de autenticação disponível será auto-selecionado com base no que o servidor suporta.</td>
         </tr>
     </table>
    </td></tr>
