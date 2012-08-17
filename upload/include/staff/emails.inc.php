@@ -52,7 +52,7 @@ $emails=db_query($sql.' ORDER BY email');
             $class = ($class =='row2') ?'row1':'row2';
             } //end of while.
         else: ?> 
-            <tr class="<?=$class?>"><td colspan=6><b>Query returned 0 results</b></td></tr>
+            <tr class="<?=$class?>"><td colspan=6><b>Consulta retornou 0 resultados</b></td></tr>
         <?
         endif; ?>
     </table>
@@ -63,14 +63,14 @@ $emails=db_query($sql.' ORDER BY email');
     <tr>
         <td style="padding-left:20px">
             Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['email'],true)">All</a>&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['email'])">None</a>&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['email'],true)">Toggle</a>&nbsp;
+            <a href="#" onclick="return select_all(document.forms['email'],true)">Todos</a>&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['email'])">Nenhum</a>&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['email'],true)">Alterne</a>&nbsp;
         </td>
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="delete" value="Delete Selected Emails" 
+            <input class="button" type="submit" name="delete" value="Delete Emails Selecionados" 
                 onClick=' return confirm("Tem certeza que deseja excluir os e-mails selecionados?");'>
         </td>
     </tr>
