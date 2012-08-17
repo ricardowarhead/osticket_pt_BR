@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !@$thisuser->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !@$thisuser->isStaff()) die('Acesso Negado');
 
 $qstr='&t=syslog'; //Query string collector
 if($_REQUEST['type']) { 
@@ -37,7 +37,7 @@ if($type){
 $startTime  =($_REQUEST['startDate'] && (strlen($_REQUEST['startDate'])>=8))?strtotime($_REQUEST['startDate']):0;
 $endTime    =($_REQUEST['endDate'] && (strlen($_REQUEST['endDate'])>=8))?strtotime($_REQUEST['endDate']):0;
 if( ($startTime && $startTime>time()) or ($startTime>$endTime && $endTime>0)){
-    $errors['err']='Entered date span is invalid. Selection ignored.';
+    $errors['err']='Período de data digitado é inválido. seleção ignorada.';
     $startTime=$endTime=0;    
 }else{
     
