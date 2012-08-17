@@ -105,7 +105,7 @@ class Mail_sendmail extends Mail {
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers deve ser uma matriz');
         }
 
         $result = $this->_sanitizeHeaders($headers);
@@ -133,19 +133,19 @@ class Mail_sendmail extends Mail {
         }
 
         if (!isset($from)) {
-            return PEAR::raiseError('No from address given.');
+            return PEAR::raiseError('Sem endereço determinado.');
         } elseif (strpos($from, ' ') !== false ||
                   strpos($from, ';') !== false ||
                   strpos($from, '&') !== false ||
                   strpos($from, '`') !== false) {
-            return PEAR::raiseError('From address specified with dangerous characters.');
+            return PEAR::raiseError('A partir do endereço especificado com caracteres perigosos.');
         }
 
         $from = escapeshellarg($from); // Security bug #16200
         
         $mail = @popen($this->sendmail_path . (!empty($this->sendmail_args) ? ' ' . $this->sendmail_args : '') . " -f$from -- $recipients", 'w');
         if (!$mail) {
-            return PEAR::raiseError('Failed to open sendmail [' . $this->sendmail_path . '] for execution.');
+            return PEAR::raiseError('Falha ao abrir o envio de e-mail [' . $this->sendmail_path . '] para execução.');
         }
 
         // Write the headers following by two newlines: one to end the headers
@@ -161,7 +161,7 @@ class Mail_sendmail extends Mail {
         }
 
         if ($result != 0) {
-            return PEAR::raiseError('sendmail returned error code ' . $result,
+            return PEAR::raiseError('código de erro ao enviar o e-mail' . $result,
                                     $result);
         }
 
