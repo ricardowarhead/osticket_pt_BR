@@ -55,7 +55,7 @@ class Mail
             $mailer = new $class($params);
             return $mailer;
         } else {
-            return PEAR::raiseError('Unable to find class for driver ' . $driver);
+            return PEAR::raiseError('Não foi possível localizar a classe para o driver ' . $driver);
         }
     }
 
@@ -89,7 +89,7 @@ class Mail
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers devem ser uma matriz/vetor');
         }
 
         $result = $this->_sanitizeHeaders($headers);
