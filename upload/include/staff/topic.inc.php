@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 if($topic && $_REQUEST['a']!='new'){
@@ -73,8 +73,8 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
     </tr>
 </table>
 <div style="padding-left:220px;">
-    <input class="button" type="submit" name="submit" value="Submit">
-    <input class="button" type="reset" name="reset" value="Reset">
-    <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="admin.php?t=topics"'>
+    <input class="button" type="submit" name="submit" value="Submeter">
+    <input class="button" type="reset" name="reset" value="Redefinir">
+    <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="admin.php?t=topics"'>
 </div>
 </form>
