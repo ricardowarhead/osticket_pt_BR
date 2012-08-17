@@ -1,13 +1,13 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 $info=null;
 if($dept && $_REQUEST['a']!='new'){
     //Editing Department.
-    $title='Update Department';
+    $title='Atualizar Departamento';
     $action='update';
     $info=$dept->getInfo();
 }else {
-    $title='New Department';
+    $title='Novo Departamento';
     $action='create';
     $info['ispublic']=isset($info['ispublic'])?$info['ispublic']:1;
     $info['ticket_auto_response']=isset($info['ticket_auto_response'])?$info['ticket_auto_response']:1;
@@ -78,8 +78,8 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
         <?}?>
         <tr><th>Tipo do departamento</th>
             <td>
-                <input type="radio" name="ispublic"  value="1"   <?=$info['ispublic']?'checked':''?> />Public
-                <input type="radio" name="ispublic"  value="0"   <?=!$info['ispublic']?'checked':''?> />Private (Hidden)
+                <input type="radio" name="ispublic"  value="1"   <?=$info['ispublic']?'checked':''?> />Público
+                <input type="radio" name="ispublic"  value="0"   <?=!$info['ispublic']?'checked':''?> />Privado (Escondido)
                 &nbsp;<font class="error"><?=$errors['ispublic']?></font>
             </td>
         </tr>
@@ -111,19 +111,19 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
         </tr>
         <tr class="header"><td colspan=2>Resposta automática</td></tr>
         <tr class="subheader"><td colspan=2>
-            Global auto-response settings in preference section must be enabled for Dept 'Enable' setting to take effect.
+            Configurações de auto-resposta globais na seção de preferência devem estar habilitadas para Dept 'Ativar' para que a configuração tenha efeito.
             </td>
         </tr>
         <tr><th>Novo Ticket:</th>
             <td>
-                <input type="radio" name="ticket_auto_response"  value="1"   <?=$info['ticket_auto_response']?'checked':''?> />Enable
-                <input type="radio" name="ticket_auto_response"  value="0"   <?=!$info['ticket_auto_response']?'checked':''?> />Disable
+                <input type="radio" name="ticket_auto_response"  value="1"   <?=$info['ticket_auto_response']?'checked':''?> />Ativar
+                <input type="radio" name="ticket_auto_response"  value="0"   <?=!$info['ticket_auto_response']?'checked':''?> />Desativar
             </td>
         </tr>
         <tr><th>Nova Mensagem:</th>
             <td>
-                <input type="radio" name="message_auto_response"  value="1"   <?=$info['message_auto_response']?'checked':''?> />Enable
-                <input type="radio" name="message_auto_response"  value="0"   <?=!$info['message_auto_response']?'checked':''?> />Disable
+                <input type="radio" name="message_auto_response"  value="1"   <?=$info['message_auto_response']?'checked':''?> />Ativar
+                <input type="radio" name="message_auto_response"  value="0"   <?=!$info['message_auto_response']?'checked':''?> />Desativar
             </td>
         </tr>
         <tr>
