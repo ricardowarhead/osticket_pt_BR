@@ -209,7 +209,7 @@ class Mail_mimeDecode extends PEAR
 
         // Called statically but no input
         } elseif ($isStatic) {
-            return PEAR::raiseError('Called statically and no input given');
+            return PEAR::raiseError('Chamado estaticamente e sem entrada fornecida');
 
         // Called via an object
         } else {
@@ -315,7 +315,7 @@ class Mail_mimeDecode extends PEAR
                 case 'multipart/related':
                 case 'multipart/mixed':
                     if(!isset($content_type['other']['boundary'])){
-                        $this->_error = 'No boundary found for ' . $content_type['value'] . ' part';
+                        $this->_error = 'Sem limite encontrado para ' . $content_type['value'] . ' parte';
                         return false;
                     }
 
@@ -412,7 +412,7 @@ class Mail_mimeDecode extends PEAR
         if (preg_match("/^(.*?)\r?\n\r?\n(.*)/s", $input, $match)) {
             return array($match[1], $match[2]);
         }
-        $this->_error = 'Could not split header and body';
+        $this->_error = 'Não foi possível dividir cabeçalho e o conteúdo';
         return false;
     }
 
@@ -722,7 +722,7 @@ class Mail_mimeDecode extends PEAR
         $headerlist =$this->_parseHeaders($this->_header);
         $to = "";
         if (!$headerlist) {
-            return $this->raiseError("Message did not contain headers");
+            return $this->raiseError("Mensagem não contém cabeçalhos");
         }
         foreach($headerlist as $item) {
             $header[$item['name']] = $item['value'];
@@ -736,7 +736,7 @@ class Mail_mimeDecode extends PEAR
             }
         }
         if ($to == "") {
-            return $this->raiseError("Message did not contain any recipents");
+            return $this->raiseError("Mensagem não continha os destinatários");
         }
         $to = substr($to,1);
         return array($to,$header,$this->_body);
