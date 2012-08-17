@@ -1,13 +1,13 @@
 <?php
 //Note that ticket is initiated in tickets.php.
-if(!defined('OSTSCPINC') || !@$thisuser->isStaff() || !is_object($ticket) ) die('Invalid path');
+if(!defined('OSTSCPINC') || !@$thisuser->isStaff() || !is_object($ticket) ) die('Diretório Inválido');
 if(!$ticket->getId() or (!$thisuser->canAccessDept($ticket->getDeptId()) and $thisuser->getId()!=$ticket->getStaffId())) die('Access Denied');
 
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 
 //Auto-lock the ticket if locking is enabled..if locked already simply renew it.
 if($cfg->getLockTime() && !$ticket->acquireLock())
-    $warn.='Unable to obtain a lock on the ticket';
+    $warn.='Não foi possível obter um bloqueio no ticket';
 
 //We are ready baby...lets roll. Akon rocks! 
 $dept  = $ticket->getDept();  //Dept
@@ -18,11 +18,11 @@ $id=$ticket->getId(); //Ticket ID.
 if($staff)
     $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">Ticket is assigned to '.$staff->getName().'</span>';
 if(!$errors['err'] && ($lock && $lock->getStaffId()!=$thisuser->getId()))
-    $errors['err']='This ticket is currently locked by another staff member!';
+    $errors['err']='Este ticket está atualmente bloqueado por outro membro atendente!';
 if(!$errors['err'] && ($emailBanned=BanList::isbanned($ticket->getEmail())))
-    $errors['err']='Email is in banlist! Must be removed before any reply/response';    
+    $errors['err']='O e-mail está na banlist! Deve ser removido antes de qualquer resposta ';    
 if($ticket->isOverdue())
-    $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marked overdue!</span>';
+    $warn.='&nbsp;&nbsp;<span class="Icon overdueTicket">Marcado como vencido!</span>';
     
 ?>
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
@@ -32,7 +32,7 @@ if($ticket->isOverdue())
 
         <td class="msg" width=50%>
             <? if($thisuser->canEditTickets() || ($thisuser->isManager() && $dept->getId()==$thisuser->getDeptId())) { ?>
-             <a href="tickets.php?id=<?=$id?>&a=edit" title="Edit Ticket" class="Icon editTicket">Editar Ticket</a>
+             <a href="tickets.php?id=<?=$id?>&a=edit" title="Editar Ticket" class="Icon editTicket">Editar Ticket</a>
             <?}?>
         </td>
     </tr>
@@ -40,7 +40,7 @@ if($ticket->isOverdue())
      <td width=50%>	
 		<table align="center" class="ticketinfo" cellspacing="1" cellpadding="3" width="100%" border=0>
 			<tr>
-				<th>Status:</th>
+				<th>Estado/Situação:</th>
 				<td><?=$ticket->getStatus()?></td>
 			</tr>
 			<tr>
@@ -64,11 +64,11 @@ if($ticket->isOverdue())
                 <td><?=Format::htmlchars($ticket->getName())?></td>
             </tr>
             <tr>
-                <th>Email:</th>
+                <th>E-mail:</th>
                 <td><?php 
                     echo $ticket->getEmail();
                     if(($related=$ticket->getRelatedTicketsCount())) {
-                        echo sprintf('&nbsp;&nbsp;<a href="tickets.php?a=search&query=%s" title="Related Tickets">(<b>%d</b>)</a>',
+                        echo sprintf('&nbsp;&nbsp;<a href="tickets.php?a=search&query=%s" title="Tickets Relacionados">(<b>%d</b>)</a>',
                                     urlencode($ticket->getEmail()),$related);
                     }
                     ?>
@@ -91,7 +91,7 @@ if($ticket->isOverdue())
         <table align="center" class="ticketinfo" cellspacing="1" cellpadding="3" width="100%" border=0>
             <tr>
                 <th>Função Pessoal:</th>
-                <td><?=$staff?Format::htmlchars($staff->getName()):'- unassigned -'?></td>
+                <td><?=$staff?Format::htmlchars($staff->getName()):'- não atribuído -'?></td>
             </tr>
             <tr>
                 <th nowrap>Última Resposta:</th>
@@ -106,7 +106,7 @@ if($ticket->isOverdue())
             <?php
             }else { ?>
             <tr>
-                <th>Feche Data:</th>
+                <th>Data de fechamento:</th>
                 <td><?=Format::db_datetime($ticket->getCloseDate())?></td>
             </tr>
             <?php
@@ -174,14 +174,14 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
                 <?php
                  if($thisuser->canManageBanList()) {
                     if(!$emailBanned) {?>    
-                        <option value="banemail" >Proibir Email <?=$ticket->isOpen()?'&amp; Close':''?></option>
+                        <option value="banemail" >Proibir E-mail <?=$ticket->isOpen()?'&amp; Close':''?></option>
                     <?}else{?>
-                        <option value="unbanemail">Liberar Email</option>
+                        <option value="unbanemail">Liberar E-mail</option>
                     <?}
                  }?>
                 
                 <?if($thisuser->canDeleteTickets()){ //oooh...fear the deleters! ?>
-                <option value="delete" >Deletar Ticket</option>
+                <option value="delete" >Excluir Ticket</option>
                 <?}?>
             </select>
             <span for="ticket_priority">Prioridade:</span>
@@ -318,7 +318,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                          if($appendStaffSig || $appendDeptSig) { ?>
                           <div style="margin-top: 10px;">
                                 <label for="signature" nowrap>Anexar Assinatura:</label>
-                                <label><input type="radio" name="signature" value="none" checked > None</label>
+                                <label><input type="radio" name="signature" value="none" checked > Nenhuma</label>
                                 <?if($appendStaffSig) {?>
                                <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > Minha Assinatura</label>
                                 <?}?>
@@ -328,27 +328,27 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                            </div>
                          <?}?>
                         <div style="margin-top: 3px;">
-                            <b>Status do Ticket:</b>
+                            <b>Estado/Situação do Ticket:</b>
                             <?
                             $checked=isset($info['ticket_status'])?'checked':''; //Staff must explicitly check the box to change status..
                             if($ticket->isOpen()){?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Close" <?=$checked?> > Fechar na Resposta</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Fechar" <?=$checked?> > Fechar na Resposta</label>
                             <?}else{ ?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reopen" <?=$checked?> > Abrir na Resposta</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reabrir" <?=$checked?> > Abrir na Resposta</label>
                             <?}?>
                         </div>
                         <p>
                             <div  style="margin-left: 50px; margin-top: 30px; margin-bottom: 10px;border: 0px;">
-                                <input class="button" type='submit' value='Post Reply' />
-                                <input class="button" type='reset' value='Reset' />
-                                <input class="button" type='button' value='Cancel' onClick="history.go(-1)" />
+                                <input class="button" type='submit' value='Enviar Resposta' />
+                                <input class="button" type='reset' value='Redefinir' />
+                                <input class="button" type='button' value='Cancelar' onClick="history.go(-1)" />
                             </div>
                         </p>
                     </form>                
                 </p>
             </div>
             <div id="notes" class="tabbertab"  align="left">
-                <h2>Post Internal Note</h2>
+                <h2>Enviar Nota Interna</h2>
                 <p>
                     <form action="tickets.php?id=<?=$id?>#notes" name="notes" class="inline" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
@@ -373,17 +373,17 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                             <?
                             $checked=($info && isset($info['ticket_status']))?'checked':''; //not selected by default.
                             if($ticket->isOpen()){?>
-                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Close" <?=$checked?> > Fechar Ticket</label>
+                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Fechar" <?=$checked?> > Fechar Ticket</label>
                             <?}else{ ?>
-                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Reopen" <?=$checked?> > Reabrir Ticket</label>
+                            <label><input type="checkbox" name="ticket_status" id="ticket_status" value="Reabrir" <?=$checked?> > Reabrir Ticket</label>
                             <?}?>
                         </div>
                         <?}?>
                         <p>
                             <div  align="left" style="margin-left: 50px;margin-top: 10px; margin-bottom: 10px;border: 0px;">
-                                <input class="button" type='submit' value='Submit' />
-                                <input class="button" type='reset' value='Reset' />
-                                <input class="button" type='button' value='Cancel' onClick="history.go(-1)" />
+                                <input class="button" type='submit' value='Submeter' />
+                                <input class="button" type='reset' value='Redefinir' />
+                                <input class="button" type='button' value='Cancelar' onClick="history.go(-1)" />
                             </div>
                         </p>
                     </form>
@@ -419,9 +419,9 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         </div>
                         <p>
                             <div  style="margin-left: 50px; margin-top: 5px; margin-bottom: 10px;border: 0px;" align="left">
-                                <input class="button" type='submit' value='Transfer' />
-                                <input class="button" type='reset' value='Reset' />
-                                <input class="button" type='button' value='Cancel' onClick="history.go(-1)" />
+                                <input class="button" type='submit' value='Transferir' />
+                                <input class="button" type='reset' value='Redefinir' />
+                                <input class="button" type='button' value='Cancelar' onClick="history.go(-1)" />
                             </div>
                         </p>
                     </form>
@@ -434,7 +434,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                  ?>
             <div id="assign" class="tabbertab"  align="left">
                 
-                <h2><?=$staff?'Re Assign Ticket':'Assign to Staff'?></h2>
+                <h2><?=$staff?'Re Atribuir Ticket':'Atribuir para Atendente'?></h2>
                 <p>
                     <form action="tickets.php?id=<?=$id?>#assign" name="notes" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
@@ -466,9 +466,9 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         </div>
                         <p>
                             <div  style="margin-left: 50px; margin-top: 5px; margin-bottom: 10px;border: 0px;" align="left">
-                                <input class="button" type='submit' value='Assign' />
-                                <input class="button" type='reset' value='Reset' />
-                                <input class="button" type='button' value='Cancel' onClick="history.go(-1)" />
+                                <input class="button" type='submit' value='Atribuir' />
+                                <input class="button" type='reset' value='Redefinir' />
+                                <input class="button" type='button' value='Cancelar' onClick="history.go(-1)" />
                             </div>
                         </p>
                     </form>
