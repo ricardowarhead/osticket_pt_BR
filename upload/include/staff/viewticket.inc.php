@@ -16,7 +16,7 @@ $lock  = $ticket->getLock();  //Ticket lock obj
 $id=$ticket->getId(); //Ticket ID.
 
 if($staff)
-    $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">Ticket is assigned to '.$staff->getName().'</span>';
+    $warn.='&nbsp;&nbsp;<span class="Icon assignedTicket">O ticket está atribuído para '.$staff->getName().'</span>';
 if(!$errors['err'] && ($lock && $lock->getStaffId()!=$thisuser->getId()))
     $errors['err']='Este ticket está atualmente bloqueado por outro membro atendente!';
 if(!$errors['err'] && ($emailBanned=BanList::isbanned($ticket->getEmail())))
