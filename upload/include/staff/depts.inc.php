@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 //List all Depts
 $sql='SELECT dept.dept_id,dept_name,email.email_id,email.email,email.name as email_name,ispublic,count(staff.staff_id) as users '.
      ',CONCAT_WS(" ",mgr.firstname,mgr.lastname) as manager,mgr.staff_id as manager_id,dept.created,dept.updated  FROM '.DEPT_TABLE.' dept '.
@@ -76,12 +76,12 @@ $depts=db_query($sql.' GROUP BY dept.dept_id ORDER BY dept_name');
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="public" value="Make Public"
-                onClick=' return confirm("Are you sure you want to make selected depts(s) public?");'>
-            <input class="button" type="submit" name="private" value="Make Private" 
-                onClick=' return confirm("Are you sure you want to make selected depts(s) private?");'>
-            <input class="button" type="submit" name="delete" value="Delete Dept(s)" 
-                onClick=' return confirm("Are you sure you want to DELETE selected depts(s)?");'>
+            <input class="button" type="submit" name="public" value="Tornar Público"
+                onClick=' return confirm("Tem certeza quem deseja tornar o(s) departamento(s) selecionado(s) público(s)?");'>
+            <input class="button" type="submit" name="private" value="Tornar Privado" 
+                onClick=' return confirm("Tem certeza quem deseja tornar o(s) departamento(s) selecionado(s) privado(s)?");'>
+            <input class="button" type="submit" name="delete" value="Excluir Departamento(s)" 
+                onClick=' return confirm(Tem certeza que deseja excluir o(s) departamento(s) selecionado(s)?");'>
         </td>
     </tr>
     <?
