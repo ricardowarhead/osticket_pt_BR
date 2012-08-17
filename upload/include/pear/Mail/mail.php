@@ -90,7 +90,7 @@ class Mail_mail extends Mail {
     function send($recipients, $headers, $body)
     {
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers deven ser um vetor/matriz');
         }
 
         $result = $this->_sanitizeHeaders($headers);
@@ -134,7 +134,7 @@ class Mail_mail extends Mail {
         // If the mail() function returned failure, we need to create a
         // PEAR_Error object and return it instead of the boolean result.
         if ($result === false) {
-            $result = PEAR::raiseError('mail() returned failure');
+            $result = PEAR::raiseError('mail() retornou uma falha');
         }
 
         return $result;
