@@ -86,7 +86,7 @@ class Auth_SASL
                 break;
 
             default:
-                return PEAR::raiseError('Invalid SASL mechanism type');
+                return PEAR::raiseError('Mecanismo do tipo SASL inválido');
                 break;
         }
 
