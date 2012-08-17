@@ -16,7 +16,7 @@ $showing=($num=db_num_rows($groups))?'Grupos de usuários':'Sem grupos??';
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th width=200>Nome do grupo</th>
-            <th width=100>Status do grupo</th>
+            <th width=100>Estado do grupo</th>
 	        <th width=10>&nbsp;Membros</th>
 	        <th>&nbsp;Data de criação</th>
 	        <th>Última atualização</th>
@@ -55,19 +55,19 @@ $showing=($num=db_num_rows($groups))?'Grupos de usuários':'Sem grupos??';
      ?>
     <tr>
         <td style="padding-left:20px;">
-            Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['groups'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['groups'],true)">Toggle</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['groups'])">None</a>&nbsp;&nbsp;
+            Selecionar:&nbsp;
+            <a href="#" onclick="return select_all(document.forms['groups'],true)">Todos</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['groups'],true)">Alternar</a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['groups'])">Nenhum</a>&nbsp;&nbsp;
         </td>
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="activate_grps" value="Enable" 
+            <input class="button" type="submit" name="activate_grps" value="Habilitar" 
                 onClick=' return confirm("Tem certeza que deseja HABILITAR o(s) grupo(s) selecionado(s)");'>
-            <input class="button" type="submit" name="disable_grps" value="Disable" 
+            <input class="button" type="submit" name="disable_grps" value="Desabilitar" 
                 onClick=' return confirm("Tem certeza que deseja DESABILITAR o(s) grupo(s) selecionado(s)");'>
-            <input class="button" type="submit" name="delete_grps" value="Delete" 
+            <input class="button" type="submit" name="delete_grps" value="Excluir" 
                 onClick=' return confirm("Tem certeza que deseja EXCLUIR o(s) grupo(s) selecionado(s)");'>
         </td>
     </tr>
