@@ -6,7 +6,7 @@ $config=($errors && $_POST)?Format::input($_POST):Format::htmlchars($cfg->getCon
 //Basic checks for warnings...
 $warn=array();
 if($config['allow_attachments'] && !$config['upload_dir']) {
-    $errors['allow_attachments']='You need to setup upload dir.';    
+    $errors['allow_attachments']='Você precisará configurar para carregar diretório.';    
 }else{
     if(!$config['allow_attachments'] && $config['allow_email_attachments'])
         $warn['allow_email_attachments']='*Attachments Disabled.';
@@ -15,12 +15,12 @@ if($config['allow_attachments'] && !$config['upload_dir']) {
 }
 
 if(!$errors['enable_captcha'] && $config['enable_captcha'] && !extension_loaded('gd'))
-    $errors['enable_captcha']='GD required for captcha to work';
+    $errors['enable_captcha']='Necessária GD captcha para trabalhar';
     
 
 //Not showing err on post to avoid alarming the user...after an update.
 if(!$errors['err'] &&!$msg && $warn )
-    $errors['err']='Possible errors detected, please check the warnings below';
+    $errors['err']='Possíveis erros detectados, por favor verifique os avisos abaixo';
     
 $gmtime=Misc::gmtime();
 $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE ispublic=1');
@@ -36,10 +36,10 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr class="subheader">
             <td colspan=2">O modo offline irá desativar a interface do cliente e <b>apenas</b> permitirá o acesso ao Painel de Controle dos atendentes aos <b>super administradores</b></td>
         </tr>
-        <tr><th><b>Ajuda de Status</b></th>
+        <tr><th><b>Ajuda de Estado</b></th>
             <td>
                 <input type="radio" name="isonline"  value="1"   <?=$config['isonline']?'checked':''?> /><b>Online</b> (Ativado)
-                <input type="radio" name="isonline"  value="0"   <?=!$config['isonline']?'checked':''?> /><b>Offline</b> (Disativado)
+                <input type="radio" name="isonline"  value="0"   <?=!$config['isonline']?'checked':''?> /><b>Offline</b> (Desativado)
                 &nbsp;<font class="warn">&nbsp;<?=$config['isoffline']?'osTicket offline':''?></font>
             </td>
         </tr>
@@ -71,7 +71,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                     <?
                     while (list($id,$name) = db_fetch_row($depts)){
                     $selected = ($config['default_dept_id']==$id)?'SELECTED':''; ?>
-                    <option value="<?=$id?>"<?=$selected?>><?=$name?> Dept</option>
+                    <option value="<?=$id?>"<?=$selected?>><?=$name?> Departamento</option>
                     <?
                     }?>
                 </select>&nbsp;<font class="error">*&nbsp;<?=$errors['default_dept_id']?></font>
@@ -152,7 +152,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
 
                     ?>
                 </select> tentativa(s) permitida(s)
-                &nbsp;before a
+                &nbsp;antes de uma
                 <select name="client_login_timeout">
                   <?php
                     for ($i = 1; $i <= 10; $i++) {
@@ -232,7 +232,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr>
             <th>Horário de verão:</th>
             <td>
-                <input type="checkbox" name="enable_daylight_saving" <?=$config['enable_daylight_saving'] ? 'checked': ''?>>Observe daylight savings
+                <input type="checkbox" name="enable_daylight_saving" <?=$config['enable_daylight_saving'] ? 'checked': ''?>>Observar o horário de verão
             </td>
         </tr>
     </table>
@@ -242,8 +242,8 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr class="subheader"><td colspan=2>Se habilitar ticket fechado, começar auto-renovação na atividade do formulário.</td></tr>
         <tr><th valign="top">IDs dos tickets:</th>
             <td>
-                <input type="radio" name="random_ticket_ids"  value="0"   <?=!$config['random_ticket_ids']?'checked':''?> /> Sequential
-                <input type="radio" name="random_ticket_ids"  value="1"   <?=$config['random_ticket_ids']?'checked':''?> />Random  (recommended)
+                <input type="radio" name="random_ticket_ids"  value="0"   <?=!$config['random_ticket_ids']?'checked':''?> /> Contínuo
+                <input type="radio" name="random_ticket_ids"  value="1"   <?=$config['random_ticket_ids']?'checked':''?> />Aleatório  (recomendado)
             </td>
         </tr>
         <tr><th valign="top">Prioridade de ticket:</th>
@@ -329,9 +329,9 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr class="subheader"><td colspan=2>Observe que as configurações globais podem ser desabilitadas no nível departamento/e-mail.</td></tr>
         <tr><th valign="top"><br><b>E-mails recebidos</b>:</th>
             <td><i>Para e-mail (POP/IMAP) trabalhar você deve definir um cron job ou simplesmente habilitar o auto-cront</i><br/>
-                <input type="checkbox" name="enable_mail_fetch" value=1 <?=$config['enable_mail_fetch']? 'checked': ''?>  > Enable POP/IMAP email fetch
+                <input type="checkbox" name="enable_mail_fetch" value=1 <?=$config['enable_mail_fetch']? 'checked': ''?>  > Ativar o POP / IMAP e-mail buscar
                     &nbsp;&nbsp;(<i>Configuração global que pode ser desabilitada no e-mail</i>) <br/>
-                <input type="checkbox" name="enable_email_piping" value=1 <?=$config['enable_email_piping']? 'checked': ''?>  > Enable email piping
+                <input type="checkbox" name="enable_email_piping" value=1 <?=$config['enable_email_piping']? 'checked': ''?>  > Ativar canalização de e-mail
                    &nbsp;(<i>Canalizando, nós aceitamos política</i>)<br/>
                 <input type="checkbox" name="strip_quoted_reply" <?=$config['strip_quoted_reply'] ? 'checked':''?>>
                     Tira resposta citada (<i>depende da tag abaixo</i>)<br/>
@@ -480,9 +480,9 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         </tr>
         <tr><th valign="top">Erros do sistema:</th>
             <td><i>Habilitar erros para serem eviados para o e-mail do administrador definido acima</i><br>
-              <input type="checkbox" name="send_sys_errors" <?=$config['send_sys_errors']?'checked':'checked'?> disabled>System Errors
-              <input type="checkbox" name="send_sql_errors" <?=$config['send_sql_errors']?'checked':''?>>SQL errors
-              <input type="checkbox" name="send_login_errors" <?=$config['send_login_errors']?'checked':''?>>Excessive Login attempts
+              <input type="checkbox" name="send_sys_errors" <?=$config['send_sys_errors']?'checked':'checked'?> disabled>Erros do sistema
+              <input type="checkbox" name="send_sql_errors" <?=$config['send_sql_errors']?'checked':''?>>SQL erros
+              <input type="checkbox" name="send_login_errors" <?=$config['send_login_errors']?'checked':''?>>Excessivas tentativas de entrar
             </td>
         </tr> 
         
