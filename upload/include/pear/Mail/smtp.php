@@ -224,7 +224,7 @@ class Mail_smtp extends Mail {
         }
 
         if (!is_array($headers)) {
-            return PEAR::raiseError('$headers must be an array');
+            return PEAR::raiseError('$headers deve ser uma matriz');
         }
 
         $this->_sanitizeHeaders($headers);
@@ -245,7 +245,7 @@ class Mail_smtp extends Mail {
 
         if (!isset($from)) {
             $this->_smtp->rset();
-            return PEAR::raiseError('No From: address has been provided',
+            return PEAR::raiseError('Remetente: não fornecido',
                                     PEAR_MAIL_SMTP_ERROR_FROM);
         }
 
@@ -256,7 +256,7 @@ class Mail_smtp extends Mail {
             }
         }
         if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params)))) {
-            $error = $this->_error("Failed to set sender: $from", $res);
+            $error = $this->_error("Falha ao definir remetente: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
         }
@@ -270,7 +270,7 @@ class Mail_smtp extends Mail {
         foreach ($recipients as $recipient) {
             $res = $this->_smtp->rcptTo($recipient);
             if (is_a($res, 'PEAR_Error')) {
-                $error = $this->_error("Failed to add recipient: $recipient", $res);
+                $error = $this->_error("Falha ao adicionar destinatário: $recipient", $res);
                 $this->_smtp->rset();
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_RECIPIENT);
             }
@@ -279,7 +279,7 @@ class Mail_smtp extends Mail {
         /* Send the message's headers and the body as SMTP data. */
         $res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body);
         if (is_a($res, 'PEAR_Error')) {
-            $error = $this->_error('Failed to send data', $res);
+            $error = $this->_error('Falha ao enviar dados', $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_DATA);
         }
@@ -325,7 +325,7 @@ class Mail_smtp extends Mail {
 
         /* If we still don't have an SMTP object at this point, fail. */
         if (is_object($this->_smtp) === false) {
-            return PEAR::raiseError('Failed to create a Net_SMTP object',
+            return PEAR::raiseError('Falha ao criar um objeto Net_SMTP',
                                     PEAR_MAIL_SMTP_ERROR_CREATE);
         }
 
@@ -337,7 +337,7 @@ class Mail_smtp extends Mail {
         /* Attempt to connect to the configured SMTP server. */
         if (PEAR::isError($res = $this->_smtp->connect($this->timeout))) {
 
-            $error = $this->_error('Failed to connect to ' .
+            $error = $this->_error('Falha na conexão com ' .
                                    $this->host . ':' . $this->port,
                                    $res);
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_CONNECT);
@@ -350,7 +350,7 @@ class Mail_smtp extends Mail {
             if (PEAR::isError($res = $this->_smtp->auth($this->username,
                                                         $this->password,
                                                         $method))) {
-                $error = $this->_error("$method authentication failure",
+                $error = $this->_error("$method falha de autenticação",
                                        $res);
                 $this->_smtp->rset();
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
