@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Kwaheri');
+if(!defined('OSTSCPINC') || !is_object($thisuser)) die('Adeus');
 $rep=Format::htmlchars($rep);
 ?>
 <div class="msg">Trocar senha</div>
@@ -27,9 +27,9 @@ $rep=Format::htmlchars($rep);
     </tr>
     <tr><td >&nbsp;</td>
          <td><br/>
-            <input class="button" type="submit" name="submit" value="Submit">
-            <input class="button" type="reset" name="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="profile.php"'>
+            <input class="button" type="submit" name="submit" value="Aplicar">
+            <input class="button" type="reset" name="reset" value="Redefinir">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="profile.php"'>
         </td>
     </tr>
     </form>
