@@ -346,7 +346,7 @@ class Mail_mime
             $filename = $name;
         }
         if (!strlen($filename)) {
-            $msg = "The supplied filename for the attachment can't be empty";
+            $msg = "O nome do arquivo fornecido para o anexo não pode ser vazio";
             $err = PEAR::raiseError($msg);
             return $err;
         }
@@ -379,11 +379,11 @@ class Mail_mime
     function &_file2str($file_name)
     {
         if (!is_readable($file_name)) {
-            $err = PEAR::raiseError('File is not readable ' . $file_name);
+            $err = PEAR::raiseError('Arquivo ilegível ' . $file_name);
             return $err;
         }
         if (!$fd = fopen($file_name, 'rb')) {
-            $err = PEAR::raiseError('Could not open ' . $file_name);
+            $err = PEAR::raiseError('Não foi possível abrir ' . $file_name);
             return $err;
         }
         $filesize = filesize($file_name);
