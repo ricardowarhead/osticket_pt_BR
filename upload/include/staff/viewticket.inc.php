@@ -1,7 +1,7 @@
 <?php
 //Note that ticket is initiated in tickets.php.
 if(!defined('OSTSCPINC') || !@$thisuser->isStaff() || !is_object($ticket) ) die('Diretório Inválido');
-if(!$ticket->getId() or (!$thisuser->canAccessDept($ticket->getDeptId()) and $thisuser->getId()!=$ticket->getStaffId())) die('Access Denied');
+if(!$ticket->getId() or (!$thisuser->canAccessDept($ticket->getDeptId()) and $thisuser->getId()!=$ticket->getStaffId())) die('Acesso Negado');
 
 $info=($_POST && $errors)?Format::input($_POST):array(); //Re-use the post info on error...savekeyboards.org
 
@@ -150,7 +150,7 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
     <tr><td>
         <form name=action action='tickets.php?id=<?=$id?>' method=post class="inline" >
             <input type='hidden' name='ticket_id' value="<?=$id?>"/>
-             <input type='hidden' name='a' value="process"/>
+             <input type='hidden' name='a' value="processo"/>
             <span for="do"> &nbsp;<b>Ação:</b></span>
             <select id="do" name="do" 
               onChange="this.form.ticket_priority.disabled=strcmp(this.options[this.selectedIndex].value,'change_priority','reopen','overdue')?false:true;">
@@ -195,7 +195,7 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
                 <?}?>
             </select>
                 &nbsp;&nbsp;
-            <input class="button" type="submit" value="GO">
+            <input class="button" type="submit" value="Avançar">
         </form>
     </tr></td>
 </table>
@@ -284,7 +284,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                     <form action="tickets.php?id=<?=$id?>#reply" name="reply" id="replyform" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
                         <input type="hidden" name="msg_id" value="<?=$msgid?>">
-                        <input type="hidden" name="a" value="reply">
+                        <input type="hidden" name="a" value="responder">
                         <div><font class="error">&nbsp;<?=$errors['response']?></font></div>
                         <div>
                            <?
@@ -323,7 +323,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                                <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > Minha Assinatura</label>
                                 <?}?>
                                 <?if($appendDeptSig) {?>
-                                <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura Dept</label>
+                                <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura do Departamento</label>
                                 <?}?>
                            </div>
                          <?}?>
@@ -332,9 +332,9 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                             <?
                             $checked=isset($info['ticket_status'])?'checked':''; //Staff must explicitly check the box to change status..
                             if($ticket->isOpen()){?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Fechar" <?=$checked?> > Fechar na Resposta</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Fechar" <?=$checked?> > Fechar Resposta</label>
                             <?}else{ ?>
-                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reabrir" <?=$checked?> > Abrir na Resposta</label>
+                            <label><input type="checkbox" name="ticket_status" id="l_ticket_status" value="Reabrir" <?=$checked?> > Abrir Resposta</label>
                             <?}?>
                         </div>
                         <p>
@@ -381,7 +381,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         <?}?>
                         <p>
                             <div  align="left" style="margin-left: 50px;margin-top: 10px; margin-bottom: 10px;border: 0px;">
-                                <input class="button" type='submit' value='Submeter' />
+                                <input class="button" type='submit' value='Aplicar' />
                                 <input class="button" type='reset' value='Redefinir' />
                                 <input class="button" type='button' value='Cancelar' onClick="history.go(-1)" />
                             </div>
@@ -402,7 +402,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                         <div>
                             <span for="dept_id">Departamento:</span>
                             <select id="dept_id" name="dept_id">
-                                <option value="" selected="selected">-Selecione Dept Alvo.-</option>
+                                <option value="" selected="selected">-Selecione Departamento Alvo.-</option>
                                 <?
                                 $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' WHERE dept_id!='.db_input($ticket->getDeptId()));
                                 while (list($deptId,$deptName) = db_fetch_row($depts)){
@@ -438,7 +438,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                 <p>
                     <form action="tickets.php?id=<?=$id?>#assign" name="notes" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
-                        <input type="hidden" name="a" value="assign">
+                        <input type="hidden" name="a" value="atribuir">
                         <div>
                             <span for="staffId">Membro:</span>
                             <select id="staffId" name="staffId">
