@@ -107,7 +107,7 @@ if($group && $_REQUEST['a']!='new'){
     </table>
     <tr><td style="padding-left:165px;padding-top:20px;">
         <input class="button" type="submit" name="submit" value="Aplicar">
-        <input class="button" type="reset" name="reset" value="Resetar">
+        <input class="button" type="reset" name="reset" value="Redefinir">
         <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="admin.php?t=groups"'>
         </td>
     </tr>
