@@ -1,11 +1,11 @@
 <?php
-if(!defined('OSTSCPINC') or !$thisuser->canManageKb()) die('Access Denied');
+if(!defined('OSTSCPINC') or !$thisuser->canManageKb()) die('Acesso Negado');
 $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($answer);
 if($answer && $_REQUEST['a']!='add'){
-    $title='Edit Premade Reply';
+    $title='Edite Resposta Pré-determinada';
     $action='update';
 }else {
-    $title='Add New Premade Reply';
+    $title='Adicione Nova Resposta Pré-determinada';
     $action='add';
     $info['isenabled']=1;
 }
@@ -31,7 +31,7 @@ if($answer && $_REQUEST['a']!='add'){
         </td>
     </tr>
     <tr>
-        <td>Status:</td>
+        <td>Estado:</td>
         <td>
             <input type="radio" name="isenabled"  value="1"   <?=$info['isenabled']?'checked':''?> /> Ativado
             <input type="radio" name="isenabled"  value="0"   <?=!$info['isenabled']?'checked':''?> />Desativado
@@ -53,16 +53,16 @@ if($answer && $_REQUEST['a']!='add'){
         </td>
     </tr>
     <tr><td valign="top">Responder:</td>
-        <td>Resposta Preparada - variáveis do Ticket's de base são suportadas.&nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font><br/>
+        <td>Resposta Preparada - variáveis do Tickets de base são suportadas.&nbsp;<font class="error">*&nbsp;<?=$errors['answer']?></font><br/>
             <textarea name="answer" id="answer" cols="90" rows="9" wrap="soft" style="width:80%"><?=$info['answer']?></textarea>
         </td>
     </tr>
     <tr>
         <td nowrap>&nbsp;</td>
         <td><br>
-            <input class="button" type="submit" name="submit" value="Submit">
-            <input class="button" type="reset" name="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="kb.php"'>
+            <input class="button" type="submit" name="submit" value="Aplicar">
+            <input class="button" type="reset" name="reset" value="Redefinir">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="kb.php"'>
         </td>
     </tr>
     </form>
