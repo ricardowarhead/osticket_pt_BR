@@ -265,7 +265,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
         <tr>
             <td>Consulta: </td>
             <td><input type="text" id="query" name="query" size=30 value="<?=Format::htmlchars($_REQUEST['query'])?>"></td>
-            <td><input type="submit" name="basic_search" class="button" value="Search">
+            <td><input type="submit" name="basic_search" class="button" value="Pesquisar">
              &nbsp;[<a href="#" onClick="showHide('basic','advance'); return false;">Avançado</a> ] </td>
         </tr>
     </table>
@@ -351,7 +351,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
         </select>
      </td>
      <td>
-     <input type="submit" name="advance_search" class="button" value="Search">
+     <input type="submit" name="advance_search" class="button" value="Pesquisar">
        &nbsp;[ <a href="#" onClick="showHide('advance','basic'); return false;" >Básico</a> ]
     </td>
   </tr>
