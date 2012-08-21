@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 
 //List all staff members...not pagenating...
 $sql='SELECT staff.staff_id, staff.group_id,staff.dept_id, firstname,lastname, username'.
@@ -13,7 +13,7 @@ if($_REQUEST['dept'] && is_numeric($_REQUEST['dept'])){
     $sql.=' WHERE staff.dept_id='.db_input($_REQUEST['dept']);
 }
 $users=db_query($sql.' ORDER BY lastname,firstname');
-$showing=($num=db_num_rows($users))?"Staff Members":"Atendente não encontrado. <a href='admin.php?t=staff&a=new&dept=$id'>Add New User</a>.";        
+$showing=($num=db_num_rows($users))?"Membros do atendimento":"Atendente não encontrado. <a href='admin.php?t=staff&a=new&dept=$id'>Adicionado Novo Usuário</a>.";        
 ?>
  <div class="msg">&nbsp;<?=$showing?>&nbsp;</div>
  <table width="100%" border="0" cellspacing=1 cellpadding=2>
