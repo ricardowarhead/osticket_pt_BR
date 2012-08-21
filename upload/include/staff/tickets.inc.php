@@ -306,10 +306,10 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     </table>
     <div>
         Período de data:
-        &nbsp;From&nbsp;<input id="sd" name="startDate" value="<?=Format::htmlchars($_REQUEST['startDate'])?>" 
+        &nbsp;De&nbsp;<input id="sd" name="startDate" value="<?=Format::htmlchars($_REQUEST['startDate'])?>" 
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('sd')); return false;"><img src='images/cal.png'border=0 alt=""></a>
-            &nbsp;&nbsp; to &nbsp;&nbsp;
+            &nbsp;&nbsp; Para &nbsp;&nbsp;
             <input id="ed" name="endDate" value="<?=Format::htmlchars($_REQUEST['endDate'])?>" 
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF >
                 <a href="#" onclick="event.cancelBubble=true;calendar(getObj('ed')); return false;"><img src='images/cal.png'border=0 alt=""></a>
