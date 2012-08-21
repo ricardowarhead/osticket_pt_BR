@@ -27,19 +27,19 @@ class StaffNav {
         $this->ptype=$pagetype;
         $tabs=array();
         if($thisuser->isAdmin() && strcasecmp($pagetype,'admin')==0) {
-            $tabs['dashboard']=array('desc'=>'Dashboard','href'=>'admin.php?t=dashboard','title'=>'Admin Dashboard');
-            $tabs['settings']=array('desc'=>'Settings','href'=>'admin.php?t=settings','title'=>'System Settings');
-            $tabs['emails']=array('desc'=>'Emails','href'=>'admin.php?t=email','title'=>'Email Settings');
-            $tabs['topics']=array('desc'=>'Help Topics','href'=>'admin.php?t=topics','title'=>'Help Topics');
-            $tabs['staff']=array('desc'=>'Staff','href'=>'admin.php?t=staff','title'=>'Staff Members');
-            $tabs['depts']=array('desc'=>'Departments','href'=>'admin.php?t=depts','title'=>'Departments');
+            $tabs['dashboard']=array('desc'=>'Painel de Controle','href'=>'admin.php?t=dashboard','title'=>'Admin Dashboard');
+            $tabs['settings']=array('desc'=>'Configurações','href'=>'admin.php?t=settings','title'=>'System Settings');
+            $tabs['emails']=array('desc'=>'E-mails','href'=>'admin.php?t=email','title'=>'Email Settings');
+            $tabs['topics']=array('desc'=>'Tópicos de Ajuda','href'=>'admin.php?t=topics','title'=>'Help Topics');
+            $tabs['staff']=array('desc'=>'Atendente','href'=>'admin.php?t=staff','title'=>'Staff Members');
+            $tabs['depts']=array('desc'=>'Departamentos','href'=>'admin.php?t=depts','title'=>'Departments');
         }else {
             $tabs['tickets']=array('desc'=>'Tickets','href'=>'tickets.php','title'=>'Ticket Queue');
             if($thisuser && $thisuser->canManageKb()){
-             $tabs['kbase']=array('desc'=>'Knowledge Base','href'=>'kb.php','title'=>'Knowledge Base: Premade');
+             $tabs['kbase']=array('desc'=>'Base de Conhecimento','href'=>'kb.php','title'=>'Knowledge Base: Premade');
             }
-            $tabs['directory']=array('desc'=>'Directory','href'=>'directory.php','title'=>'Staff Directory');
-            $tabs['profile']=array('desc'=>'My Account','href'=>'profile.php','title'=>'My Profile');
+            $tabs['directory']=array('desc'=>'Diretório','href'=>'directory.php','title'=>'Staff Directory');
+            $tabs['profile']=array('desc'=>'Minha Conta','href'=>'profile.php','title'=>'My Profile');
         }
         $this->tabs=$tabs;    
     }
