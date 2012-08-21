@@ -79,7 +79,7 @@ if($ticket->isOverdue())
                 <td><?=Format::phone($ticket->getPhoneNumber())?></td>
             </tr>
             <tr>
-                <th>Fonte:</th>
+                <th>Origem:</th>
                 <td><?=$ticket->getSource()?></td>
             </tr>
         </table>
