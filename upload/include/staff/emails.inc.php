@@ -70,7 +70,7 @@ $emails=db_query($sql.' ORDER BY email');
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="delete" value="Delete Emails Selecionados" 
+            <input class="button" type="submit" name="delete" value="Excluir Seleção" 
                 onClick=' return confirm("Tem certeza que deseja excluir os e-mails selecionados?");'>
         </td>
     </tr>
