@@ -47,7 +47,7 @@ $deletable=0;
                 <a href="admin.php?t=templates&sort=name&order=<?=$negorder?><?=$qstr?>" title="Ordenar por nome <?=$negorder?>">Nome</a></th>
             <th width="20" nowrap>Em uso</th>
 	        <th width="170" nowrap>&nbsp;&nbsp;
-                <a href="admin.php?t=templates&sort=date&order=<?=$negorder?><?=$qstr?>" title="Ordenar por Data de Criação <?=$negorder?>">Último Update</a></th>
+                <a href="admin.php?t=templates&sort=date&order=<?=$negorder?><?=$qstr?>" title="Ordenar por Data de Criação <?=$negorder?>">Última Atualização</a></th>
             <th width="170" nowrap>Criado</th>
         </tr>
         <?
