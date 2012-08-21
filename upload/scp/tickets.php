@@ -432,13 +432,13 @@ $stats=db_fetch_array(db_query($sql));
 $nav->setTabActive('tickets');
 
 if($cfg->showAnsweredTickets()) {
-    $nav->addSubMenu(array('desc'=>'Abrir ('.($stats['open']+$stats['answered']).')'
+    $nav->addSubMenu(array('desc'=>'Aberto(s) ('.($stats['open']+$stats['answered']).')'
                             ,'title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
 }else{
     if($stats['open'])
-        $nav->addSubMenu(array('desc'=>'Abrir ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+        $nav->addSubMenu(array('desc'=>'Aberto(s) ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
     if($stats['answered']) {
-        $nav->addSubMenu(array('desc'=>'Respondido ('.$stats['answered'].')',
+        $nav->addSubMenu(array('desc'=>'Respondido(s) ('.$stats['answered'].')',
                            'title'=>'Tickets Respondidos', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
     }
 }
@@ -452,14 +452,14 @@ if($stats['assigned']) {
 }
 
 if($stats['overdue']) {
-    $nav->addSubMenu(array('desc'=>'Vencido ('.$stats['overdue'].')','title'=>'Stale Tickets',
+    $nav->addSubMenu(array('desc'=>'Vencido(s) ('.$stats['overdue'].')','title'=>'Stale Tickets',
                     'href'=>'tickets.php?status=overdue','iconclass'=>'overdueTickets'));
 
     if(!$sysnotice && $stats['overdue']>10)
         $sysnotice=$stats['overdue'] .' tickets vencidos!';
 }
 
-$nav->addSubMenu(array('desc'=>'Tickets Fechados','title'=>'Tickets Fechados', 'href'=>'tickets.php?status=closed', 'iconclass'=>'closedTickets'));
+$nav->addSubMenu(array('desc'=>'Ticket(s) Fechado(s)','title'=>'Tickets Fechados', 'href'=>'tickets.php?status=closed', 'iconclass'=>'closedTickets'));
 
 
 if($thisuser->canCreateTickets()) {
