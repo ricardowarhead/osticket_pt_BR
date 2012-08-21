@@ -28,7 +28,7 @@ if(!$errors && ($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['ticket_id']) && is_n
     $deptID=0;
     $ticket= new Ticket($id);
     if(!$ticket or !$ticket->getDeptId())
-        $errors['err']='Unknown ticket ID#'.$id; //Sucker...invalid id
+        $errors['err']='Ticket desconhecido, ID#'.$id; //Sucker...invalid id
     elseif(!$thisuser->isAdmin()  && (!$thisuser->canAccessDept($ticket->getDeptId()) && $thisuser->getId()!=$ticket->getStaffId()))
         $errors['err']='Acesso negado. Contate o administrador se você acredita que isso é um erro.';
 
@@ -432,13 +432,13 @@ $stats=db_fetch_array(db_query($sql));
 $nav->setTabActive('tickets');
 
 if($cfg->showAnsweredTickets()) {
-    $nav->addSubMenu(array('desc'=>'Open ('.($stats['open']+$stats['answered']).')'
+    $nav->addSubMenu(array('desc'=>'Abrir ('.($stats['open']+$stats['answered']).')'
                             ,'title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
 }else{
     if($stats['open'])
-        $nav->addSubMenu(array('desc'=>'Open ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+        $nav->addSubMenu(array('desc'=>'Abrir ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
     if($stats['answered']) {
-        $nav->addSubMenu(array('desc'=>'Answered ('.$stats['answered'].')',
+        $nav->addSubMenu(array('desc'=>'Respondido ('.$stats['answered'].')',
                            'title'=>'Answered Tickets', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
     }
 }
@@ -447,12 +447,12 @@ if($stats['assigned']) {
     if(!$sysnotice && $stats['assigned']>10)
         $sysnotice=$stats['assigned'].' atribuído para você!';
 
-    $nav->addSubMenu(array('desc'=>'My Tickets ('.$stats['assigned'].')','title'=>'Assigned Tickets',
+    $nav->addSubMenu(array('desc'=>'Meus Tickets ('.$stats['assigned'].')','title'=>'Assigned Tickets',
                     'href'=>'tickets.php?status=assigned','iconclass'=>'assignedTickets'));
 }
 
 if($stats['overdue']) {
-    $nav->addSubMenu(array('desc'=>'Overdue ('.$stats['overdue'].')','title'=>'Stale Tickets',
+    $nav->addSubMenu(array('desc'=>'Vencido ('.$stats['overdue'].')','title'=>'Stale Tickets',
                     'href'=>'tickets.php?status=overdue','iconclass'=>'overdueTickets'));
 
     if(!$sysnotice && $stats['overdue']>10)
