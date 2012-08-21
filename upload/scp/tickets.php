@@ -314,7 +314,7 @@ if($_POST && !$errors):
                     }else{
                         if($ticket->delete()){
                             $page='tickets.inc.php'; //ticket is gone...go back to the listing.
-                            $msg='Ticket Deleted Forever';
+                            $msg='Ticket Excluído Para Sempre';
                             $ticket=null; //clear the object.
                         }else{
                             $errors['err']='Problemas na exclusão do ticket. Tente novamente';
@@ -433,13 +433,13 @@ $nav->setTabActive('tickets');
 
 if($cfg->showAnsweredTickets()) {
     $nav->addSubMenu(array('desc'=>'Abrir ('.($stats['open']+$stats['answered']).')'
-                            ,'title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+                            ,'title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
 }else{
     if($stats['open'])
         $nav->addSubMenu(array('desc'=>'Abrir ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
     if($stats['answered']) {
         $nav->addSubMenu(array('desc'=>'Respondido ('.$stats['answered'].')',
-                           'title'=>'Answered Tickets', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
+                           'title'=>'Tickets Respondidos', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
     }
 }
 
