@@ -395,10 +395,10 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 <a href="tickets.php?sort=date&order=<?=$negorder?><?=$qstr?>" title="Sort By Date <?=$negorder?>">Data</a></th>
 	        <th width="280">Assunto</th>
 	        <th width="120">
-                <a href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" title="Sort By Category <?=$negorder?>">Departarmento</a></th>
+                <a href="tickets.php?sort=dept&order=<?=$negorder?><?=$qstr?>" title="Sort By Category <?=$negorder?>">Departamento</a></th>
 	        <th width="70">
                 <a href="tickets.php?sort=pri&order=<?=$negorder?><?=$qstr?>" title="Sort By Priority <?=$negorder?>">Prioridade</a></th>
-            <th width="180" >Para</th>
+            <th width="180" >Cliente</th>
         </tr>
         <?
         $class = "row1";
