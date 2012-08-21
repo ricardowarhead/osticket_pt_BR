@@ -53,7 +53,7 @@ require(CLIENTINC_DIR.'header.inc.php');
     </fieldset>
     <fieldset>
         <label>&nbsp;</label>
-         <input type="submit" class="button2" value="Checar Estado/Situação">
+         <input type="submit" class="button2" value="Checar Situação">
     </fieldset>
   </form>
 </div>
