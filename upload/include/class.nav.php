@@ -36,7 +36,7 @@ class StaffNav {
         }else {
             $tabs['tickets']=array('desc'=>'Tickets','href'=>'tickets.php','title'=>'Ticket Queue');
             if($thisuser && $thisuser->canManageKb()){
-             $tabs['kbase']=array('desc'=>'Base de Conhecimento','href'=>'kb.php','title'=>'Knowledge Base: Premade');
+             $tabs['kbase']=array('desc'=>'Respostas','href'=>'kb.php','title'=>'Knowledge Base: Premade');
             }
             $tabs['directory']=array('desc'=>'Diretório','href'=>'directory.php','title'=>'Staff Directory');
             $tabs['profile']=array('desc'=>'Minha Conta','href'=>'profile.php','title'=>'My Profile');
