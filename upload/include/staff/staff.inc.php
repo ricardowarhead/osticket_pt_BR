@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Access Denied');
+if(!defined('OSTADMININC') || !$thisuser->isadmin()) die('Acesso Negado');
 
 $rep=null;
 $newuser=true;
@@ -30,7 +30,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
 <form action="admin.php" method="post">
  <input type="hidden" name="do" value="<?=$action?>">
  <input type="hidden" name="a" value="<?=Format::htmlchars($_REQUEST['a'])?>">
- <input type="hidden" name="t" value="staff">
+ <input type="hidden" name="t" value="atendente">
  <input type="hidden" name="staff_id" value="<?=$rep['staff_id']?>">
  <tr><td>
     <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform">
@@ -84,7 +84,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr>
             <th>Telefone do Escritório:</th>
             <td>
-                <input type="text" name="phone" value="<?=$rep['phone']?>" >&nbsp;Ext&nbsp;
+                <input type="text" name="phone" value="<?=$rep['phone']?>" >&nbsp;Ramal&nbsp;
                 <input type="text" name="phone_ext" size=6 value="<?=$rep['phone_ext']?>" >
                     &nbsp;<font class="error">&nbsp;<?=$errors['phone']?></font></td>
         </tr>
@@ -122,7 +122,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         <tr><th><b>Estado da Conta</b></th>
             <td>
                         <input type="radio" name="isactive"  value="1" <?=$rep['isactive']?'checked':''?> /><b>Ativo</b>
-                        <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Bloqueado</b>
+                        <input type="radio" name="isactive"  value="0" <?=!$rep['isactive']?'checked':''?> /><b>Desativar</b>
                         &nbsp;&nbsp;
             </td>
         </tr>
@@ -135,7 +135,7 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
         </tr>
         <tr><th>Listagem de diretório</th>
             <td>
-               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no diretório do atendente
+               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Mostrar o usuário no diretório do atendente 
             </td>
         </tr>
         <tr><th>Modo de Tendência</th>
@@ -148,9 +148,9 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
     </table>
    </td></tr>
    <tr><td style="padding:5px 0 10px 210px;">
-        <input class="button" type="submit" name="submit" value="Submit">
-        <input class="button" type="reset" name="reset" value="Reset">
-        <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="admin.php?t=staff"'>
+        <input class="button" type="submit" name="submit" value="Aplicar">
+        <input class="button" type="reset" name="reset" value="Redefinir">
+        <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="admin.php?t=staff"'>
     </td></tr>
   </form>
 </table>
