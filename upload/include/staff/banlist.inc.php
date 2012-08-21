@@ -127,13 +127,13 @@ $showadd=($errors && $_POST['a']=='add')?true:false;
             <a href="#" onclick="return select_all(document.forms['banlist'],true)">Todos</a>&nbsp;&nbsp;
             <a href="#" onclick="return toogle_all(document.forms['banlist'],true)">Alternar</a>&nbsp;&nbsp;
             <a href="#" onclick="return reset_all(document.forms['banlist'])">Nenhum</a>&nbsp;&nbsp;
-            &nbsp;page:<?=$pageNav->getPageLinks()?>
+            &nbsp;página:<?=$pageNav->getPageLinks()?>
             
         </td>
     </tr>
     <tr>
         <td align="center">
-            <input class="button" type="submit" name="delete" value="Remover da lista" 
+            <input class="button" type="submit" name="delete" value="Remover da Lista" 
                      onClick='return confirm("Tem certeza que deseja remover e-mails selecionados da lista de proibição?");'>
         </td>
     </tr>
