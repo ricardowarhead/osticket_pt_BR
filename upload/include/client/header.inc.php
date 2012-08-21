@@ -14,7 +14,7 @@ header("Content-Type: text/html; charset=UTF-8\r\n");
 <div id="container">
     <div id="header">
         <a id="logo" href="index.php" title="Support Center"><img src="./images/logo2.jpg" border=0 alt="Support Center"></a>
-        <p>SISTEMA<span> DE SUPORTE PARA TICKET</span></p>
+        <p>SISTEMA DE SUPORTE PARA<span> TICKET</span></p>
     </div>
     <ul id="nav">
          <?                    
