@@ -457,7 +457,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
                 <a href="#" onclick="return reset_all(document.forms['tickets'])">Nenhum</a>&nbsp;
                 <a href="#" onclick="return toogle_all(document.forms['tickets'],true)">Alternar</a>&nbsp;
             <?}?>
-            page:<?=$pageNav->getPageLinks()?>
+            página:<?=$pageNav->getPageLinks()?>
         </td></tr>
         <? if($canClose or $canDelete) { ?>
         <tr><td align="center"> <br>
