@@ -40,7 +40,7 @@ require(CLIENTINC_DIR.'header.inc.php');
 </div>
 <div class="rcol">
   <img src="./images/ticket_status_icon.jpg" width="48" height="48" align="left" style="padding-bottom:150px;">
-  <h3>Check Ticket Status</h3>Nós fornecemos arquivos e histórico de todos os seus pedidos de suporte completo com respostas.
+  <h3>Checar Situação de Ticket</h3>Nós fornecemos arquivos e histórico de todos os seus pedidos de suporte completo com respostas.
   <br /><br />
   <form class="status_form" action="login.php" method="post">
     <fieldset>
