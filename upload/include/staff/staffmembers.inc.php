@@ -25,7 +25,7 @@ $showing=($num=db_num_rows($users))?"Membros do atendimento":"Atendente não enc
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th>Nome Completo</th>
-            <th>Nonme de usuário</th>
+            <th>Nome de usuário</th>
             <th>Estado</th>
             <th>Grupo</th>
             <th>Departamento</th>
