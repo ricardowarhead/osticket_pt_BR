@@ -59,7 +59,7 @@ require_once(STAFFINC_DIR.'header.inc.php');
     <form action="directory.php" method="POST" >
     <input type='hidden' name='a' value='search'>
     Procurar por :&nbsp;<input type="text" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>">
-    Departamento.
+    Departamento:
     <select name="dept">
             <option value=0>Todos os departamentos</option>
             <?
