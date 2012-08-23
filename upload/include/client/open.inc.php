@@ -111,7 +111,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <?}?>
     <?if($cfg && $cfg->enableCaptcha() && (!$thisclient || !$thisclient->isValid())) {
         if($_POST && $errors && !$errors['captcha'])
-            $errors['captcha']='Please re-enter the text again';
+            $errors['captcha']='Por favor volte a digitar o texto novamente';
         ?>
     <tr>
         <th valign="top">Texto da imagem:</th>
@@ -125,7 +125,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td></td>
         <td>
-            <input class="button" type="submit" name="submit_x" value="Submeter Ticket">
+            <input class="button" type="submit" name="submit_x" value="Enviar Ticket">
             <input class="button" type="reset" value="Redefinir">
             <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="index.php"'>    
         </td>
