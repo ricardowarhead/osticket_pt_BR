@@ -18,7 +18,7 @@
 require_once('staff.inc.php');
 $msg='';
 if($_POST && $_POST['id']!=$thisuser->getId()) { //Check dummy ID used on the form.
- $errors['err']='Internal Error. Action Denied';
+ $errors['err']='Erro Interno. Acesso Negado';
 }
 
 if(!$errors && $_POST) { //Handle post
@@ -40,28 +40,28 @@ if(!$errors && $_POST) { //Handle post
                 $thisuser->reload();
                 $_SESSION['TZ_OFFSET']=$thisuser->getTZoffset();
                 $_SESSION['daylight']=$thisuser->observeDaylight();
-                $msg='Preference Updated Successfully';
+                $msg='Preferências Atualizadas com Sucesso';
             }else{
-                $errors['err']='Preference update error.';
+                $errors['err']='Erro na atualização de Preferências.';
             }
         }
         break;
     case 'passwd':
         if(!$_POST['password'])
-            $errors['password']='Current password required';        
+            $errors['password']='Senha atual';        
         if(!$_POST['npassword'])
-            $errors['npassword']='New password required';
+            $errors['npassword']='Nova senha';
         elseif(strlen($_POST['npassword'])<6)
-             $errors['npassword']='Must be atleast 6 characters';
+             $errors['npassword']='Deve ter pelo menos 6 caracteres';
         if(!$_POST['vpassword'])
-            $errors['vpassword']='Confirm new password';
+            $errors['vpassword']='Confirme a nova senha';
         if(!$errors) {
             if(!$thisuser->check_passwd($_POST['password'])){
-                $errors['password']='Valid password required';
+                $errors['password']='É necessária uma senha válida';
             }elseif(strcmp($_POST['npassword'],$_POST['vpassword'])){
-                $errors['npassword']=$errors['vpassword']='New password(s) don\'t match';
+                $errors['npassword']=$errors['vpassword']='Nova senha não corresponde';
             }elseif(!strcasecmp($_POST['password'],$_POST['npassword'])){
-                $errors['npassword']='New password is same as old password';
+                $errors['npassword']='A nova senha é a antiga senha';
             }
         }
         if(!$errors) {       
@@ -69,32 +69,32 @@ if(!$errors && $_POST) { //Handle post
                 ',change_passwd=0, passwd='.db_input(MD5($_POST['npassword'])).
                 ' WHERE staff_id='.db_input($thisuser->getId()); 
             if(db_query($sql) && db_affected_rows()){
-                $msg='Password Changed Successfully';
+                $msg='Senha Trocada com Sucesso';
             }else{
-                $errors['err']='Unable to complete password change. Internal error.';
+                $errors['err']='Não foi possível completar a troca de senha. Erro interno.';
             }
         }
         break;
     case 'info':
         //Update profile info
         if(!$_POST['firstname']) {
-            $errors['firstname']='First name required';
+            $errors['firstname']='Primeiro nomeFirst name required';
         }
         if(!$_POST['lastname']) {
-            $errors['lastname']='Last name required';
+            $errors['lastname']='Último nomeLast name required';
         }
         if(!$_POST['email'] || !Validator::is_email($_POST['email'])) {
-            $errors['email']='Valid email required';
+            $errors['email']='E-mail Válido';
         }
         if($_POST['phone'] && !Validator::is_phone($_POST['phone'])) {
-            $errors['phone']='Enter a valid number';
+            $errors['phone']='Digite um número válido';
         }
         if($_POST['mobile'] && !Validator::is_phone($_POST['mobile'])) {
-            $errors['mobile']='Enter a valid number';
+            $errors['mobile']='Digite um número válido';
         }
 
         if($_POST['phone_ext'] && !is_numeric($_POST['phone_ext'])) {
-            $errors['phone_ext']='Invalid ext.';
+            $errors['phone_ext']='Inválido.';
         }
 
         if(!$errors) {
@@ -111,14 +111,14 @@ if(!$errors && $_POST) { //Handle post
             if(db_query($sql) && db_affected_rows()){
                 $msg='Profile Updated Successfully';
             }else{
-                $errors['err']='Error(s) occured. Profile NOT updated';
+                $errors['err']='Erros ocorreram. Perfil NÃO atualizado';
             }
         }else{
-            $errors['err']='Error(s) below occured. Try again';
+            $errors['err']='Erros ocorreram abaixo. Tente novamente';
         }
         break;
     default:
-        $errors['err']='Uknown action';
+        $errors['err']='Ação Desconhecida';
     endswitch;
     //Reload user info if no errors.
     if(!$errors) {
@@ -130,12 +130,12 @@ if(!$errors && $_POST) { //Handle post
 
 //Tab and Nav options.
 $nav->setTabActive('profile');
-$nav->addSubMenu(array('desc'=>'My Profile','href'=>'profile.php','iconclass'=>'user'));
-$nav->addSubMenu(array('desc'=>'Preferences','href'=>'profile.php?t=pref','iconclass'=>'userPref'));
-$nav->addSubMenu(array('desc'=>'Change Password','href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
+$nav->addSubMenu(array('desc'=>'Perfil','href'=>'profile.php','iconclass'=>'user'));
+$nav->addSubMenu(array('desc'=>'Preferências','href'=>'profile.php?t=pref','iconclass'=>'userPref'));
+$nav->addSubMenu(array('desc'=>'Trocar Senha','href'=>'profile.php?t=passwd','iconclass'=>'userPasswd'));
 //Warnings if any.
 if($thisuser->onVacation()){
-        $warn.='Welcome back! You are listed as \'on vacation\' Please let admin or your manager know that you are back.';
+        $warn.='Bem vindo de volta! Você está listado como \'de férias\' por favor, deixe o administrador ou o gerente saber que você está de volta.';
 }
 
 $rep=($errors && $_POST)?Format::input($_POST):Format::htmlchars($thisuser->getData());
@@ -155,7 +155,7 @@ switch(strtolower($_REQUEST['t'])) {
 }
 //Forced password Change.
 if($thisuser->forcePasswdChange()){
-    $errors['err']='You must change your password to continue.';
+    $errors['err']='Você deve mudar a sua senha para continuar.';
     $inc='changepasswd.inc.php';
 }
 
