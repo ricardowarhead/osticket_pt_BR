@@ -273,7 +273,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
 </div>
 <div id='advance' style="display:<?=$basic_display?'none':'block'?>">
  <form action="tickets.php" method="get">
- <input type="hidden" name="a" value="search">
+ <input type="hidden" name="a" value="pesquisar">
   <table>
     <tr>
         <td>Consulta: </td><td><input type="text" id="query" name="query" value="<?=Format::htmlchars($_REQUEST['query'])?>"></td>
@@ -334,7 +334,7 @@ $basic_display=!isset($_REQUEST['advance_search'])?true:false;
     	    <option value="ID" <?= $sort== 'ID' ?'selected':''?>>Ticket #</option>
             <option value="pri" <?= $sort == 'pri' ?'selected':''?>>Prioridade</option>
             <option value="date" <?= $sort == 'date' ?'selected':''?>>Data</option>
-            <option value="dept" <?= $sort == 'dept' ?'selected':''?>>Departamento.</option>
+            <option value="dept" <?= $sort == 'dept' ?'selected':''?>>Departamento</option>
         </select>
         <select name="order">
             <option value="DESC"<?= $_REQUEST['order'] == 'DESC' ?'selected':''?>>Anterior</option>
