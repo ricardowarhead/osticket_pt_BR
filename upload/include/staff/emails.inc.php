@@ -65,7 +65,7 @@ $emails=db_query($sql.' ORDER BY email');
             Select:&nbsp;
             <a href="#" onclick="return select_all(document.forms['email'],true)">Todos</a>&nbsp;
             <a href="#" onclick="return reset_all(document.forms['email'])">Nenhum</a>&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['email'],true)">Alterne</a>&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['email'],true)">Alternar</a>&nbsp;
         </td>
     </tr>
     <tr>
