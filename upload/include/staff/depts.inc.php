@@ -69,9 +69,9 @@ $depts=db_query($sql.' GROUP BY dept.dept_id ORDER BY dept_name');
     <tr>
         <td style="padding-left:20px">
             Select:&nbsp;
-            <a href="#" onclick="return select_all(document.forms['depts'],true)">All</a>&nbsp;&nbsp;
-            <a href="#" onclick="return reset_all(document.forms['depts'])">None</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['depts'],true)">Toggle</a>&nbsp;&nbsp;
+            <a href="#" onclick="return select_all(document.forms['depts'],true)">Todos</a>&nbsp;&nbsp;
+            <a href="#" onclick="return reset_all(document.forms['depts'])">Nenhum</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['depts'],true)">Alternar</a>&nbsp;&nbsp;
         </td>
     </tr>
     <tr>
