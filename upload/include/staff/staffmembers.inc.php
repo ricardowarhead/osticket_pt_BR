@@ -72,7 +72,7 @@ $showing=($num=db_num_rows($users))?"Membros do atendimento":"Atendente não enc
         <div style="margin-left:20px;">
             Selecionar:&nbsp;
             <a href="#" onclick="return select_all(document.forms['staff'],true)">Todos</a>&nbsp;&nbsp;
-            <a href="#" onclick="return toogle_all(document.forms['staff'],true)">Alterne</a>&nbsp;&nbsp;
+            <a href="#" onclick="return toogle_all(document.forms['staff'],true)">Alternar</a>&nbsp;&nbsp;
             <a href="#" onclick="return reset_all(document.forms['staff'])">Nenhum</a>&nbsp;&nbsp;
         </div>
     </td></tr>
