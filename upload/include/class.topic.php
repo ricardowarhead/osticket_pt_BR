@@ -108,25 +108,25 @@ class Topic {
 
 
         if($id && $id!=$vars['topic_id'])
-            $errors['err']='Internal error. Try again';
+            $errors['err']='Erro interno. Tente novamente.';
 
         if(!$vars['topic'])
-            $errors['topic']='Help topic required';
+            $errors['topic']='Tópico de ajuda requerido';
         elseif(strlen($vars['topic'])<5)
-            $errors['topic']='Topic is too short. 5 chars minimum';
+            $errors['topic']='Tema é muito curto. Mínimo de 5 caracteres';
         else{
             $sql='SELECT topic_id FROM '.TOPIC_TABLE.' WHERE topic='.db_input(Format::striptags($vars['topic']));
             if($id)
                 $sql.=' AND topic_id!='.db_input($id);
             if(($res=db_query($sql)) && db_num_rows($res))
-                $errors['topic']='Topic already exists';
+                $errors['topic']='Tópico já existe';
         }
             
         if(!$vars['dept_id'])
-            $errors['dept_id']='You must select a department';
+            $errors['dept_id']='Você deve selecionar um departamento';
             
         if(!$vars['priority_id'])
-            $errors['priority_id']='You must select a priority';
+            $errors['priority_id']='Você deve selecionar uma prioridade';
             
         if(!$errors) {
             $sql='updated=NOW(),topic='.db_input(Format::striptags($vars['topic'])).
@@ -137,11 +137,11 @@ class Topic {
             if($id) {
                 $sql='UPDATE '.TOPIC_TABLE.' SET '.$sql.' WHERE topic_id='.db_input($id);
                 if(!db_query($sql) || !db_affected_rows())
-                    $errors['err']='Unable to update topic. Internal error occured';
+                    $errors['err']='Não foi possível atualizar o tópico. Erro interno';
             }else{
                 $sql='INSERT INTO '.TOPIC_TABLE.' SET '.$sql.',created=NOW()';
                 if(!db_query($sql) or !($topicID=db_insert_id()))
-                    $errors['err']='Unable to create the topic. Internal error';
+                    $errors['err']='Não foi possível criar o tópico. Erro interno';
                 else
                     return $topicID;
             }
