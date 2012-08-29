@@ -40,9 +40,9 @@ class Validator {
         $this->errors=array();
         //Check the input and make sure the fields are specified.
         if(!$source || !is_array($source))
-            $this->errors['err']='Invalid input';
+            $this->errors['err']='Entrada inválida';
         elseif(!$this->fields || !is_array($this->fields))
-            $this->errors['err']='No fields setup';
+            $this->errors['err']='Não configuração de campos';
         //Abort on error
         if($this->errors)
             return false;
@@ -106,18 +106,18 @@ class Validator {
                 break;
             case 'password':
                 if(strlen($this->input[$k])<5)
-                    $this->errors[$k]=$field['error'].' (5 chars min)';
+                    $this->errors[$k]=$field['error'].' (mínimo de 5 caracteres)';
                 break;
             case 'username':
                 if(strlen($this->input[$k])<3)
-                    $this->errors[$k]=$field['error'].' (3 chars min)';
+                    $this->errors[$k]=$field['error'].' (mínimo de 3 caracteres)';
                 break;
             case 'zipcode':
                 if(!is_numeric($this->input[$k]) || (strlen($this->input[$k])!=5))
                     $this->errors[$k]=$field['error'];   
                 break;
             default://If param type is not set...or handle..error out...
-                $this->errors[$k]=$field['error'].' (type not set)';
+                $this->errors[$k]=$field['error'].' (tipo não definido)';
             endswitch;
         }
         return ($this->errors)?(FALSE):(TRUE);
