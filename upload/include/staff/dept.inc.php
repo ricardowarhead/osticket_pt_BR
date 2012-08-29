@@ -86,11 +86,11 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
         <tr>
             <th valign="top"><br/>Assinatura do departamento:</th>
             <td>
-                <i>Required when Dept is public</i>&nbsp;&nbsp;&nbsp;<font class="error"><?=$errors['dept_signature']?></font><br/>
+                <i>Necessário quando o departamento é público</i>&nbsp;&nbsp;&nbsp;<font class="error"><?=$errors['dept_signature']?></font><br/>
                 <textarea name="dept_signature" cols="21" rows="5" style="width: 60%;"><?=$info['dept_signature']?></textarea>
                 <br>
                 <input type="checkbox" name="can_append_signature" <?=$info['can_append_signature'] ?'checked':''?> > 
-                can be appended to responses.&nbsp;(available as a choice for public departments)  
+                pode ser acrescentado às respostas.&nbsp;(disponível como opção para departamentos públicos)  
             </td>
         </tr>
         <tr><th>Modelos de e-mail:</th>
@@ -111,19 +111,19 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
         </tr>
         <tr class="header"><td colspan=2>Resposta automática</td></tr>
         <tr class="subheader"><td colspan=2>
-            Configurações de auto-resposta globais na seção de preferência devem estar habilitadas para Dept 'Ativar' para que a configuração tenha efeito.
+            Configurações de auto-resposta globais em Preferências deve estar como 'Ativado' para que a configuração tenha efeito.
             </td>
         </tr>
         <tr><th>Novo Ticket:</th>
             <td>
-                <input type="radio" name="ticket_auto_response"  value="1"   <?=$info['ticket_auto_response']?'checked':''?> />Ativar
-                <input type="radio" name="ticket_auto_response"  value="0"   <?=!$info['ticket_auto_response']?'checked':''?> />Desativar
+                <input type="radio" name="ticket_auto_response"  value="1"   <?=$info['ticket_auto_response']?'checked':''?> />Ativado
+                <input type="radio" name="ticket_auto_response"  value="0"   <?=!$info['ticket_auto_response']?'checked':''?> />Desativado
             </td>
         </tr>
         <tr><th>Nova Mensagem:</th>
             <td>
-                <input type="radio" name="message_auto_response"  value="1"   <?=$info['message_auto_response']?'checked':''?> />Ativar
-                <input type="radio" name="message_auto_response"  value="0"   <?=!$info['message_auto_response']?'checked':''?> />Desativar
+                <input type="radio" name="message_auto_response"  value="1"   <?=$info['message_auto_response']?'checked':''?> />Ativado
+                <input type="radio" name="message_auto_response"  value="0"   <?=!$info['message_auto_response']?'checked':''?> />Desativado
             </td>
         </tr>
         <tr>
