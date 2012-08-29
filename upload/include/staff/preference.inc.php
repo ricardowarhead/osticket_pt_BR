@@ -490,8 +490,8 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
  </td></tr>
  <tr>
     <td style="padding:10px 0 10px 240px;">
-        <input class="button" type="submit" name="submit" value="Save Changes">
-        <input class="button" type="reset" name="reset" value="Reset Changes">
+        <input class="button" type="submit" name="submit" value="Salvar Mudanças">
+        <input class="button" type="reset" name="reset" value="Redefinir Mudanças">
     </td>
  </tr>
  </form>
