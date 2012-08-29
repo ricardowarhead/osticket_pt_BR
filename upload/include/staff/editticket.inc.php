@@ -111,7 +111,7 @@ if($_POST && $errors){
                 }
                  while (list($topicId,$topic,$active) = db_fetch_row($services)){
                     $selected = ($info['topicId']==$topicId)?'selected':'';
-                    $status=$active?'Active':'Inactive';
+                    $status=$active?'Ativo':'Inativo';
                     ?>
                     <option value="<?=$topicId?>"<?=$selected?>><?=$topic?>&nbsp;&nbsp;&nbsp;(<?=$status?>)</option>
                 <?
