@@ -49,7 +49,7 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                     <?
                     }?>
                  </select>
-                 &nbsp;<font class="error">*&nbsp;<?=$errors['email_id']?></font>&nbsp;(outgoing email)
+                 &nbsp;<font class="error">*&nbsp;<?=$errors['email_id']?></font>&nbsp;(e-mail enviado)
             </td>
         </tr>    
         <? if($info['dept_id']) { //update 
@@ -106,7 +106,7 @@ $info=($errors && $_POST)?Format::input($_POST):Format::htmlchars($info);
                     <?
                     }?>
                 </select><font class="error">&nbsp;<?=$errors['tpl_id']?></font><br/>
-                <i>Used for outgoing emails,alerts and notices to user and staff.</i>
+                <i>Utilizado para e-mails de saída, alertas e notícias para o usuário e atendentes relacionados.</i>
             </td>
         </tr>
         <tr class="header"><td colspan=2>Resposta automática</td></tr>
