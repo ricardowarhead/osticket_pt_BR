@@ -481,8 +481,8 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
         <tr><th valign="top">Erros do sistema:</th>
             <td><i>Habilitar erros para serem eviados para o e-mail do administrador definido acima</i><br>
               <input type="checkbox" name="send_sys_errors" <?=$config['send_sys_errors']?'checked':'checked'?> disabled>Erros do sistema
-              <input type="checkbox" name="send_sql_errors" <?=$config['send_sql_errors']?'checked':''?>>SQL erros
-              <input type="checkbox" name="send_login_errors" <?=$config['send_login_errors']?'checked':''?>>Excessivas tentativas de entrar
+              <input type="checkbox" name="send_sql_errors" <?=$config['send_sql_errors']?'checked':''?>>Erros de SQL
+              <input type="checkbox" name="send_login_errors" <?=$config['send_login_errors']?'checked':''?>>Excessivas tentativas de entrada
             </td>
         </tr> 
         
