@@ -472,7 +472,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
             <td>
               <input type="radio" name="overdue_alert_active"  value="1"   <?=$config['overdue_alert_active']?'checked':''?> />Habilitado
               <input type="radio" name="overdue_alert_active"  value="0"   <?=!$config['overdue_alert_active']?'checked':''?> />Desabilitado
-              <br><i>E-maiol do administrador recebe um e-mail por padrão. Selecione mais destinatários abaixo</i>&nbsp;<font class="error">&nbsp;<?=$errors['overdue_alert_active']?></font><br>
+              <br><i>E-mail do administrador recebe um e-mail por padrão. Selecione mais destinatários abaixo</i>&nbsp;<font class="error">&nbsp;<?=$errors['overdue_alert_active']?></font><br>
               <input type="checkbox" name="overdue_alert_assigned" <?=$config['overdue_alert_assigned']?'checked':''?>> Atendente atribuído
               <input type="checkbox" name="overdue_alert_dept_manager" <?=$config['overdue_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos
               <input type="checkbox" name="overdue_alert_dept_members" <?=$config['overdue_alert_dept_members']?'checked':''?>> Membros de departalmento (spammy)
