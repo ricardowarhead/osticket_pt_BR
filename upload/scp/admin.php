@@ -25,14 +25,14 @@ if(!$thisuser or !$thisuser->isadmin()){
 
 //Some security related warnings - bitch until fixed!!! :)
 if(defined('THIS_VERSION') && strcasecmp($cfg->getVersion(),THIS_VERSION)) {
-    $sysnotice=sprintf('O script é a versão %s, enquanto o banco de dados é a versão %s.',THIS_VERSION,$cfg->getVersion());
+    $sysnotice=sprintf('O script ï¿½ a versï¿½o %s, enquanto o banco de dados ï¿½ a versï¿½o %s.',THIS_VERSION,$cfg->getVersion());
     if(file_exists('../setup/'))
         $sysnotice.=' Possivelmente causada por estar imcompleta <a href="../setup/upgrade.php">upgrade</a>.';
     $errors['err']=$sysnotice; 
 }elseif(!$cfg->isHelpDeskOffline()) {
 
     if(file_exists('../setup/')){
-        $sysnotice='Por favor, espere um minuto para excluir <strong>setup/install</strong> este diretório por razões de segurança.';
+        $sysnotice='Por favor, espere um minuto para excluir <strong>setup/install</strong> este diretï¿½rio por razï¿½es de seguranï¿½a.';
     }else{
 
         if(CONFIG_FILE && file_exists(CONFIG_FILE) && is_writable(CONFIG_FILE)) {
@@ -40,14 +40,14 @@ if(defined('THIS_VERSION') && strcasecmp($cfg->getVersion(),THIS_VERSION)) {
             clearstatcache(); //clear the cache!
             $perms = @fileperms(CONFIG_FILE);
             if(($perms & 0x0002) || ($perms & 0x0010)) { 
-                $sysnotice=sprintf('Por favor, mude a permissão de configuração do arquivo (%s) para remover a escrita e o acesso. e.g <i>chmod 644 %s</i>',
+                $sysnotice=sprintf('Por favor, mude a permissï¿½o de configuraï¿½ï¿½o do arquivo (%s) para remover a escrita e o acesso. e.g <i>chmod 644 %s</i>',
                                 basename(CONFIG_FILE),basename(CONFIG_FILE));
             }
         }
 
     }
     if(!$sysnotice && ini_get('register_globals'))
-        $sysnotice='Por favor, cosidere desligar o registro global se possível.';
+        $sysnotice='Por favor, cosidere desligar o registro global se possï¿½vel.';
 }
 
 //Access checked out OK...lets do the do 
@@ -71,7 +71,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
         case 'pref':
             //Do the dirty work behind the scenes.
             if($cfg->updatePref($_POST,$errors)){
-                $msg='Preferências atualizadas com sucesso';
+                $msg='Preferï¿½ncias atualizadas com sucesso';
                 $cfg->reload();
             }else{
                 $errors['err']=$errors['err']?$errors['err']:'Erro interno';
@@ -84,18 +84,18 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     $_POST['upload_dir'] = realpath($_POST['upload_dir']);
 
                 if(!$_POST['upload_dir'] or !is_writable($_POST['upload_dir'])) {
-                    $errors['upload_dir']='Diretório deve ser válido e gravável';
+                    $errors['upload_dir']='Diretï¿½rio deve ser vï¿½lido e gravï¿½vel';
                     if($_POST['allow_attachments'])
-                        $errors['allow_attachments']='Diretório de upload inválido';
+                        $errors['allow_attachments']='Diretï¿½rio de upload invï¿½lido';
                 }elseif(!ini_get('file_uploads')) {
-                    $errors['allow_attachments']='O \'file_uploads\' direcionamento está desabilitado em php.ini';
+                    $errors['allow_attachments']='O \'file_uploads\' direcionamento estï¿½ desabilitado em php.ini';
                 }
                 
                 if(!is_numeric($_POST['max_file_size']))
-                    $errors['max_file_size']='Tamanho máximo de arquivo exigido';
+                    $errors['max_file_size']='Tamanho mï¿½ximo de arquivo exigido';
 
                 if(!$_POST['allowed_filetypes'])
-                    $errors['allowed_filetypes']='Extensões de arquivos permitidos necessária';
+                    $errors['allowed_filetypes']='Extensï¿½es de arquivos permitidos necessï¿½ria';
             }
             if(!$errors) {
                $sql= 'UPDATE '.CONFIG_TABLE.' SET allow_attachments='.db_input(isset($_POST['allow_attachments'])?1:0).
@@ -110,9 +110,9 @@ if($_POST && $_REQUEST['t'] && !$errors):
                //echo $sql;
                if(db_query($sql)) {
                    $cfg->reload();
-                   $msg='Configurações de anexos atualizadas';
+                   $msg='Configuraï¿½ï¿½es de anexos atualizadas';
                }else{
-                    $errors['err']='Erro de atualização!';
+                    $errors['err']='Erro de atualizaï¿½ï¿½o!';
                }
             }else {
                 $errors['err']='Erro ocorrido. Consulte as mensagens de erro abaixo.';
@@ -132,11 +132,11 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if(Api::setPassphrase(trim($_POST['phrase']),$errors))
                         $msg='Dica de senha API atualizada com sucesso.';
                     elseif(!$errors['err'])
-                        $errors['err']='Erro na atualização da dica de senha. Tente novamente.';
+                        $errors['err']='Erro na atualizaï¿½ï¿½o da dica de senha. Tente novamente.';
                     break;
                 case 'mass_process':
                     if(!$_POST['ids'] || !is_array($_POST['ids'])) {
-                        $errors['err']='Você deve selecionar pelo menos uma entrada para processar.';
+                        $errors['err']='Vocï¿½ deve selecionar pelo menos uma entrada para processar.';
                     }else{
                         $count=count($_POST['ids']);
                         $ids=implode(',',$_POST['ids']);
@@ -146,14 +146,14 @@ if($_POST && $_REQUEST['t'] && !$errors):
                             if($resp && ($i=db_affected_rows())){
                                 $msg="$i de $count da(s) chave(s) selecionada(s) atualizada(s)";
                             }else {
-                                $errors['err']='Não é possível excluir a(s) chave(s) selecionada(s).';
+                                $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir a(s) chave(s) selecionada(s).';
                              }
                         }elseif($_POST['delete']){
                             $resp=db_query('DELETE FROM '.API_KEY_TABLE.'  WHERE id IN ('.$ids.')');
                             if($resp && ($i=db_affected_rows())){
-                                $msg="$i de $count da(s) chave(s) selecionadas excluídas";
+                                $msg="$i de $count da(s) chave(s) selecionadas excluï¿½das";
                             }else{
-                                $errors['err']='Não é possível excluir a(s) chave(s) selecionadas. Tente novamente.';
+                                $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir a(s) chave(s) selecionadas. Tente novamente.';
                             }
                         }else {
                             $errors['err']='Comando desconhecido.';
@@ -161,7 +161,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     }
                     break;
                 default:
-                    $errors['err']='Ação desconhecida '.$_POST['do'];
+                    $errors['err']='Aï¿½ï¿½o desconhecida '.$_POST['do'];
             }
             break;
         case 'banlist': //BanList.
@@ -169,26 +169,26 @@ if($_POST && $_REQUEST['t'] && !$errors):
             switch(strtolower($_POST['a'])) {
                 case 'add':
                     if(!$_POST['email'] || !Validator::is_email($_POST['email']))
-                        $errors['err']='Por favor, entre com um e-mail válido.';
+                        $errors['err']='Por favor, entre com um e-mail vï¿½lido.';
                     elseif(BanList::isbanned($_POST['email']))
-                        $errors['err']='E-mail já banido';
+                        $errors['err']='E-mail jï¿½ banido';
                     else{
                         if(BanList::add($_POST['email'],$thisuser->getName()))
                             $msg='E-mail adicionado na banlist';
                         else
-                            $errors['err']='Não é possível adicionar o e-mail na banlist. Tente novamente.';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel adicionar o e-mail na banlist. Tente novamente.';
                     }
                     break;
                 case 'remove':
                     if(!$_POST['ids'] || !is_array($_POST['ids'])) {
-                        $errors['err']='Você deve selecionar pelo menos um e-mail.';
+                        $errors['err']='Vocï¿½ deve selecionar pelo menos um e-mail.';
                     }else{
                         //TODO: move mass remove to Banlist class when needed elsewhere...at the moment this is the only place.
                         $sql='DELETE FROM '.BANLIST_TABLE.' WHERE id IN ('.implode(',',$_POST['ids']).')';
                         if(db_query($sql) && ($num=db_affected_rows()))
                             $msg="$num de $count do(s) e-mail(s) selecionado(s) foi/foram removido(s) da banlist";
                         else
-                            $errors['err']='Não é possível remover o(s) e-mail(s) selecionado(s). Tente novamente.';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel remover o(s) e-mail(s) selecionado(s). Tente novamente.';
                     }
                     break;
                 default:
@@ -205,7 +205,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         if($email->update($_POST,$errors))
                             $msg='E-mail atualizado com sucesso.';
                         elseif(!$errors['err'])
-                            $errors['err']='Erro na atualização de e-mail.';
+                            $errors['err']='Erro na atualizaï¿½ï¿½o de e-mail.';
                     }else{
                         $errors['err']='Erro interno.';
                     }
@@ -214,27 +214,27 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if(Email::create($_POST,$errors))
                         $msg='E-mail adicionado com sucesso.';
                     elseif(!$errors['err'])
-                         $errors['err']='Não é possível adicionar e-mail. Erro interno.';
+                         $errors['err']='Nï¿½o ï¿½ possï¿½vel adicionar e-mail. Erro interno.';
                     break;
                 case 'mass_process':
                     if(!$_POST['ids'] || !is_array($_POST['ids'])) {
-                        $errors['err']='Você deve selecionar pelo menos um e-mail para processar.';
+                        $errors['err']='Vocï¿½ deve selecionar pelo menos um e-mail para processar.';
                     }else{
                         $count=count($_POST['ids']);
                         $ids=implode(',',$_POST['ids']);
                         $sql='SELECT count(dept_id) FROM '.DEPT_TABLE.' WHERE email_id IN ('.$ids.') OR autoresp_email_id IN ('.$ids.')';
                         list($depts)=db_fetch_row(db_query($sql));
                         if($depts>0){
-                            $errors['err']='Um ou mais e-mails selecionados estão sendo usados por um Departamento. Remover a associação primeiro.';    
+                            $errors['err']='Um ou mais e-mails selecionados estï¿½o sendo usados por um Departamento. Remover a associaï¿½ï¿½o primeiro.';    
                         }elseif($_POST['delete']){
                             $i=0;
                             foreach($_POST['ids'] as $k=>$v) {
                                 if(Email::deleteEmail($v)) $i++;
                             }
                             if($i>0){
-                                $msg="$i de $count do(s) e-mail(s) selecionado(s) foi/foram excluído(s).";
+                                $msg="$i de $count do(s) e-mail(s) selecionado(s) foi/foram excluï¿½do(s).";
                             }else{
-                                $errors['err']='Não é possível excluir o(s) e-mail(s) selecionado(s).';
+                                $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir o(s) e-mail(s) selecionado(s).';
                             }
                         }else{
                             $errors['err']='Comando desconhecido';
@@ -242,7 +242,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     }
                     break;
                 default:
-                    $errors['err']='Tópico de ação desconhecida';
+                    $errors['err']='Tï¿½pico de aï¿½ï¿½o desconhecida';
             }
             break;
         case 'templates':
@@ -254,7 +254,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if(($tid=Template::create($_POST,$errors))){
                         $msg='Modelo criado com sucesso.';
                     }elseif(!$errors['err']){
-                        $errors['err']='Erro na criação de modelo - tente novamente';
+                        $errors['err']='Erro na criaï¿½ï¿½o de modelo - tente novamente';
                     }
                     break;
                 case 'update':
@@ -268,35 +268,35 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         }elseif($template->update($_POST,$errors)){
                             $msg='Modelo atualizado com sucesso';
                         }elseif(!$errors['err']){
-                            $errors['err']='Erro na atualização de modelo. Tente novamente.';
+                            $errors['err']='Erro na atualizaï¿½ï¿½o de modelo. Tente novamente.';
                         }
                     }
                     break;
                 case 'mass_process':
                     if(!$_POST['ids'] || !is_array($_POST['ids'])) {
-                        $errors['err']='Você deve selecionar pelo menos um modelo.';
+                        $errors['err']='Vocï¿½ deve selecionar pelo menos um modelo.';
                     }elseif(in_array($cfg->getDefaultTemplateId(),$_POST['ids'])){
-                        $errors['err']='Você não pode excluir o modelo padrão.';
+                        $errors['err']='Vocï¿½ nï¿½o pode excluir o modelo padrï¿½o.';
                     }else{
                         $count=count($_POST['ids']);
                         $ids=implode(',',$_POST['ids']);
                         $sql='SELECT count(dept_id) FROM '.DEPT_TABLE.' WHERE tpl_id IN ('.$ids.')';
                         list($tpl)=db_fetch_row(db_query($sql));
                         if($tpl>0){
-                            $errors['err']='Um ou mais modelos selecioados estão sendo usados por um Departamento. Remover associação primeiro.';
+                            $errors['err']='Um ou mais modelos selecioados estï¿½o sendo usados por um Departamento. Remover associaï¿½ï¿½o primeiro.';
                         }elseif($_POST['delete']){
                             $sql='DELETE FROM '.EMAIL_TEMPLATE_TABLE.' WHERE tpl_id IN ('.$ids.') AND tpl_id!='.db_input($cfg->getDefaultTemplateId());
                             if(($result=db_query($sql)) && ($i=db_affected_rows()))
                                 $msg="$i de $count do(s) modelo(s) selecionado(s) foi/foram deletado(s).";
                             else
-                                $errors['err']='Não é possível excluir o(s) modelo(s) selecionado(s).';
+                                $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir o(s) modelo(s) selecionado(s).';
                         }else{
                             $errors['err']='Comando desconhecido.';
                         }
                     }
                     break;
                 default:
-                    $errors['err']='Ação desconhecida.';
+                    $errors['err']='Aï¿½ï¿½o desconhecida.';
                     //print_r($_POST);
             }
             break;
@@ -308,48 +308,48 @@ if($_POST && $_REQUEST['t'] && !$errors):
                 $topic = new Topic($_POST['topic_id']);
                 if($topic && $topic->getId()) {
                     if($topic->update($_POST,$errors))
-                        $msg='Tópico atualizado com sucesso.';
+                        $msg='Tï¿½pico atualizado com sucesso.';
                     elseif(!$errors['err'])
-                        $errors['err']='Erro na atualizando o tópico.';
+                        $errors['err']='Erro na atualizando o tï¿½pico.';
                 }else{
                     $errors['err']='Erro interno.';
                 }
                 break;
             case 'create':
                 if(Topic::create($_POST,$errors))
-                    $msg='Tópico de ajuda criado com sucesso.';
+                    $msg='Tï¿½pico de ajuda criado com sucesso.';
                 elseif(!$errors['err'])
-                    $errors['err']='Não é possível criar o tópico. Erro interno.';
+                    $errors['err']='Nï¿½o ï¿½ possï¿½vel criar o tï¿½pico. Erro interno.';
                 break;
             case 'mass_process':
                 if(!$_POST['tids'] || !is_array($_POST['tids'])) {
-                    $errors['err']='Você deve selecionar pelo menos um tópico.';
+                    $errors['err']='Vocï¿½ deve selecionar pelo menos um tï¿½pico.';
                 }else{
                     $count=count($_POST['tids']);
                     $ids=implode(',',$_POST['tids']);
                     if($_POST['enable']){
                         $sql='UPDATE '.TOPIC_TABLE.' SET isactive=1, updated=NOW() WHERE topic_id IN ('.$ids.') AND isactive=0 ';
                         if(db_query($sql) && ($num=db_affected_rows()))
-                            $msg="$num de $count do(s) serviço(s) selecionado(s) foi/foram habilitado(s).";
+                            $msg="$num de $count do(s) serviï¿½o(s) selecionado(s) foi/foram habilitado(s).";
                         else
-                            $errors['err']='Não é possível completar a ação.';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel completar a aï¿½ï¿½o.';
                     }elseif($_POST['disable']){
                         $sql='UPDATE '.TOPIC_TABLE.' SET isactive=0, updated=NOW() WHERE topic_id IN ('.$ids.') AND isactive=1 ';
                         if(db_query($sql) && ($num=db_affected_rows()))
-                            $msg="$num de $count do(s) tópico(s) selecionado(s) foi/foram desativado(s).";
+                            $msg="$num de $count do(s) tï¿½pico(s) selecionado(s) foi/foram desativado(s).";
                         else
-                            $errors['err']='Não é possível desativar o(s) tópico(s) selecioado(s).';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel desativar o(s) tï¿½pico(s) selecioado(s).';
                     }elseif($_POST['delete']){
                         $sql='DELETE FROM '.TOPIC_TABLE.' WHERE topic_id IN ('.$ids.')';        
                         if(db_query($sql) && ($num=db_affected_rows()))
-                            $msg="$num de $count do(s) tópico(s) selecionado(s) foi/foram excluído(s)!";
+                            $msg="$num de $count do(s) tï¿½pico(s) selecionado(s) foi/foram excluï¿½do(s)!";
                         else
-                            $errors['err']='Não é possível excluir o(s) tópico(s) selecionado(s).';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir o(s) tï¿½pico(s) selecionado(s).';
                     }
                 }
                 break;
             default:
-                $errors['err']='Ação do tópico desconhecida!';
+                $errors['err']='Aï¿½ï¿½o do tï¿½pico desconhecida!';
         }
         break;
     case 'groups':
@@ -380,7 +380,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         db_query($sql);
                         $msg=db_affected_rows()." de  $selected do(s) grupos selecionados foram habilitado.";
                     }elseif(in_array($thisuser->getDeptId(),$_POST['grps'])) {
-                          $errors['err']="Tentando 'Desabilitar' ou 'Excluir' seu grupo? Não faz o menor sentido!";
+                          $errors['err']="Tentando 'Desabilitar' ou 'Excluir' seu grupo? Nï¿½o faz o menor sentido!";
                     }elseif(isset($_POST['disable_grps'])) {
                         $sql='UPDATE '.GROUP_TABLE.' SET group_enabled=0, updated=NOW() WHERE group_enabled=1 AND group_id IN('.$ids.')';
                         db_query($sql);
@@ -388,7 +388,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     }elseif(isset($_POST['delete_grps'])) {
                         $res=db_query('SELECT staff_id FROM '.STAFF_TABLE.' WHERE group_id IN('.$ids.')');
                         if(!$res || db_num_rows($res)) { //fail if any of the selected groups has users.
-                            $errors['err']='Um ou mais grupos selecionados tem usuários. Somente grupos vazios podem ser excluídos.';
+                            $errors['err']='Um ou mais grupos selecionados tem usuï¿½rios. Somente grupos vazios podem ser excluï¿½dos.';
                         }else{
                             db_query('DELETE FROM '.GROUP_TABLE.' WHERE group_id IN('.$ids.')');    
                             $msg=db_affected_rows()." de  $selected do(s) grupos selecionados foram deletados";
@@ -398,7 +398,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     }
                     
                 }else{
-                    $errors['err']='Não foram selecionados grupos.';
+                    $errors['err']='Nï¿½o foram selecionados grupos.';
                 }
         }
     break;
@@ -412,7 +412,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if($staff->update($_POST,$errors))
                         $msg='Perfil de atendente atualizado com sucesso!';
                     elseif(!$errors['err'])
-                        $errors['err']='Erro atualizando o usuário.';
+                        $errors['err']='Erro atualizando o usuï¿½rio.';
                 }else{
                     $errors['err']='Erro interno.';
                 }
@@ -421,7 +421,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                 if(($uID=Staff::create($_POST,$errors)))
                     $msg=Format::htmlchars($_POST['firstname'].' '.$_POST['lastname']).' adicionado com sucesso!';
                 elseif(!$errors['err'])
-                    $errors['err']='Não é possível adicionar o usuário. Erro interno.';
+                    $errors['err']='Nï¿½o ï¿½ possï¿½vel adicionar o usuï¿½rio. Erro interno.';
                 break;
             case 'mass_process':
                 //ok..at this point..look WMA.
@@ -431,21 +431,21 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if(isset($_POST['enable'])) {
                         $sql='UPDATE '.STAFF_TABLE.' SET isactive=1,updated=NOW() WHERE isactive=0 AND staff_id IN('.$ids.')';
                         db_query($sql);
-                        $msg=db_affected_rows()." de  $selected do(s) usuários selecionados foram habilitados.";
+                        $msg=db_affected_rows()." de  $selected do(s) usuï¿½rios selecionados foram habilitados.";
                     
                     }elseif(in_array($thisuser->getId(),$_POST['uids'])) {
                         //sucker...watch what you are doing...why don't you just DROP the DB?
-                        $errors['err']='Você não pode bloquear ou excluir você mesmo!';  
+                        $errors['err']='Vocï¿½ nï¿½o pode bloquear ou excluir vocï¿½ mesmo!';  
                     }elseif(isset($_POST['disable'])) {
                         $sql='UPDATE '.STAFF_TABLE.' SET isactive=0, updated=NOW() '.
                             ' WHERE isactive=1 AND staff_id IN('.$ids.') AND staff_id!='.$thisuser->getId();
                         db_query($sql);
-                        $msg=db_affected_rows()." de  $selected do(s) usuários selecionados foram bloqueados.";
+                        $msg=db_affected_rows()." de  $selected do(s) usuï¿½rios selecionados foram bloqueados.";
                         //Release tickets assigned to the user?? NO? could be a temp thing 
                         // May be auto-release if not logged in for X days? 
                     }elseif(isset($_POST['delete'])) {
                         db_query('DELETE FROM '.STAFF_TABLE.' WHERE staff_id IN('.$ids.') AND staff_id!='.$thisuser->getId());
-                        $msg=db_affected_rows()." de  $selected do(s) usuários selecionados foram excluidos";
+                        $msg=db_affected_rows()." de  $selected do(s) usuï¿½rios selecionados foram excluidos";
                         //Demote the user 
                         db_query('UPDATE '.DEPT_TABLE.' SET manager_id=0 WHERE manager_id IN('.$ids.') ');
                         db_query('UPDATE '.TICKET_TABLE.' SET staff_id=0 WHERE staff_id IN('.$ids.') ');
@@ -453,7 +453,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         $errors['err']='Comando desconhecido!';
                     }
                 }else{
-                    $errors['err']='Não foram selecionados usuários.';
+                    $errors['err']='Nï¿½o foram selecionados usuï¿½rios.';
                 }
             break;
             default:
@@ -479,28 +479,28 @@ if($_POST && $_REQUEST['t'] && !$errors):
                 if(($deptID=Dept::create($_POST,$errors)))
                     $msg=Format::htmlchars($_POST['dept_name']).' adicionado com sucesso.';
                 elseif(!$errors['err'])
-                    $errors['err']='Não é possível adicionar o departamento. Erro interno.';
+                    $errors['err']='Nï¿½o ï¿½ possï¿½vel adicionar o departamento. Erro interno.';
                 break;
             case 'mass_process':
                 if(!$_POST['ids'] || !is_array($_POST['ids'])) {
-                    $errors['err']='Você deve selecionar pelo menos um departamento.';
+                    $errors['err']='Vocï¿½ deve selecionar pelo menos um departamento.';
                 }elseif(!$_POST['public'] && in_array($cfg->getDefaultDeptId(),$_POST['ids'])) {
-                    $errors['err']='Você não pode desativar/excluir um departamento padrão. Remova o departamento padrão e tente novamente.';
+                    $errors['err']='Vocï¿½ nï¿½o pode desativar/excluir um departamento padrï¿½o. Remova o departamento padrï¿½o e tente novamente.';
                 }else{
                     $count=count($_POST['ids']);
                     $ids=implode(',',$_POST['ids']);
                     if($_POST['public']){
                         $sql='UPDATE '.DEPT_TABLE.' SET ispublic=1 WHERE dept_id IN ('.$ids.')';  
                         if(db_query($sql) && ($num=db_affected_rows()))
-                            $warn="$num de $count do(s)departamento(s) selecionando(s) tornaram-se públicos.";
+                            $warn="$num de $count do(s)departamento(s) selecionando(s) tornaram-se pï¿½blicos.";
                         else
-                            $errors['err']='Não é possível fazer departamentos públicos.';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel fazer departamentos pï¿½blicos.';
                     }elseif($_POST['private']){
                         $sql='UPDATE '.DEPT_TABLE.' SET ispublic=0 WHERE dept_id IN ('.$ids.') AND dept_id!='.db_input($cfg->getDefaultDeptId());
                         if(db_query($sql) && ($num=db_affected_rows())) {
                             $warn="$num of $count do(s) departamento(s) selecionando(s) tornaram-se privados.";
                         }else
-                            $errors['err']='Não é possível fazer os departamentos selecionados serem privados. Possivelmente já são privados!';
+                            $errors['err']='Nï¿½o ï¿½ possï¿½vel fazer os departamentos selecionados serem privados. Possivelmente jï¿½ sï¿½o privados!';
                             
                     }elseif($_POST['delete']){
                         //Deny all deletes if one of the selections has members in it.
@@ -509,9 +509,9 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         $sql='SELECT count(topic_id) FROM '.TOPIC_TABLE.' WHERE dept_id IN ('.$ids.')';
                         list($topics)=db_fetch_row(db_query($sql));
                         if($members){
-                            $errors['err']='Não pode excluir departamento com membros. Mova os atendentes primeiro.';
+                            $errors['err']='Nï¿½o pode excluir departamento com membros. Mova os atendentes primeiro.';
                         }elseif($topic){
-                             $errors['err']='Não pode excluir departamento assiciados com tópicos de ajuda. Remova a associação primeiro.';
+                             $errors['err']='Nï¿½o pode excluir departamento assiciados com tï¿½picos de ajuda. Remova a associaï¿½ï¿½o primeiro.';
                         }else{
                             //We have to deal with individual selection because of associated tickets and users.
                             $i=0;
@@ -520,16 +520,16 @@ if($_POST && $_REQUEST['t'] && !$errors):
                                 if(Dept::delete($v)) $i++;
                             }
                             if($i>0){
-                                $warn="$i de $count do(s) departamento(s) selecionado(s) foi/foram excluído(s).";
+                                $warn="$i de $count do(s) departamento(s) selecionado(s) foi/foram excluï¿½do(s).";
                             }else{
-                                $errors['err']='Não é possível excluir os departamentos selecionados.';
+                                $errors['err']='Nï¿½o ï¿½ possï¿½vel excluir os departamentos selecionados.';
                             }
                         }
                     }
                 }
             break;            
             default:
-                $errors['err']='Ação do departamento desconhecida';
+                $errors['err']='Aï¿½ï¿½o do departamento desconhecida';
         }
     break;
     default:
@@ -549,7 +549,7 @@ switch($thistab){
     case 'attach':
     case 'api':
         $nav->setTabActive('settings');
-        $nav->addSubMenu(array('desc'=>'Preferêcias','href'=>'admin.php?t=pref','iconclass'=>'preferences'));
+        $nav->addSubMenu(array('desc'=>'Preferï¿½cias','href'=>'admin.php?t=pref','iconclass'=>'preferences'));
         $nav->addSubMenu(array('desc'=>'Anexos','href'=>'admin.php?t=attach','iconclass'=>'attachment'));
         $nav->addSubMenu(array('desc'=>'API','href'=>'admin.php?t=api','iconclass'=>'api'));
         switch($thistab):
@@ -574,7 +574,7 @@ switch($thistab){
     case 'templates':
     case 'banlist':
         $nav->setTabActive('emails');
-        $nav->addSubMenu(array('desc'=>'Endereço de e-mail','href'=>'admin.php?t=email','iconclass'=>'emailSettings'));
+        $nav->addSubMenu(array('desc'=>'EndereÃ§os de e-mail','href'=>'admin.php?t=email','iconclass'=>'emailSettings'));
         $nav->addSubMenu(array('desc'=>'Adicionar novo e-mail','href'=>'admin.php?t=email&a=new','iconclass'=>'newEmail'));
         $nav->addSubMenu(array('desc'=>'Modelos','href'=>'admin.php?t=templates','title'=>'Email Templates','iconclass'=>'emailTemplates')); 
         $nav->addSubMenu(array('desc'=>'Banlist/Proibidos','href'=>'admin.php?t=banlist','title'=>'Banned Email','iconclass'=>'banList')); 
@@ -587,7 +587,7 @@ switch($thistab){
                     $template= new Template($id);
                     if(!$template || !$template->getId()) {
                         $template=null;
-                        $errors['err']='Incapaz de buscar a informação do modelo ID#'.$id;
+                        $errors['err']='Incapaz de buscar a informaï¿½ï¿½o do modelo ID#'.$id;
                     }else {
                         $page='template.inc.php';
                     }
@@ -604,7 +604,7 @@ switch($thistab){
                     $email= new Email($id,false);
                     if(!$email->load()) {
                         $email=null;
-                        $errors['err']='Incapaz de buscar a informação no e-mail ID#'.$id;
+                        $errors['err']='Incapaz de buscar a informaï¿½ï¿½o no e-mail ID#'.$id;
                     }
                 }
                 $page=($email or ($_REQUEST['a']=='new' && !$emailID))?'email.inc.php':'emails.inc.php';
@@ -614,13 +614,13 @@ switch($thistab){
         require_once(INCLUDE_DIR.'class.topic.php');
         $topic=null;
         $nav->setTabActive('topics');
-        $nav->addSubMenu(array('desc'=>'Tópicos de ajuda','href'=>'admin.php?t=topics','iconclass'=>'helpTopics'));
-        $nav->addSubMenu(array('desc'=>'Adicionar novo tópico de ajuda','href'=>'admin.php?t=topics&a=new','iconclass'=>'newHelpTopic'));
+        $nav->addSubMenu(array('desc'=>'Tï¿½picos de ajuda','href'=>'admin.php?t=topics','iconclass'=>'helpTopics'));
+        $nav->addSubMenu(array('desc'=>'Adicionar novo tï¿½pico de ajuda','href'=>'admin.php?t=topics&a=new','iconclass'=>'newHelpTopic'));
         if(($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['topic_id']) && is_numeric($id)) {
             $topic= new Topic($id);
             if(!$topic->load() && $topic->getId()==$id) {
                 $topic=null;
-                $errors['err']='Incapaz de buscar a informação no tópico #'.$id;
+                $errors['err']='Incapaz de buscar a informaï¿½ï¿½o no tï¿½pico #'.$id;
             }
         }
         $page=($topic or ($_REQUEST['a']=='new' && !$topicID))?'topic.inc.php':'helptopics.inc.php';
@@ -633,8 +633,8 @@ switch($thistab){
         //Tab and Nav options.
         $nav->setTabActive('staff');
         $nav->addSubMenu(array('desc'=>'Membros atendentes','href'=>'admin.php?t=staff','iconclass'=>'users'));
-        $nav->addSubMenu(array('desc'=>'Adicionar novo usuário','href'=>'admin.php?t=staff&a=new','iconclass'=>'newuser'));
-        $nav->addSubMenu(array('desc'=>'Usuários dos grupos','href'=>'admin.php?t=groups','iconclass'=>'groups'));
+        $nav->addSubMenu(array('desc'=>'Adicionar novo usuï¿½rio','href'=>'admin.php?t=staff&a=new','iconclass'=>'newuser'));
+        $nav->addSubMenu(array('desc'=>'Usuï¿½rios dos grupos','href'=>'admin.php?t=groups','iconclass'=>'groups'));
         $nav->addSubMenu(array('desc'=>'Adicionar novo grupo','href'=>'admin.php?t=groups&a=new','iconclass'=>'newgroup'));
         $page='';
         switch($thistab){
@@ -643,7 +643,7 @@ switch($thistab){
                 if(($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['group_id']) && is_numeric($id)) {
                     $res=db_query('SELECT * FROM '.GROUP_TABLE.' WHERE group_id='.db_input($id));
                     if(!$res or !db_num_rows($res) or !($group=db_fetch_array($res)))
-                        $errors['err']='Incapaz de buscar a informação no grupo ID#'.$id;
+                        $errors['err']='Incapaz de buscar a informaï¿½ï¿½o no grupo ID#'.$id;
                 }
                 $page=($group or ($_REQUEST['a']=='new' && !$gID))?'group.inc.php':'groups.inc.php';
                 break;
@@ -653,7 +653,7 @@ switch($thistab){
                     $staff = new Staff($id);
                     if(!$staff || !is_object($staff) || $staff->getId()!=$id) {
                         $staff=null;
-                        $errors['err']='Incapaz de buscar a informação no rep ID#'.$id;
+                        $errors['err']='Incapaz de buscar a informaï¿½ï¿½o no rep ID#'.$id;
                     }
                 }
                 $page=($staff or ($_REQUEST['a']=='new' && !$uID))?'staff.inc.php':'staffmembers.inc.php';
@@ -670,7 +670,7 @@ switch($thistab){
             $dept= new Dept($id);
             if(!$dept || !$dept->getId()) {
                 $dept=null;
-                $errors['err']='Incapaz de buscar a informação no Departamento ID#'.$id;
+                $errors['err']='Incapaz de buscar a informaï¿½ï¿½o no Departamento ID#'.$id;
             }
         }
         $page=($dept or ($_REQUEST['a']=='new' && !$deptID))?'dept.inc.php':'depts.inc.php';
@@ -706,8 +706,8 @@ require(STAFFINC_DIR.'header.inc.php');
             }else{
                 ?>
                 <p align="center">
-                    <font class="error">Problemas ao carregar a página de administração solicitada (<?=Format::htmlchars($thistab)?>)</font>
-                    <br>Possivelmente o acesso foi negado, se você acredita que isto é um erro por favor contate o suporte técnico.
+                    <font class="error">Problemas ao carregar a pï¿½gina de administraï¿½ï¿½o solicitada (<?=Format::htmlchars($thistab)?>)</font>
+                    <br>Possivelmente o acesso foi negado, se vocï¿½ acredita que isto ï¿½ um erro por favor contate o suporte tï¿½cnico.
                 </p>
             <?}?>
         </div>
