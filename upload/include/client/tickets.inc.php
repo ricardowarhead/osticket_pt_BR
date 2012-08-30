@@ -134,7 +134,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
     <tr><td>
     <?
     if($num>0 && $pageNav->getNumPages()>1){ //if we actually had any tickets returned?>
-     <tr><td style="text-align:left;padding-left:20px">page:<?=$pageNav->getPageLinks()?>&nbsp;</td></tr>
+     <tr><td style="text-align:left;padding-left:20px">página:<?=$pageNav->getPageLinks()?>&nbsp;</td></tr>
     <?}?>
  </table>
 </div>
