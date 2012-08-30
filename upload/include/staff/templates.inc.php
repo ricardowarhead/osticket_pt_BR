@@ -74,7 +74,7 @@ $deletable=0;
                   <input type="checkbox" name="ids[]" value="<?=$row['tpl_id']?>" <?=$sel?'checked':''?> <?=$disabled?>
                         onClick="highLight(this.value,this.checked);">
                 <td><a href="admin.php?t=templates&id=<?=$row['tpl_id']?>"><?=$row['name']?></a></td>
-                <td><?=$disabled?'Yes':'No'?></td>
+                <td><?=$disabled?'Sim':'Não'?></td>
                 <td><?=Format::db_datetime($row['updated'])?></td>
                 <td><?=Format::db_datetime($row['created'])?></td>
             </tr>
