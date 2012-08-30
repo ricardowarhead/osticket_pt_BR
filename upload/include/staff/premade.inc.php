@@ -89,11 +89,11 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         <tr>
 	        <th width="7px">&nbsp;</th>
 	        <th>
-                <a href="kb.php?sort=title&order=<?=$negorder?><?=$qstr?>" title="Sort By Title <?=$negorder?>">Título da Resposta</a></th>
+                <a href="kb.php?sort=title&order=<?=$negorder?><?=$qstr?>" title="Ordenar Por Título <?=$negorder?>">Título da Resposta</a></th>
             <th width=50>Estado</th>
 	        <th width=200>Categoria/Departamento</th> 
 	        <th width=150 nowrap>
-                <a href="kb.php?sort=updatedate&order=<?=$negorder?><?=$qstr?>" title="Sort By Update Date <?=$negorder?>">Última Atualização</a></th>
+                <a href="kb.php?sort=updatedate&order=<?=$negorder?><?=$qstr?>" title="Ordenar Por Data de Atualização <?=$negorder?>">Última Atualização</a></th>
         </tr>
         <?
         $class = 'row1';
