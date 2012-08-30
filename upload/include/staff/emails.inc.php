@@ -43,7 +43,7 @@ $emails=db_query($sql.' ORDER BY email');
                  <input type="checkbox" name="ids[]" value="<?=$row['email_id']?>" <?=$sel?'checked':''?>  
                     <?=($defaultID==$row['email_id'])?'disabled':''?>   onClick="highLight(this.value,this.checked);">
                 <td><a href="admin.php?t=email&id=<?=$row['email_id']?>"><?=Format::htmlchars($row['email'])?></a></td>
-                <td>&nbsp;&nbsp;<?=$row['noautoresp']?'No':'<b>Yes</b>'?></td>
+                <td>&nbsp;&nbsp;<?=$row['noautoresp']?'No':'<b>Sim</b>'?></td>
                 <td><a href="admin.php?t=dept&id=<?=$row['dept_id']?>"><?=Format::htmlchars($row['dept_name'])?></a></td>
                 <td><?=$row['priority_desc']?></td>
                 <td><?=Format::db_datetime($row['updated'])?></td>
