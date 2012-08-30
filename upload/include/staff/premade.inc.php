@@ -135,7 +135,7 @@ $negorder=$order=='DESC'?'ASC':'DESC'; //Negate the sorting..
         <a href="#" onclick="return select_all(document.forms['premade'],true)">Todos</a>&nbsp;
         <a href="#" onclick="return toogle_all(document.forms['premade'],true)">Aleatório</a>&nbsp;
         <a href="#" onclick="return reset_all(document.forms['premade'])">Nenhum</a>&nbsp;
-        &nbsp;page:<?=$pageNav->getPageLinks()?>&nbsp;
+        &nbsp;página:<?=$pageNav->getPageLinks()?>&nbsp;
     </td></td>
     <tr><td align="center">
             <input class="button" type="submit" name="enable" value="Ativar" 
