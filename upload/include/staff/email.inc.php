@@ -43,7 +43,7 @@ $priorities= db_query('SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_T
         <tr><th>Nome do e-mail:</th>
             <td>
                 <input type="text" name="name" size=30 value="<?=$info['name']?>">&nbsp;<font class="error">&nbsp;<?=$errors['name']?></font>
-                &nbsp;&nbsp;(<i>Email's Opcional FROM name.</i>)
+                &nbsp;&nbsp;(<i>Nome do responsável pelo e-mail.</i>)
             </td>
         </tr>
         <tr><th>Prioridade do novo ticket</th>
