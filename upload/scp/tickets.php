@@ -433,13 +433,13 @@ $nav->setTabActive('tickets');
 
 if($cfg->showAnsweredTickets()) {
     $nav->addSubMenu(array('desc'=>'Aberto(s) ('.($stats['open']+$stats['answered']).')'
-                            ,'title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+                            ,'title'=>'Ticket(s) Aberto(s)', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
 }else{
     if($stats['open'])
-        $nav->addSubMenu(array('desc'=>'Aberto(s) ('.$stats['open'].')','title'=>'Open Tickets', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+        $nav->addSubMenu(array('desc'=>'Aberto(s) ('.$stats['open'].')','title'=>'Ticket(s) Aberto(s)', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
     if($stats['answered']) {
         $nav->addSubMenu(array('desc'=>'Respondido(s) ('.$stats['answered'].')',
-                           'title'=>'Tickets Respondidos', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
+                           'title'=>'Ticket(s) Respondido(s)', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
     }
 }
 
