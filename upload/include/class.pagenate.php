@@ -75,7 +75,7 @@ class PageNate {
 		}
         $html="&nbsp;Mostrando&nbsp;&nbsp;";
 		if ($this->total > 0) {
-            $html .= "$from - $to of " .$this->total;
+            $html .= "$from - $to de " .$this->total;
 		}else{
 			$html .= " 0 ";
 		}
