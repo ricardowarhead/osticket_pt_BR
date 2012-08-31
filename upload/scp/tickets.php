@@ -28,9 +28,9 @@ if(!$errors && ($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['ticket_id']) && is_n
     $deptID=0;
     $ticket= new Ticket($id);
     if(!$ticket or !$ticket->getDeptId())
-        $errors['err']='Unknown ticket ID#'.$id; //Sucker...invalid id
+        $errors['err']='ID do ticket desconhecido#'.$id; //Sucker...invalid id
     elseif(!$thisuser->isAdmin()  && (!$thisuser->canAccessDept($ticket->getDeptId()) && $thisuser->getId()!=$ticket->getStaffId()))
-        $errors['err']='Access denied. Contact admin if you believe this is in error';
+        $errors['err']='Acesso Negado. Entre em contato com o administrador, se você acredita que este é um erro do sistema';
 
     if(!$errors && $ticket->getId()==$id)
         $page='viewticket.inc.php'; //Default - view
@@ -39,7 +39,7 @@ if(!$errors && ($id=$_REQUEST['id']?$_REQUEST['id']:$_POST['ticket_id']) && is_n
         if($thisuser->canEditTickets() || ($thisuser->isManager() && $ticket->getDeptId()==$thisuser->getDeptId()))
             $page='editticket.inc.php';
         else
-            $errors['err']='Access denied. You are not allowed to edit this ticket. Contact admin if you believe this is in error';
+            $errors['err']='Acesso Negado. Você não tem permissão para editar este ticket. Fale com o administrador, se você acredita que este é um erro do sistema';
     }
 
 }elseif($_REQUEST['a']=='open') {
@@ -57,29 +57,29 @@ if($_POST && !$errors):
         switch(strtolower($_POST['a'])):
         case 'reply':
             $fields=array();
-            $fields['msg_id']       = array('type'=>'int',  'required'=>1, 'error'=>'Missing message ID');
-            $fields['response']     = array('type'=>'text', 'required'=>1, 'error'=>'Response message required');
+            $fields['msg_id']       = array('type'=>'int',  'required'=>1, 'error'=>'Falta ID da mensagem');
+            $fields['response']     = array('type'=>'text', 'required'=>1, 'error'=>'Mensagem de resposta necessária');
             $params = new Validator($fields);
             if(!$params->validate($_POST)){
                 $errors=array_merge($errors,$params->errors());
             }
             //Use locks to avoid double replies
             if($lock && $lock->getStaffId()!=$thisuser->getId())
-                $errors['err']='Action Denied. Ticket is locked by someone else!';
+                $errors['err']='Ação inválida. Ticket está bloqueado por outra pessoa!';
 
             //Check attachments restrictions.
             if($_FILES['attachment'] && $_FILES['attachment']['size']) {
                 if(!$_FILES['attachment']['name'] || !$_FILES['attachment']['tmp_name'])
-                    $errors['attachment']='Invalid attachment';
+                    $errors['attachment']='Anexo inválido';
                 elseif(!$cfg->canUploadFiles()) //TODO: saved vs emailed attachments...admin config??
-                    $errors['attachment']='upload dir invalid. Contact admin.';
+                    $errors['attachment']='Carregamento inválido. Contacte o administrador.';
                 elseif(!$cfg->canUploadFileType($_FILES['attachment']['name']))
-                    $errors['attachment']='Invalid file type';
+                    $errors['attachment']='Tipo de arquivo inválido';
             }
 
             //Make sure the email is not banned
             if(!$errors && BanList::isbanned($ticket->getEmail()))
-                $errors['err']='Email is in banlist. Must be removed to reply';
+                $errors['err']='E-mail está na lista de banidos. Deve ser removido para responder';
 
             //If no error...do the do.
             if(!$errors && ($respId=$ticket->postResponse($_POST['msg_id'],$_POST['response'],$_POST['signature'],$_FILES['attachment']))){
