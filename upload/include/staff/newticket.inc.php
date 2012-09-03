@@ -45,9 +45,9 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         <td>
             <select name="source">
                 <option value="" selected >Selecionar Origem</option>
-                <option value="Phone" <?=($info['source']=='Phone')?'selected':''?>>Phone</option>
-                <option value="Email" <?=($info['source']=='Email')?'selected':''?>>Email</option>
-                <option value="Other" <?=($info['source']=='Other')?'selected':''?>>Other</option>
+                <option value="Phone" <?=($info['source']=='Phone')?'selected':''?>>Telefone</option>
+                <option value="Email" <?=($info['source']=='Email')?'selected':''?>>E-mail</option>
+                <option value="Other" <?=($info['source']=='Other')?'selected':''?>>Outros</option>
             </select>
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['source']?></font>
         </td>
