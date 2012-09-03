@@ -180,7 +180,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
                     }?>
             </select><font class='error'>&nbsp;<?=$errors['staffId']?></font>
                 &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>}Alerte o atendente atribuído.
+                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>Alerte o atendente atribuído.
         </td>
     </tr>
     <tr>
