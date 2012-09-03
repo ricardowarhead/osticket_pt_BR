@@ -432,13 +432,13 @@ $stats=db_fetch_array(db_query($sql));
 $nav->setTabActive('tickets');
 
 if($cfg->showAnsweredTickets()) {
-    $nav->addSubMenu(array('desc'=>'Open ('.($stats['open']+$stats['answered']).')'
+    $nav->addSubMenu(array('desc'=>'Abertos ('.($stats['open']+$stats['answered']).')'
                             ,'title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
 }else{
     if($stats['open'])
-        $nav->addSubMenu(array('desc'=>'Open ('.$stats['open'].')','title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
+        $nav->addSubMenu(array('desc'=>'Abertos ('.$stats['open'].')','title'=>'Tickets Abertos', 'href'=>'tickets.php', 'iconclass'=>'Ticket'));
     if($stats['answered']) {
-        $nav->addSubMenu(array('desc'=>'Answered ('.$stats['answered'].')',
+        $nav->addSubMenu(array('desc'=>'Respondidos ('.$stats['answered'].')',
                            'title'=>'Tickets Respondidos', 'href'=>'tickets.php?status=answered', 'iconclass'=>'answeredTickets')); 
     }
 }
@@ -447,23 +447,23 @@ if($stats['assigned']) {
     if(!$sysnotice && $stats['assigned']>10)
         $sysnotice=$stats['assigned'].' atribuído a você!';
 
-    $nav->addSubMenu(array('desc'=>'My Tickets ('.$stats['assigned'].')','title'=>'Tickets Atribuídos',
+    $nav->addSubMenu(array('desc'=>'Meus Tickets ('.$stats['assigned'].')','title'=>'Tickets Atribuídos',
                     'href'=>'tickets.php?status=assigned','iconclass'=>'assignedTickets'));
 }
 
 if($stats['overdue']) {
-    $nav->addSubMenu(array('desc'=>'Overdue ('.$stats['overdue'].')','title'=>'Tickets Velhos',
+    $nav->addSubMenu(array('desc'=>'Vencidos ('.$stats['overdue'].')','title'=>'Tickets Velhos',
                     'href'=>'tickets.php?status=overdue','iconclass'=>'overdueTickets'));
 
     if(!$sysnotice && $stats['overdue']>10)
         $sysnotice=$stats['overdue'] .' tickets vencidos!';
 }
 
-$nav->addSubMenu(array('desc'=>'Closed Tickets','title'=>'Tickets Fechados', 'href'=>'tickets.php?status=closed', 'iconclass'=>'closedTickets'));
+$nav->addSubMenu(array('desc'=>'Tickets Fechados','title'=>'Tickets Fechados', 'href'=>'tickets.php?status=closed', 'iconclass'=>'closedTickets'));
 
 
 if($thisuser->canCreateTickets()) {
-    $nav->addSubMenu(array('desc'=>'New Ticket','href'=>'tickets.php?a=open','iconclass'=>'newTicket'));    
+    $nav->addSubMenu(array('desc'=>'Novo Ticket','href'=>'tickets.php?a=open','iconclass'=>'newTicket'));    
 }
 
 //Render the page...
