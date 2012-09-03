@@ -34,7 +34,7 @@ class Misc {
 
         //if mcrypt extension is not installed--simply return unencryted text and log a warning.
         if(!function_exists('mcrypt_encrypt') || !function_exists('mcrypt_decrypt')) {
-            $msg='Cryptography extension mcrypt is not enabled or installed. IMAP/POP passwords are being stored as plain text in database.';
+            $msg='A extensão de criptografia mcrypt não está habilitada ou instalada. As senhas de IMAP/POP estão sendo armazenadas como texto sem formatação no banco de dados.';
             Sys::log(LOG_WARN,'mcrypt missing',$msg);
             return $text;
         }
