@@ -22,7 +22,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['email']?></font>
             <? if($cfg->notifyONNewStaffTicket()) {?>
                &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?=(!$errors || $info['alertuser'])? 'checked': ''?>>Envie o alera para o usuário.
+               <input type="checkbox" name="alertuser" <?=(!$errors || $info['alertuser'])? 'checked': ''?>>Alerte o usuário.
             <?}?>
         </td>
     </tr>
@@ -180,7 +180,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
                     }?>
             </select><font class='error'>&nbsp;<?=$errors['staffId']?></font>
                 &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>Send alert to assigned staff.
+                <input type="checkbox" name="alertstaff" <?=(!$errors || $info['alertstaff'])? 'checked': ''?>>}Alerte o atendente atribuído.
         </td>
     </tr>
     <tr>
