@@ -1,5 +1,5 @@
 <?php
-if(!defined('OSTSCPINC') || !is_object($thisuser) || !$thisuser->isStaff()) die('Access Denied');
+if(!defined('OSTSCPINC') || !is_object($thisuser) || !$thisuser->isStaff()) die('Acesso Negado');
 $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the post data
 ?>
 <div width="100%">
@@ -14,37 +14,37 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
 <table width="80%" border="0" cellspacing=1 cellpadding=2>
    <form action="tickets.php" method="post" enctype="multipart/form-data">
     <input type='hidden' name='a' value='open'>
-    <tr><td align="left" colspan=2>Please fill in the form below to open a new ticket.</td></tr>
+    <tr><td align="left" colspan=2>Por favor, preencha o formulário abaixo para abrir um novo ticket.</td></tr>
     <tr>
-        <td align="left" nowrap width="20%"><b>Email Address:</b></td>
+        <td align="left" nowrap width="20%"><b>Endereço de E-mail:</b></td>
         <td>
             <input type="text" id="email" name="email" size="25" value="<?=$info['email']?>">
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['email']?></font>
             <? if($cfg->notifyONNewStaffTicket()) {?>
                &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?=(!$errors || $info['alertuser'])? 'checked': ''?>>Send alert to user.
+               <input type="checkbox" name="alertuser" <?=(!$errors || $info['alertuser'])? 'checked': ''?>>Envie o alera para o usuário.
             <?}?>
         </td>
     </tr>
     <tr>
-        <td align="left" ><b>Full Name:</b></td>
+        <td align="left" ><b>Nome Completo:</b></td>
         <td>
             <input type="text" id="name" name="name" size="25" value="<?=$info['name']?>">
             &nbsp;<font class="error"><b>*</b>&nbsp;<?=$errors['name']?></font>
         </td>
     </tr>
     <tr>
-        <td align="left">Telephone:</td>
+        <td align="left">Telefone:</td>
         <td><input type="text" name="phone" size="25" value="<?=$info['phone']?>">
             &nbsp;Ext&nbsp;<input type="text" name="phone_ext" size="6" value="<?=$info['phone_ext']?>">
             <font class="error">&nbsp;<?=$errors['phone']?></font></td>
     </tr>
     <tr height=2px><td align="left" colspan=2 >&nbsp;</td</tr>
     <tr>
-        <td align="left"><b>Ticket Source:</b></td>
+        <td align="left"><b>Origem do Ticket:</b></td>
         <td>
             <select name="source">
-                <option value="" selected >Select Source</option>
+                <option value="" selected >Selecionar Origem</option>
                 <option value="Phone" <?=($info['source']=='Phone')?'selected':''?>>Phone</option>
                 <option value="Email" <?=($info['source']=='Email')?'selected':''?>>Email</option>
                 <option value="Other" <?=($info['source']=='Other')?'selected':''?>>Other</option>
@@ -53,10 +53,10 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         </td>
     </tr>
     <tr>
-        <td align="left"><b>Department:</b></td>
+        <td align="left"><b>Departamento:</b></td>
         <td>
             <select name="deptId">
-                <option value="" selected >Select Department</option>
+                <option value="" selected >Selecione o Departamento</option>
                 <?
                  $services= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE.' ORDER BY dept_name');
                  while (list($deptId,$dept) = db_fetch_row($services)){
@@ -69,25 +69,25 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         </td>
     </tr>
     <tr>
-        <td align="left"><b>Subject:</b></td>
+        <td align="left"><b>Assunto:</b></td>
         <td>
             <input type="text" name="subject" size="35" value="<?=$info['subject']?>">
             &nbsp;<font class="error">*&nbsp;<?=$errors['subject']?></font>
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top"><b>Issue Summary:</b></td>
+        <td align="left" valign="top"><b>Resumo do Problema:</b></td>
         <td>
-            <i>Visible to client/customer.</i><font class="error"><b>*&nbsp;<?=$errors['issue']?></b></font><br/>
+            <i>Visível para o cliente.</i><font class="error"><b>*&nbsp;<?=$errors['issue']?></b></font><br/>
             <?
             $sql='SELECT premade_id,title FROM '.KB_PREMADE_TABLE.' WHERE isenabled=1';
             $canned=db_query($sql);
             if($canned && db_num_rows($canned)) {
             ?>
-             Premade:&nbsp;
+             Pré Definições:&nbsp;
               <select id="canned" name="canned"
                 onChange="getCannedResponse(this.options[this.selectedIndex].value,this.form,'issue');this.selectedIndex='0';" >
-                <option value="0" selected="selected">Select a premade reply/issue</option>
+                <option value="0" selected="selected">Selecione uma resposta/questão pré definida</option>
                 <?while(list($cannedId,$title)=db_fetch_row($canned)) { ?>
                 <option value="<?=$cannedId?>" ><?=Format::htmlchars($title)?></option>
                 <?}?>
@@ -98,23 +98,23 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <?if($cfg->canUploadFiles()) {
         ?>
     <tr>
-        <td>Attachment:</td>
+        <td>Anexo:</td>
         <td>
             <input type="file" name="attachment"><font class="error">&nbsp;<?=$errors['attachment']?></font>
         </td>
     </tr>
     <?}?>
     <tr>
-        <td align="left" valign="top">Internal Note:</td>
+        <td align="left" valign="top">Nota Interna:</td>
         <td>
-            <i>Optional Internal note(s).</i><font class="error"><b>&nbsp;<?=$errors['note']?></b></font><br/>
+            <i>Nota Interna Opcional.</i><font class="error"><b>&nbsp;<?=$errors['note']?></b></font><br/>
             <textarea name="note" cols="55" rows="5" wrap="soft"><?=$info['note']?></textarea></td>
     </tr>
 
     <tr>
-        <td align="left" valign="top">Due Date:</td>
+        <td align="left" valign="top">Data de Vencimento:</td>
         <td>
-            <i>Time is based on your time zone (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
+            <i>A hora é baseada  no seu fuso horário (GM <?=$thisuser->getTZoffset()?>)</i>&nbsp;<font class="error">&nbsp;<?=$errors['time']?></font><br>
             <input id="duedate" name="duedate" value="<?=Format::htmlchars($info['duedate'])?>"
                 onclick="event.cancelBubble=true;calendar(this);" autocomplete=OFF>
             <a href="#" onclick="event.cancelBubble=true;calendar(getObj('duedate')); return false;"><img src='images/cal.png'border=0 alt=""></a>
@@ -132,7 +132,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
       $sql='SELECT priority_id,priority_desc FROM '.TICKET_PRIORITY_TABLE.' ORDER BY priority_urgency DESC';
       if(($priorities=db_query($sql)) && db_num_rows($priorities)){ ?>
       <tr>
-        <td align="left">Priority:</td>
+        <td align="left">Prioridade:</td>
         <td>
             <select name="pri">
               <?
@@ -151,7 +151,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         <td align="left" valign="top">Help Topic:</td>
         <td>
             <select name="topicId">
-                <option value="" selected >Select One</option>
+                <option value="" selected >Selecionar Um</option>
                 <?
                  while (list($topicId,$topic) = db_fetch_row($services)){
                     $selected = ($info['topicId']==$topicId)?'selected':''; ?>
@@ -165,7 +165,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <?
     }?>
     <tr>
-        <td>Assign To:</td>
+        <td>Atribuir Para:</td>
         <td>
             <select id="staffId" name="staffId">
                 <option value="0" selected="selected">-Assign To Staff-</option>
@@ -184,17 +184,17 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         </td>
     </tr>
     <tr>
-        <td>Signature:</td>
+        <td>Assinatura:</td>
         <td> <?php
             $appendStaffSig=$thisuser->appendMySignature();
             $info['signature']=!$info['signature']?'none':$info['signature']; //change 'none' to 'mine' to default to staff signature.
             ?>
             <div style="margin-top: 2px;">
-                <label><input type="radio" name="signature" value="none" checked > None</label>
+                <label><input type="radio" name="signature" value="none" checked > Nenhuma</label>
                 <?if($appendStaffSig) {?>
-                    <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > My signature</label>
+                    <label> <input type="radio" name="signature" value="mine" <?=$info['signature']=='mine'?'checked':''?> > Minha assinatura</label>
                  <?}?>
-                 <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Dept Signature (if any)</label>
+                 <label><input type="radio" name="signature" value="dept" <?=$info['signature']=='dept'?'checked':''?> > Assinatura do Departamento (se for o caso)</label>
             </div>
         </td>
     </tr>
@@ -202,9 +202,9 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     <tr>
         <td></td>
         <td>
-            <input class="button" type="submit" name="submit_x" value="Submit Ticket">
-            <input class="button" type="reset" value="Reset">
-            <input class="button" type="button" name="cancel" value="Cancel" onClick='window.location.href="tickets.php"'>    
+            <input class="button" type="submit" name="submit_x" value="Submeter Ticket">
+            <input class="button" type="reset" value="Redefinir">
+            <input class="button" type="button" name="cancel" value="Cancelar" onClick='window.location.href="tickets.php"'>    
         </td>
     </tr>
   </form>
