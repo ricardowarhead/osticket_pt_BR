@@ -91,7 +91,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
                 <?while(list($cannedId,$title)=db_fetch_row($canned)) { ?>
                 <option value="<?=$cannedId?>" ><?=Format::htmlchars($title)?></option>
                 <?}?>
-              </select>&nbsp;&nbsp;&nbsp;<label><input type='checkbox' value='1' name=append checked="true" />Append</label>
+              </select>&nbsp;&nbsp;&nbsp;<label><input type='checkbox' value='1' name=append checked="true" />Anexar</label>
             <?}?>
             <textarea name="issue" cols="55" rows="8" wrap="soft"><?=$info['issue']?></textarea></td>
     </tr>
@@ -148,7 +148,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
     $services= db_query('SELECT topic_id,topic FROM '.TOPIC_TABLE.' WHERE isactive=1 ORDER BY topic');
     if($services && db_num_rows($services)){ ?>
     <tr>
-        <td align="left" valign="top">Help Topic:</td>
+        <td align="left" valign="top">Tópico de Ajuda:</td>
         <td>
             <select name="topicId">
                 <option value="" selected >Selecionar Um</option>
@@ -168,7 +168,7 @@ $info=($_POST && $errors)?Format::input($_POST):array(); //on error...use the po
         <td>Atribuir Para:</td>
         <td>
             <select id="staffId" name="staffId">
-                <option value="0" selected="selected">-Assign To Staff-</option>
+                <option value="0" selected="selected">-Atribuição-</option>
                 <?
                     //TODO: make sure the user's group is also active....DO a join.
                     $sql=' SELECT staff_id,CONCAT_WS(", ",lastname,firstname) as name FROM '.STAFF_TABLE.' WHERE isactive=1 AND onvacation=0 ';
