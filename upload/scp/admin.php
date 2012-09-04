@@ -156,7 +156,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                                 $errors['err']='Não é possível excluir a(s) chave(s) selecionadas. Tente novamente.';
                             }
                         }else {
-                            $errors['err']='Comando desconhecido.';
+                            $errors['err']='Comando desconhecido';
                         }
                     }
                     break;
@@ -283,7 +283,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         $sql='SELECT count(dept_id) FROM '.DEPT_TABLE.' WHERE tpl_id IN ('.$ids.')';
                         list($tpl)=db_fetch_row(db_query($sql));
                         if($tpl>0){
-                            $errors['err']='Um ou mais modelos selecioados estão sendo usados por um Departamento. Remover associação primeiro.';
+                            $errors['err']='Um ou mais modelos selecionados estão sendo usados por um Departamento. Remover associação primeiro.';
                         }elseif($_POST['delete']){
                             $sql='DELETE FROM '.EMAIL_TEMPLATE_TABLE.' WHERE tpl_id IN ('.$ids.') AND tpl_id!='.db_input($cfg->getDefaultTemplateId());
                             if(($result=db_query($sql)) && ($i=db_affected_rows()))
@@ -291,7 +291,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                             else
                                 $errors['err']='Não é possível excluir o(s) modelo(s) selecionado(s).';
                         }else{
-                            $errors['err']='Comando desconhecido.';
+                            $errors['err']='Comando desconhecido';
                         }
                     }
                     break;
@@ -394,7 +394,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                             $msg=db_affected_rows()." de  $selected do(s) grupos selecionados foram deletados";
                         }
                     }else{
-                         $errors['err']='Comando desconhecido!';
+                         $errors['err']='Comando desconhecido';
                     }
                     
                 }else{
@@ -412,7 +412,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
                     if($staff->update($_POST,$errors))
                         $msg='Perfil de atendente atualizado com sucesso!';
                     elseif(!$errors['err'])
-                        $errors['err']='Erro atualizando o usu�rio.';
+                        $errors['err']='Erro atualizando o usuário.';
                 }else{
                     $errors['err']='Erro interno.';
                 }
@@ -450,14 +450,14 @@ if($_POST && $_REQUEST['t'] && !$errors):
                         db_query('UPDATE '.DEPT_TABLE.' SET manager_id=0 WHERE manager_id IN('.$ids.') ');
                         db_query('UPDATE '.TICKET_TABLE.' SET staff_id=0 WHERE staff_id IN('.$ids.') ');
                     }else{
-                        $errors['err']='Comando desconhecido!';
+                        $errors['err']='Comando desconhecido';
                     }
                 }else{
                     $errors['err']='Não foram selecionados usuários.';
                 }
             break;
             default:
-                $errors['err']='Comando desconhecido!';
+                $errors['err']='Comando desconhecido na criação do atendente';
         }
     break;
     case 'dept':
@@ -533,7 +533,7 @@ if($_POST && $_REQUEST['t'] && !$errors):
         }
     break;
     default:
-        $errors['err']='Comando desconhecido!';
+        $errors['err']='Comando desconhecido';
     endswitch;
 endif;
 
@@ -675,7 +675,7 @@ switch($thistab){
         }
         $page=($dept or ($_REQUEST['a']=='new' && !$deptID))?'dept.inc.php':'depts.inc.php';
         $nav->setTabActive('depts');
-        $nav->addSubMenu(array('desc'=>'Departmentos','href'=>'admin.php?t=depts','iconclass'=>'departments'));
+        $nav->addSubMenu(array('desc'=>'Departamentos','href'=>'admin.php?t=depts','iconclass'=>'departments'));
         $nav->addSubMenu(array('desc'=>'Adicionar novo departamento','href'=>'admin.php?t=depts&a=new','iconclass'=>'newDepartment'));
         break;
     // (default)
