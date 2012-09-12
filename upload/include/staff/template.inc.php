@@ -5,8 +5,8 @@ $tpl=($errors && $_POST)?Format::input($_POST):Format::htmlchars($template->getI
 <div class="msg">Modelos de Email</div>
 <table width="100%" border="0" cellspacing=0 cellpadding=0>
   <form action="admin.php?t=templates" method="post">
-    <input type="hidden" name="t" value="Modelos">
-    <input type="hidden" name="do" value="Atualizar">
+    <input type="hidden" name="t" value="templates">
+    <input type="hidden" name="do" value="update">
     <input type="hidden" name="id" value="<?=$template->getId()?>">
     <tr><td>
         <table width="100%" border="0" cellspacing=0 cellpadding=2 class="tform tpl">
