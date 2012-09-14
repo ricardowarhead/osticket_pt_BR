@@ -158,13 +158,10 @@ $deletable=0;
                 <tr><td>%staff</td><td>Nome do Atendente (aleta/notificação)</td></tr>
                 <tr><td>%assignee</td><td>Atendente Atribuído</td></tr>
                 <tr><td>%assigner</td><td>Atribuir atendente ao ticket</td></tr>
-                <tr><td>%url</td><td>osTicket's base url (FQDN)</td></tr>
+                <tr><td>%url</td><td>osTickets base url (FQDN)</td></tr>
 
             </table>
         </td>
     </tr>
  </table>
  </div>
-
-
-
