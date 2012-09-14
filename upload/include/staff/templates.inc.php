@@ -74,7 +74,7 @@ $deletable=0;
                   <input type="checkbox" name="ids[]" value="<?=$row['tpl_id']?>" <?=$sel?'checked':''?> <?=$disabled?>
                         onClick="highLight(this.value,this.checked);">
                 <td><a href="admin.php?t=templates&id=<?=$row['tpl_id']?>"><?=$row['name']?></a></td>
-                <td><?=$disabled?'Sim':'Não'?></td>
+                <td><?=$disabled?'Yes':'No'?></td>
                 <td><?=Format::db_datetime($row['updated'])?></td>
                 <td><?=Format::db_datetime($row['created'])?></td>
             </tr>
@@ -155,7 +155,7 @@ $deletable=0;
                 <tr><td width="100">%message</td><td>Mensagem (de entrada)</td></tr>
                 <tr><td>%response</td><td>Resposta (de saída)</td></tr>
                 <tr><td>%note</td><td>Nota Interna</td></tr>
-                <tr><td>%staff</td><td>Nome do Atendente (aleta/notificação)</td></tr>
+                <tr><td>%staff</td><td>Nome do Atendente (alerta/notificação)</td></tr>
                 <tr><td>%assignee</td><td>Atendente Atribuído</td></tr>
                 <tr><td>%assigner</td><td>Atribuir atendente ao ticket</td></tr>
                 <tr><td>%url</td><td>osTickets base url (FQDN)</td></tr>
