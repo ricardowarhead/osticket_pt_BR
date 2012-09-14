@@ -195,7 +195,7 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
                 <?}?>
             </select>
                 &nbsp;&nbsp;
-            <input class="button" type="submit" value="Avançar">
+            <input class="button" type="submit" value="GO">
         </form>
     </tr></td>
 </table>
@@ -284,7 +284,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                     <form action="tickets.php?id=<?=$id?>#reply" name="reply" id="replyform" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
                         <input type="hidden" name="msg_id" value="<?=$msgid?>">
-                        <input type="hidden" name="a" value="responder">
+                        <input type="hidden" name="a" value="reply">
                         <div><font class="error">&nbsp;<?=$errors['response']?></font></div>
                         <div>
                            <?
@@ -438,7 +438,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
                 <p>
                     <form action="tickets.php?id=<?=$id?>#assign" name="notes" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
-                        <input type="hidden" name="a" value="atribuir">
+                        <input type="hidden" name="a" value="assign">
                         <div>
                             <span for="staffId">Membro:</span>
                             <select id="staffId" name="staffId">
