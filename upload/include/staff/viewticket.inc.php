@@ -150,7 +150,7 @@ if($thisuser->canManageTickets() || $thisuser->isManager()){ ?>
     <tr><td>
         <form name=action action='tickets.php?id=<?=$id?>' method=post class="inline" >
             <input type='hidden' name='ticket_id' value="<?=$id?>"/>
-             <input type='hidden' name='a' value="processo"/>
+             <input type='hidden' name='a' value="process"/>
             <span for="do"> &nbsp;<b>Ação:</b></span>
             <select id="do" name="do" 
               onChange="this.form.ticket_priority.disabled=strcmp(this.options[this.selectedIndex].value,'change_priority','reopen','overdue')?false:true;">
