@@ -279,7 +279,7 @@ if(($resp=db_query($sql)) && ($notes=db_num_rows($resp))){
   <tr> <td align="center">
         <div class="tabber">
             <div id="reply" class="tabbertab" align="left">
-                <h2>Post Reply</h2>
+                <h2>Enviar Resposta</h2>
                 <p>
                     <form action="tickets.php?id=<?=$id?>#reply" name="reply" id="replyform" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="ticket_id" value="<?=$id?>">
