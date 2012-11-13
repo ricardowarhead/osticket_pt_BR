@@ -38,7 +38,7 @@ class StaffNav {
             if($thisuser && $thisuser->canManageKb()){
              $tabs['kbase']=array('desc'=>'Respostas','href'=>'kb.php','title'=>'Base de Dados: Respostas');
             }
-            $tabs['directory']=array('desc'=>'Comitiva','href'=>'directory.php','title'=>'Comissão Diretora');
+            $tabs['directory']=array('desc'=>'Membros','href'=>'directory.php','title'=>'Comissão Diretora');
             $tabs['profile']=array('desc'=>'Minha Conta','href'=>'profile.php','title'=>'Meu Perfil');
         }
         $this->tabs=$tabs;    
