@@ -133,9 +133,9 @@ $depts= db_query('SELECT dept_id,dept_name FROM '.DEPT_TABLE);
                         &nbsp;&nbsp;
             </td>
         </tr>
-        <tr><th>Listagem de comitiva</th>
+        <tr><th>Listagem de Membros</th>
             <td>
-               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Motrar o usuário na lista de comitiva
+               <input type="checkbox" name="isvisible" <?=$rep['isvisible'] ? 'checked': ''?>>Motrar o usuário na lista de membros
             </td>
         </tr>
         <tr><th>Modo Férias</th>
