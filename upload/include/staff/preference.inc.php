@@ -445,7 +445,7 @@ $templates=db_query('SELECT tpl_id,name FROM '.EMAIL_TEMPLATE_TABLE.' WHERE cfg_
                 <br><i>Selecionar destinatários</i>&nbsp;<font class="error">&nbsp;<?=$errors['ticket_alert_active']?></font><br>
                 <input type="checkbox" name="ticket_alert_admin" <?=$config['ticket_alert_admin']?'checked':''?>> E-mail do administrador
                 <input type="checkbox" name="ticket_alert_dept_manager" <?=$config['ticket_alert_dept_manager']?'checked':''?>> Gerenciamento de Departamentos
-                <input type="checkbox" name="ticket_alert_dept_members" <?=$config['ticket_alert_dept_members']?'checked':''?>> Membros de departalmento (spammy)
+                <input type="checkbox" name="ticket_alert_dept_members" <?=$config['ticket_alert_dept_members']?'checked':''?>> Membros de departamento (spammy)
             </td>
         </tr>
         <tr><th valign="top">Alerta de nova mensagem:</th>
